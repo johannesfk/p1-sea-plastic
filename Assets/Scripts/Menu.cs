@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
-{
-    bool UpgradeMenuOpen = false;
+{  
     public GameObject UpgradeMenuObject;
     public GameObject ManagementMenuObject;
     public GameObject AdvertismentMenuObject;
