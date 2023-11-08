@@ -10,10 +10,10 @@ public class Menu : MonoBehaviour
     public GameObject AdvertismentMenuObject;
     public GameObject CurrentMenu;
     public void OpenMenu()
-    {   
+    {
         if (CurrentMenu != null)
         {
-            CurrentMenu.SetActive(false);  
+            CurrentMenu.SetActive(false);
         }
 
         UpgradeMenuObject.SetActive(true);
