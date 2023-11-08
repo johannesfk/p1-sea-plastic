@@ -35,8 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool donationUpgrade = false;
 
     private float donationChance;
-    private void Awake()
-        bool GameHasEnded = false;
+    bool GameHasEnded = false;
 
     public GameObject GameOverBackground;
     public void GameOver()
@@ -58,7 +57,7 @@ public class GameManager : MonoBehaviour
             GameOverBackground.SetActive(false);
             Debug.Log("New Game");
         }
-    {
+    
         if (gameObject != null)
         {
             polution = startPolution;
@@ -105,5 +104,4 @@ public class GameManager : MonoBehaviour
         Debug.Log("Your Company is named: " + addedText);
     }
 
-}
 }
