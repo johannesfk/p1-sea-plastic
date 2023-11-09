@@ -8240,14 +8240,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1166429231}
+  - {fileID: 253784144}
+  - {fileID: 988124334}
+  - {fileID: 393100989}
+  - {fileID: 1405024054}
+  - {fileID: 1521347519}
+  - {fileID: 609304294}
+  - {fileID: 157925313}
 --- !u!1 &2116405474
 GameObject:
   m_ObjectHideFlags: 0

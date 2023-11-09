@@ -36,8 +36,4 @@ public class ChangeImageOpacity : MonoBehaviour
         }
         return 0.0f; // If the image is not found, return 0 opacity
     }
-    public void ChangesImageOpacity()
-    {
-        
-    } 
 }
