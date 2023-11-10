@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &158030827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 158030829}
+  - component: {fileID: 158030828}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &158030828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158030827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c49467cb22e9644a144224facf1a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeMenuObject: {fileID: 0}
+  ManagementMenuObject: {fileID: 0}
+  AdvertismentMenuObject: {fileID: 0}
+  CurrentMenu: {fileID: 0}
+--- !u!4 &158030829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158030827}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 622.68134, y: 188.81638, z: 2.9804673}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &254846416
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +539,6 @@ GameObject:
   - component: {fileID: 990732263}
   - component: {fileID: 990732262}
   - component: {fileID: 990732261}
-  - component: {fileID: 990732260}
   m_Layer: 5
   m_Name: Confirm
   m_TagString: Untagged
@@ -519,22 +566,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1.3837891, y: -63.547684}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &990732260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990732258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01c49467cb22e9644a144224facf1a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpgradeMenuObject: {fileID: 0}
-  ManagementMenuObject: {fileID: 0}
-  AdvertismentMenuObject: {fileID: 0}
-  CurrentMenu: {fileID: 0}
 --- !u!114 &990732261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,7 +610,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 990732260}
+      - m_Target: {fileID: 158030828}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -1429,8 +1460,8 @@ Canvas:
   m_GameObject: {fileID: 1830687175}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 1038946953}
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
@@ -1828,3 +1859,4 @@ SceneRoots:
   - {fileID: 1516121756}
   - {fileID: 1830687179}
   - {fileID: 5488845767445216692}
+  - {fileID: 158030829}

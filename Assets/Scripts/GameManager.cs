@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool donationUpgrade = false;
 
     private float donationChance;
+
+    [Header("ChangeGameState")]
     bool GameHasEnded = false;
 
     public GameObject GameOverBackground;
