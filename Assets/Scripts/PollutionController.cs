@@ -49,7 +49,6 @@ public class PollutionController : MonoBehaviour
             polution += Time.fixedDeltaTime * polutionMultiplier;
         }
 
-        money += Time.fixedDeltaTime * income;
 
     }
 
