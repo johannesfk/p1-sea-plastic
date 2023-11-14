@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    [Header("World Time")]
+    [SerializeField] float dayTimer;
+    [SerializeField] int dayNumber;
+    private float dayMaxTime = 60;
+
     [Header("Company Stats")]
     public string companyName;
     public float money = 0;
@@ -53,6 +58,18 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (dayTimer <= 0)
+        {
+            dayNumber++;
+            Debug.Log("day: " + dayNumber);
+            dayTimer = dayMaxTime;
+        }
+        else
+        {
+            dayTimer -= Time.fixedDeltaTime;
+        }
+
 
         if (donationUpgrade)
         {
