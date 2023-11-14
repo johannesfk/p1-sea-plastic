@@ -7,18 +7,22 @@ public class ChangeOpacity : MonoBehaviour
 {
     public List<Image> imageList;
 
-    public void ChangeImageOpacity(float toOpacity)
+    public void ChangeIndividualImageOpacity(int index, float Opacity)
     {
-        foreach (Image image in imageList)
+        if (index >= 0 && index < imageList.Count)
         {
-            // Get the current color of the image
-            Color currentColor = image.color;
+            // Get the current color of the specific image
+            Color currentColor = imageList[index].color;
 
             // Set the new alpha value (opacity)
-            currentColor.a = toOpacity;
+            currentColor.a = Opacity;
 
-            // Apply the new color to the image
-            image.color = currentColor;
+            // Apply the new color to the specific image
+            imageList[index].color = currentColor;
+        }
+        else
+        {
+            Debug.LogError("Invalid index or image not found in the list.");
         }
     }
 }
