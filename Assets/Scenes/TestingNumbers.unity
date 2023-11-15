@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 908761691}
   - component: {fileID: 908761690}
   m_Layer: 5
-  m_Name: RegionsDestroyedProcent
+  m_Name: RegionsInciniratedProcent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

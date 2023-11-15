@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] float dayTimer;
     [SerializeField] int dayNumber = 1;
     private float dayMaxTime = 60;
+    private bool dailyEventHappened;
+
 
     [Header("Company Stats")]
     public string companyName;
@@ -65,11 +67,21 @@ public class GameManager : MonoBehaviour
         {
             dayNumber++;
             Debug.Log("day: " + dayNumber);
+
+            money += income;
+
             dayTimer = 0;
+
+            dailyEventHappened = false;
         }
         else
         {
             dayTimer += Time.fixedDeltaTime;
+        }
+
+        if (dayTimer >= dayMaxTime * 0.5f && dailyEventHappened == false)
+        {
+            dailyEventHappened = true;
         }
 
 
