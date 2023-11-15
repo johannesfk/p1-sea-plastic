@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -98,18 +99,32 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0; 
+        Time.timeScale = 0;
+        Debug.Log("Time is paused");
     }
 
     public void Resume()
     {
         Time.timeScale = 1;
+        Debug.Log("Time is resumed");
     }
 
     public void FastForward()
     {
         Time.timeScale = 2;
+        Debug.Log("Time is fast forwarded");
     }
+
+    public void OnTimerButtons(InputValue button)
+    {
+
+        Debug.Log("hej med dig " + button);
+
+
+
+    }
+
+
 
 
 
