@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("World Time")]
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI daytext;
     [SerializeField] float dayTimer;
-    [SerializeField] int dayNumber;
+    [SerializeField] int dayNumber = 1;
     private float dayMaxTime = 60;
 
     [Header("Company Stats")]
@@ -59,15 +61,15 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (dayTimer <= 0)
+        if (dayTimer >= dayMaxTime)
         {
             dayNumber++;
             Debug.Log("day: " + dayNumber);
-            dayTimer = dayMaxTime;
+            dayTimer = 0;
         }
         else
         {
-            dayTimer -= Time.fixedDeltaTime;
+            dayTimer += Time.fixedDeltaTime;
         }
 
 
@@ -78,16 +80,48 @@ public class GameManager : MonoBehaviour
             if (donationChance < popularity)
             {
                 money += Random.Range(0, donationChance) / 2;
-                Debug.Log("You got a dontaion of: " + donationChance / 2 + " Smackeroos");
+                Debug.Log("You got a dontaion of: " + donationChance / 2 + " Dabloons");
             }
         }
 
     }
 
+    private void Update()
+    {
+        int minutes = Mathf.FloorToInt(dayTimer / 60);
+        int seconds = Mathf.FloorToInt(dayTimer % 60);
+        //timerText.text = ((int)dayTimer).ToString();
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        daytext.text = string.Format("Day " + dayNumber);
+    }
+
+
+    public void Pause()
+    {
+        Time.timeScale = 0; 
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void FastForward()
+    {
+        Time.timeScale = 2;
+    }
+
+
+
     public void ChangeName(string addedText)
     {
         companyName = addedText;
         Debug.Log("Your Company is named: " + addedText);
+    }
+
+    public void Buy(float priceAmount)
+    {
+        money -= priceAmount;
     }
 
 }
