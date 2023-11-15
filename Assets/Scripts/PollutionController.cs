@@ -13,9 +13,11 @@ public class PollutionController : MonoBehaviour
 
     [Header("World Stats")]
     public float polutionProcent;
-    public TMP_Text polutionProcentText;
 
-    public TMP_Text regionPollutionText;
+    [SerializeField] private TMP_Text polutionProcentText;
+    [SerializeField] private TMP_Text regionPolutionText;
+    [SerializeField] private TMP_Text regionRecycleText;
+    [SerializeField] private TMP_Text regionDestroyedText;
 
     public float polution = 0;
     public float polutionMultiplier = 10f;
@@ -120,17 +122,21 @@ public class PollutionController : MonoBehaviour
 
 
     //region percentage to the UI
-    regionPollutionText.text = ("Pollution " + "Region: " + (int)r1pollutionProcent + "% " + "Region: " + (int)r2pollutionProcent + "% " + "Region: " + (int)r3pollutionProcent + "% " + "Region: " + (int)r4pollutionProcent + "% " + "Region: " + (int)r5pollutionProcent + "% " + "Region: " + (int)r6pollutionProcent + "% ");
 
 
         polutionMultiplier = region1Polution + region2Polution + region3Polution + region4Polution + region5Polution + region6Polution;
 
         polutionProcent = polution / polutionThreshhold * 100;
 
-        polutionProcentText.text = ((int)polutionProcent)+"%".ToString();
+        regionPolutionText.text = ("Pollution " + "Region: " + (int)r1pollutionProcent + "% " + "Region: " + (int)r2pollutionProcent + "% " + "Region: " + (int)r3pollutionProcent + "% " + "Region: " + (int)r4pollutionProcent + "% " + "Region: " + (int)r5pollutionProcent + "% " + "Region: " + (int)r6pollutionProcent + "% ");
+
+        regionRecycleText.text = ("Recycled " + "Region: " + (int)r1recycleProcent + "% " + "Region: " + (int)r2recycleProcent + "% " + "Region: " + (int)r3recycleProcent + "% " + "Region: " + (int)r4recycleProcent + "% " + "Region: " + (int)r5recycleProcent + "% " + "Region: " + (int)r6recycleProcent + "% ");
+
+        regionDestroyedText.text = ("Landfilled " + "Region: " + (int)r1trashDestroyedProcent + "% " + "Region: " + (int)r2trashDestroyedProcent + "% " + "Region: " + (int)r3trashDestroyedProcent + "% " + "Region: " + (int)r4trashDestroyedProcent + "% " + "Region: " + (int)r5trashDestroyedProcent + "% " + "Region: " + (int)r6trashDestroyedProcent + "% ");
 
         slider.value = polutionProcent;
-
+        
+        polutionProcentText.text = ((int)polutionProcent + "%").ToString();
        
 
 
