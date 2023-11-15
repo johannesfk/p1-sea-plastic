@@ -119,4 +119,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Your Company is named: " + addedText);
     }
 
+    public void Buy(float priceAmount)
+    {
+        money -= priceAmount;
+    }
+
 }
