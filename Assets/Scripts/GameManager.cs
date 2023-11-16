@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] int dayNumber = 1;
     private float dayMaxTime = 60;
     private bool dailyEventHappened;
-
+    public Button pauseButton;
+    public Button resumeButton;
+    public Button fastForwardButton;
 
     [Header("Company Stats")]
     public string companyName;
@@ -127,15 +130,30 @@ public class GameManager : MonoBehaviour
         Debug.Log("Time is fast forwarded");
     }
 
-    public void OnTimerButtons(InputValue button)
+    public void OnTimerButtons1(InputValue button)
     {
-
-        Debug.Log("hej med dig " + button);
-
-
-
+        Pause();
+        Debug.Log("hotkey: pause");
+        EventSystem.current.SetSelectedGameObject(null); //Deselects selected game objects
+        pauseButton.Select();
+            
     }
 
+    public void OnTimerButtons2(InputValue button)
+    {
+        Resume();
+        Debug.Log("hotkey: resume");
+        EventSystem.current.SetSelectedGameObject(null);
+        resumeButton.Select();
+    }
+
+    public void OnTimerButtons3(InputValue button)
+    {
+        FastForward();
+        Debug.Log("hotkey: fast forward");
+        EventSystem.current.SetSelectedGameObject(null);
+        fastForwardButton.Select();
+    }
 
 
 
