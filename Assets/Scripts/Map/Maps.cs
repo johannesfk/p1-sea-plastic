@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static HexGrid;
 using static HexGrid.terrainType;
@@ -22,8 +23,38 @@ public class Maps : MonoBehaviour
     public static Maps instance;
     public List<Map> mapList;
 
-    public const int CellCountX = 8;
+    private const int CellCountX = 8;
     private const int CellCountZ = 6;
+
+    private const int map1CellCountX = 52;
+    private const int map1CellCountZ = 24;
+
+    string map1Text =
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ" +
+        "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" +
+        "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" +
+        "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" +
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+
 
     // Start is called before the first frame update
     void OnEnable()
@@ -34,7 +65,12 @@ public class Maps : MonoBehaviour
         }
         mapList = new List<Map>();
 
+
+
         Map map1 = new Map(CellCountX, CellCountZ);
+
+        terrainType[,] map2Terrain = ConvertTo2DArray(map1Text, map1CellCountX, map1CellCountZ);
+        Map map2 = new Map(map2Terrain.GetLength(1), map2Terrain.GetLength(0));
 
 
         for (int i = 0; i < map1.layout.GetLength(0); i++)
@@ -77,8 +113,51 @@ public class Maps : MonoBehaviour
         }
 
         map1.layout = borderedLayout;
+        map2.layout = map2Terrain;
         mapList.Add(map1);
+        mapList.Add(map2);
 
     }
+
+    static terrainType[,] ConvertTo2DArray(string mapText, int width, int height)
+    {
+        terrainType[,] terrainMap = new terrainType[height, width];
+
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                char terrainChar = mapText[i * width + j];
+                terrainMap[i, j] = GetTerrainType(terrainChar);
+            }
+        }
+
+        return terrainMap;
+    }
+
+    static terrainType GetTerrainType(char terrainChar)
+    {
+        switch (terrainChar)
+        {
+            case 'F':
+                return terrainType.forest;
+            case 'M':
+                return terrainType.mountain;
+            case 'W':
+                return terrainType.water;
+            case 'Z':
+                return terrainType.riverZ;
+            case 'X':
+                return terrainType.riverX;
+            case 'C':
+                return terrainType.riverXZ;
+            case 'V':
+                return terrainType.riverZX;
+            default:
+                throw new ArgumentException($"Invalid terrain character: {terrainChar}");
+        }
+    }
 }
+
+
 

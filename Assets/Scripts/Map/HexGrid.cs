@@ -54,7 +54,7 @@ public class HexGrid : MonoBehaviour
 
         if (mapList.Count > 0)
         {
-            Map map1 = mapList[0];
+            Map map1 = mapList[1];
 
             int height = map1.layout.GetLength(0);
             int width = map1.layout.GetLength(1);
