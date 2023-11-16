@@ -5,16 +5,16 @@ using UnityEngine;
 using static HexGrid;
 using static HexGrid.terrainType;
 
-public class Map : MonoBehaviour
+public class Map
 {
     public int CellCountX;
     public int CellCountZ;
     public terrainType[,] layout;
-    public Map(int width, int height)
+    public Map(int cellCountX, int cellCountZ)
     {
-        CellCountX = width;
-        CellCountZ = height;
-        layout = new terrainType[width, height];
+        this.CellCountX = cellCountX;
+        this.CellCountZ = cellCountZ;
+        this.layout = new terrainType[CellCountX, CellCountZ];
     }
 }
 public class Maps : MonoBehaviour
