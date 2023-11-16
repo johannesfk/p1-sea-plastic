@@ -19,8 +19,11 @@ public class HexGrid : MonoBehaviour
     {
         forest,
         mountain,
+        recycler,
+        incinerator,
         water,
         boatCleaner,
+        riverBarricade,
         riverZ,
         riverX,
         riverXZ,

@@ -13,9 +13,11 @@ public class HexCell : MonoBehaviour
 
     public GameObject forest;
     public GameObject mountain;
+    public GameObject recycler;
+    public GameObject incinerator;
     public GameObject water;
     public GameObject boatCleaner;
-
+    public GameObject riverBarricade;
     public GameObject riverZ;
     public GameObject riverX;
     public GameObject riverXZ;
