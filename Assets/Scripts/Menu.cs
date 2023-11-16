@@ -9,7 +9,68 @@ public class Menu : MonoBehaviour
     public GameObject ManagementMenuObject;
     public GameObject AdvertismentMenuObject;
     public GameObject CurrentMenu;
-    public void OpenMenu()
+    public GameObject CurrentRegion;
+    public GameObject GlobalRegionObject;
+    public GameObject Region1Object;
+    public GameObject Region2Object;
+    public GameObject Region3Object;
+    public GameObject Region4Object;
+    public GameObject Region5Object;
+    public GameObject Region6Object;
+
+    public void OpenGlobalStatScreen()
+    {
+        if (CurrentRegion != null)
+        { 
+            CurrentRegion.SetActive(false); 
+        }
+        GlobalRegionObject.SetActive(true);
+        CurrentRegion = GlobalRegionObject;
+    }
+    public void OpenRegion1()
+    {
+        CurrentMenu.SetActive(false);
+        Region1Object.SetActive(true);
+        CurrentRegion = Region1Object;
+    }
+    public void OpenRegion2()
+    {
+        CurrentMenu.SetActive(false);
+        Region2Object.SetActive(true);
+        CurrentRegion = Region2Object;
+    }
+    public void OpenRegion3()
+    {
+        CurrentMenu.SetActive(false);
+        Region3Object.SetActive(true);
+        CurrentRegion = Region3Object;
+    }
+    public void OpenRegion4()
+    {
+        CurrentMenu.SetActive(false);
+        Region4Object.SetActive(true);
+        CurrentRegion = Region4Object;
+    }
+    public void OpenRegion5()
+    {
+        CurrentMenu.SetActive(false);
+        Region5Object.SetActive(true);
+        CurrentRegion = Region5Object;
+    }
+    public void OpenRegion6()
+    {
+        CurrentMenu.SetActive(false);
+        Region6Object.SetActive(true);
+        CurrentRegion = Region6Object;
+    }
+    public void ExitStatScreen()
+    {
+        CurrentRegion.SetActive(false);
+        CurrentRegion = null;
+    }
+
+    // Below are upgrade menu
+    public void OpenUpgradeMenu()
     {
         if (CurrentMenu != null)
         {
@@ -20,7 +81,8 @@ public class Menu : MonoBehaviour
         CurrentMenu = UpgradeMenuObject;
 
     }
-    public void ExitMenu()
+
+    public void ExitUpgradeMenu()
     {
         CurrentMenu.SetActive(false);
         CurrentMenu = null;

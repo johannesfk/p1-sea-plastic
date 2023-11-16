@@ -4,24 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance;
 
-    [Header("World Stats")]
-    public float polution = 25;
-    public float polutionMultiplier = 0.1f;
+    [Header("World Time")]
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI daytext;
+    [SerializeField] float dayTimer;
+    [SerializeField] int dayNumber = 1;
+    private float dayMaxTime = 60;
+    private bool dailyEventHappened;
 
-    private float startPolution = 25;
-    private float polutionThreshhold = 100;
-
-    [Header("Regions")]
-    private float region1Polution = 0.05f;
-    private float region2Polution = 0.03f;
-    private float region3Polution = 0.005f;
-    private float region4Polution = 0.015f;
 
     [Header("Company Stats")]
     public string companyName;
@@ -29,12 +26,12 @@ public class GameManager : MonoBehaviour
     public float income = 1;
     public float popularity = 0;
 
-    private float startMoney = 100;
-
     [Header("Upgrades")]
     [SerializeField] private bool donationUpgrade = false;
 
     private float donationChance;
+
+    [Header("ChangeGameState")]
     bool GameHasEnded = false;
 
     public GameObject GameOverBackground;
@@ -57,33 +54,37 @@ public class GameManager : MonoBehaviour
             GameOverBackground.SetActive(false);
             Debug.Log("New Game");
         }
-    
-        if (gameObject != null)
-        {
-            polution = startPolution;
-            money = startMoney;
-        }
     }
 
-    private void Update()
+    private void Awake()
     {
-        polutionMultiplier = region1Polution + region2Polution + region3Polution + region4Polution;
+        instance = this;
     }
 
     private void FixedUpdate()
     {
 
-        if (polution >= polutionThreshhold)
+        if (dayTimer >= dayMaxTime)
         {
-            Debug.Log("Du fucking Tabte lol");
+            dayNumber++;
+            Debug.Log("day: " + dayNumber);
+
+            money += income;
+
+            dayTimer = 0;
+
+            dailyEventHappened = false;
+        }
+        else
+        {
+            dayTimer += Time.fixedDeltaTime;
         }
 
-        if (polution < polutionThreshhold)
+        if (dayTimer >= dayMaxTime * 0.5f && dailyEventHappened == false)
         {
-            polution += Time.fixedDeltaTime * polutionMultiplier;
+            dailyEventHappened = true;
         }
 
-        money += Time.fixedDeltaTime * income;
 
         if (donationUpgrade)
         {
@@ -92,16 +93,62 @@ public class GameManager : MonoBehaviour
             if (donationChance < popularity)
             {
                 money += Random.Range(0, donationChance) / 2;
-                Debug.Log("You got a dontaion of: " + donationChance / 2 + " Smackeroos");
+                Debug.Log("You got a dontaion of: " + donationChance / 2 + " Dabloons");
             }
         }
 
     }
 
+    private void Update()
+    {
+        int minutes = Mathf.FloorToInt(dayTimer / 60);
+        int seconds = Mathf.FloorToInt(dayTimer % 60);
+        //timerText.text = ((int)dayTimer).ToString();
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        daytext.text = string.Format("Day " + dayNumber);
+    }
+
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        Debug.Log("Time is paused");
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        Debug.Log("Time is resumed");
+    }
+
+    public void FastForward()
+    {
+        Time.timeScale = 2;
+        Debug.Log("Time is fast forwarded");
+    }
+
+    public void OnTimerButtons(InputValue button)
+    {
+
+        Debug.Log("hej med dig " + button);
+
+
+
+    }
+
+
+
+
+
     public void ChangeName(string addedText)
     {
         companyName = addedText;
         Debug.Log("Your Company is named: " + addedText);
+    }
+
+    public void Buy(float priceAmount)
+    {
+        money -= priceAmount;
     }
 
 }
