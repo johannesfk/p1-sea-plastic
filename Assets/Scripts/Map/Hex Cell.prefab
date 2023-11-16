@@ -52,6 +52,8 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 0}
   forest: {fileID: 7046648532484257570, guid: 4888361147992764eaa965edb5a928b2, type: 3}
   mountain: {fileID: 434796790441446895, guid: 73b02082e2f3e844099ae84a1fc1022f, type: 3}
+  snow: {fileID: 296365925496530503, guid: d292bf5c7e67be44bb510c02728fb5fb, type: 3}
+  desert: {fileID: 670127751538096339, guid: 4ab67d5439435bc43b76d8b844267242, type: 3}
   recycler: {fileID: 2656812261806649005, guid: 184a3172be14c3f42aca579f40e40f30,
     type: 3}
   incinerator: {fileID: 8913375794068425766, guid: 4c5f28ee5129d2249952e79adcd7a68a,

@@ -19,6 +19,8 @@ public class HexGrid : MonoBehaviour
     {
         forest,
         mountain,
+        snow,
+        desert,
         recycler,
         incinerator,
         water,

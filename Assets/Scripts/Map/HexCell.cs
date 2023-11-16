@@ -13,6 +13,8 @@ public class HexCell : MonoBehaviour
 
     public GameObject forest;
     public GameObject mountain;
+    public GameObject snow;
+    public GameObject desert;
     public GameObject recycler;
     public GameObject incinerator;
     public GameObject water;
@@ -35,6 +37,8 @@ public class HexCell : MonoBehaviour
             { terrainType.water, water },
             { terrainType.forest, forest },
             { terrainType.mountain, mountain },
+            { terrainType.snow, snow },
+            { terrainType.desert, desert },
             { terrainType.boatCleaner, boatCleaner },
             { terrainType.riverZ, riverZ },
             { terrainType.riverX, riverX },
