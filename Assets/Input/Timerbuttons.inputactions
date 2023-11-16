@@ -6,9 +6,27 @@
             "id": "74611e58-a3e9-418f-961e-4e9d5845c304",
             "actions": [
                 {
-                    "name": "TimerButtons",
+                    "name": "TimerButtons1",
                     "type": "Button",
                     "id": "b22ed654-6418-4f4d-9f41-20d2eace9840",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TimerButtons2",
+                    "type": "Button",
+                    "id": "89dcf5b3-99cc-453b-975c-eb11333a68ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TimerButtons3",
+                    "type": "Button",
+                    "id": "27bf3565-3930-41c4-916d-8b010bdc2d30",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -23,29 +41,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TimerButtons",
+                    "action": "TimerButtons1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a7c9e774-c4a0-46d1-8b51-7a3c4b8b1f5c",
+                    "id": "bb1d7412-04d0-4184-a1b3-44cdda6aff0a",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TimerButtons",
+                    "action": "TimerButtons2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a0da1207-e8d1-439c-bef8-7bab0461ea80",
+                    "id": "41264af9-6ae4-4e34-8002-7a60cc42dc73",
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TimerButtons",
+                    "action": "TimerButtons3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
