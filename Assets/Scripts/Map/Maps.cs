@@ -26,20 +26,24 @@ public class Maps : MonoBehaviour
     private const int CellCountX = 8;
     private const int CellCountZ = 6;
 
-    private const int map1CellCountX = 52;
-    private const int map1CellCountZ = 24;
 
-    string map1Text =
-        "WWWWWWWWWWWFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFSSSSFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFSSSSFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFFFSSDDDFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFFFDDDDDDDDDFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFFFDDDDDDDDDFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
-        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" +
+    readonly string map1Text =
+        "WWWWWWWWWWWFFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM\n" +
+        "FFFFFSSSSFFFFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFSSSSFFFFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFFFSSDDDFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFFFDDDDDDDDDFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFFFDDDDDDDDDFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "FFFFFFFFFFFFFFFFFFFFMMMMMMMMMMMMMMMMMMWMMMMMMMMMMMMMMM" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
         "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
         "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
         "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
@@ -55,10 +59,25 @@ public class Maps : MonoBehaviour
         "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
         "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
 
+    /* readonly string map1Text =
+        "FFWFF\n" +
+        "MMWMM" +
+        "SSWSS" +
+        "DDWDD" +
+        "XXWXX"; */
+
 
     // Start is called before the first frame update
     void OnEnable()
     {
+
+        int map1CellCountX = map1Text.IndexOf('\n');
+        int map1CellCountZ = (map1Text.Length - 1) / map1CellCountX;
+
+        /* Debug.Log("Cell collumns " + map1CellCountX);
+        Debug.Log("cell rows " + map1CellCountZ);
+        Debug.Log("cell count " + map1CellCountX * map1CellCountZ); */
+
         if (instance == null)
         {
             instance = this;
@@ -72,7 +91,20 @@ public class Maps : MonoBehaviour
         terrainType[,] map2Terrain = ConvertTo2DArray(map1Text, map1CellCountX, map1CellCountZ);
         Map map2 = new Map(map2Terrain.GetLength(1), map2Terrain.GetLength(0));
 
+        Debug.Log(map2Terrain.GetLength(1) + " ✕ " + map2Terrain.GetLength(0));
 
+        /* Debug.Log
+        (
+            map2Terrain[0, 0] + " " + map2Terrain[0, 1] + " " + map2Terrain[0, 2] + " " + map2Terrain[0, 3] + "\n" +
+            map2Terrain[1, 0] + " " + map2Terrain[1, 1] + " " + map2Terrain[1, 2] + " " + map2Terrain[1, 3] + "\n" +
+            map2Terrain[2, 0] + " " + map2Terrain[2, 1] + " " + map2Terrain[2, 2] + " " + map2Terrain[2, 3] + "\n" +
+            map2Terrain[3, 0] + " " + map2Terrain[3, 1] + " " + map2Terrain[3, 2] + " " + map2Terrain[3, 3] + "\n" +
+            map2Terrain[4, 0] + " " + map2Terrain[4, 1] + " " + map2Terrain[4, 2] + " " + map2Terrain[4, 3]
+        ); */
+
+
+
+        /// Map 1 
         for (int i = 0; i < map1.layout.GetLength(0); i++)
         {
             for (int j = 0; j < map1.layout.GetLength(1); j++)
@@ -112,6 +144,8 @@ public class Maps : MonoBehaviour
             }
         }
 
+        // Map 1 end
+
         map1.layout = borderedLayout;
         map2.layout = map2Terrain;
         mapList.Add(map1);
@@ -122,13 +156,19 @@ public class Maps : MonoBehaviour
     static terrainType[,] ConvertTo2DArray(string mapText, int width, int height)
     {
         terrainType[,] terrainMap = new terrainType[height, width];
+        int charIndex = 0;
 
         for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++)
             {
-                char terrainChar = mapText[i * width + j];
+                while (mapText[charIndex] == '\n' || mapText[charIndex] == '\r')
+                {
+                    charIndex++;
+                }
+                char terrainChar = mapText[charIndex];
                 terrainMap[i, j] = GetTerrainType(terrainChar);
+                charIndex++;
             }
         }
 
