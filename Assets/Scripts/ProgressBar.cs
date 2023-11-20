@@ -30,7 +30,7 @@ public class ProgressBar : MonoBehaviour
 
     public void UpdateProgress()
     {
-        pollution = PollutionController.instance.polutionProcent;
+        pollution = PollutionController.instance.polutionPercentage;
         slider.value = pollution;
 
 

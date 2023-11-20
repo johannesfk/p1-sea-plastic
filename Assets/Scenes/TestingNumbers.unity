@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 908761691}
   - component: {fileID: 908761690}
   m_Layer: 5
-  m_Name: RegionsDestroyedProcent
+  m_Name: RegionsInciniratedProcent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -533,9 +533,19 @@ PrefabInstance:
       objectReference: {fileID: 422445396}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
+      propertyPath: polutionMultiplier
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
       propertyPath: regionPolutionText
       value: 
       objectReference: {fileID: 1702638311}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regionDestroyedText
@@ -546,6 +556,41 @@ PrefabInstance:
       propertyPath: regionPollutionText
       value: 
       objectReference: {fileID: 1702638311}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[0].regionWaste
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[0].regionPolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[1].regionPolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[2].regionPolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[3].regionPolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[4].regionPolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[5].regionPolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3243903976173182217, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: m_Pivot.x

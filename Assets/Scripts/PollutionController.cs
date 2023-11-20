@@ -3,142 +3,122 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UIElements;
+
+public class WorldStats
+{
+    public static List<float> regionPolution;
+
+    public static float polutionTotal;
+
+  //  public static object polutionRegion { get; internal set; }
+    
+    public void Awake()
+    {
+        polutionTotal = 0;
+        Debug.Log("finkledink");
+    }
+
+    private void Update()
+    {
+
+        if (regionPolution != null)
+        {
+            foreach (var item in regionPolution)
+            {
+                polutionTotal += item;
+            }
+        }
+        
+    }
+
+}
+
+[System.Serializable]
+public class Region
+{
+
+    [Header("Amounts")]
+    public float regionPolution;
+    public float regionWaste;
+    public float regionLandfilled;
+    public float regionRecycle;
+    public float regionTrashDestroyed;
+    [Header("Percentages")]
+    public float regionPollutionPercentage;
+    public float regionRecyclePercentage;
+    public float regionTrashDestroyedPercentage;
+    public float regionLandfillPercentage;
+
+    public void Update()
+    {
+        regionPolution = regionWaste - regionRecycle - regionTrashDestroyed - regionLandfilled;
+
+        Debug.Log("dillermand");
+
+        //region Percentages
+        regionPollutionPercentage = regionPolution / regionWaste * 100;
+
+        regionRecyclePercentage = regionRecycle / regionWaste * 100;
+
+        regionTrashDestroyedPercentage = regionTrashDestroyed / regionWaste * 100;
+
+        regionLandfillPercentage = regionLandfilled / regionWaste * 100;
+
+
+    }
+}
+
 
 public class PollutionController : MonoBehaviour
 {
     public static PollutionController instance;
 
+    public List<Region> regions;
+
     [Header("Stuff")]
-    public Slider slider;
+    public UnityEngine.UI.Slider slider;
 
     [Header("World Stats")]
-    public float polutionProcent;
+    public float polutionPercentage;
 
     [SerializeField] private TMP_Text polutionProcentText;
-    [SerializeField] private TMP_Text regionPolutionText;
-    [SerializeField] private TMP_Text regionRecycleText;
-    [SerializeField] private TMP_Text regionDestroyedText;
 
     public float polution = 0;
-    public float polutionMultiplier = 10f;
+    public float polutionMultiplier;
 
     private float startPolution = 200;
     private float polutionThreshhold = 10000;
-
-    [Header("Region1")]
-    [SerializeField] private float region1Polution;
-    public float r1Waste = 10;
-    public float r1Recycle = 1;
-    public float r1TrashDestroyed = 1;
-    public float r1pollutionProcent;
-    public float r1recycleProcent;
-    public float r1trashDestroyedProcent;
-
-    [Header("Region2")]
-    [SerializeField] private float region2Polution;
-    public float r2Waste = 10;
-    public float r2Recycle = 1;
-    public float r2TrashDestroyed = 1;
-    public float r2pollutionProcent;
-    public float r2recycleProcent;
-    public float r2trashDestroyedProcent;
-
-    [Header("Region3")]
-    [SerializeField] private float region3Polution;
-    public float r3Waste = 10;
-    public float r3Recycle = 1;
-    public float r3TrashDestroyed = 1;
-    public float r3pollutionProcent;
-    public float r3recycleProcent;
-    public float r3trashDestroyedProcent;
-
-    [Header("Region4")]
-    [SerializeField] private float region4Polution;
-    public float r4Waste = 10;
-    public float r4Recycle = 1;
-    public float r4TrashDestroyed = 1;
-    public float r4pollutionProcent;
-    public float r4recycleProcent;
-    public float r4trashDestroyedProcent;
-
-    [Header("Region5")]
-    [SerializeField] private float region5Polution;
-    public float r5Waste = 10;
-    public float r5Recycle = 1;
-    public float r5TrashDestroyed = 1;
-    public float r5pollutionProcent;
-    public float r5recycleProcent;
-    public float r5trashDestroyedProcent;
-
-    [Header("Region6")]
-    [SerializeField] private float region6Polution;
-    public float r6Waste = 5;
-    public float r6Recycle = 1;
-    public float r6TrashDestroyed = 1;
-    public float r6pollutionProcent;
-    public float r6recycleProcent;
-    public float r6trashDestroyedProcent;
 
     void Awake()
     {
         polution = startPolution;
         instance = this;
+
+        if (WorldStats.regionPolution != null)
+        {
+            if (WorldStats.regionPolution.Count > 0)
+            {
+                for (int i = 0; i < regions.Count; i++)
+                {
+                    WorldStats.regionPolution[i] = regions[i].regionPolution;
+                }
+            }
+        }
+       
     }
 
     // Update is called once per frame
     private void Update()
     {
-        //the regions polution calculations
-        region1Polution = r1Waste - r1Recycle - r1TrashDestroyed;
-        region2Polution = r2Waste - r2Recycle - r2TrashDestroyed;
-        region3Polution = r3Waste - r3Recycle - r3TrashDestroyed;
-        region4Polution = r4Waste - r4Recycle - r4TrashDestroyed;
-        region5Polution = r5Waste - r5Recycle - r5TrashDestroyed;
-        region6Polution = r6Waste - r6Recycle - r6TrashDestroyed;
 
-        //the regions Procentages
-        r1pollutionProcent = region1Polution / r1Waste * 100;
-        r2pollutionProcent = region2Polution / r2Waste * 100;
-        r3pollutionProcent = region3Polution / r3Waste * 100;
-        r4pollutionProcent = region4Polution / r4Waste * 100;
-        r5pollutionProcent = region5Polution / r5Waste * 100;
-        r6pollutionProcent = region6Polution / r6Waste * 100;
+        polutionMultiplier = WorldStats.polutionTotal;
 
-        //Region Recycle Procent
-        r1recycleProcent = r1Recycle / r1Waste * 100;
-        r2recycleProcent = r2Recycle / r2Waste * 100;
-        r3recycleProcent = r3Recycle / r3Waste * 100;
-        r4recycleProcent = r4Recycle / r4Waste * 100;
-        r5recycleProcent = r5Recycle / r5Waste * 100;
-        r6recycleProcent = r6Recycle / r6Waste * 100;
+        polutionPercentage = polution / polutionThreshhold * 100;
 
-        //Region Destroyed Procent
-        r1trashDestroyedProcent = r1TrashDestroyed / r2Waste * 100;
-        r2trashDestroyedProcent = r2TrashDestroyed / r2Waste * 100;
-        r3trashDestroyedProcent = r3TrashDestroyed / r3Waste * 100;
-        r4trashDestroyedProcent = r4TrashDestroyed / r4Waste * 100;
-        r5trashDestroyedProcent = r5TrashDestroyed / r5Waste * 100;
-        r6trashDestroyedProcent = r6TrashDestroyed / r6Waste * 100;
-
-
-    //region percentage to the UI
-
-
-        polutionMultiplier = region1Polution + region2Polution + region3Polution + region4Polution + region5Polution + region6Polution;
-
-        polutionProcent = polution / polutionThreshhold * 100;
-
-        regionPolutionText.text = ("Pollution " + "Region: " + (int)r1pollutionProcent + "% " + "Region: " + (int)r2pollutionProcent + "% " + "Region: " + (int)r3pollutionProcent + "% " + "Region: " + (int)r4pollutionProcent + "% " + "Region: " + (int)r5pollutionProcent + "% " + "Region: " + (int)r6pollutionProcent + "% ");
-
-        regionRecycleText.text = ("Recycled " + "Region: " + (int)r1recycleProcent + "% " + "Region: " + (int)r2recycleProcent + "% " + "Region: " + (int)r3recycleProcent + "% " + "Region: " + (int)r4recycleProcent + "% " + "Region: " + (int)r5recycleProcent + "% " + "Region: " + (int)r6recycleProcent + "% ");
-
-        regionDestroyedText.text = ("Landfilled " + "Region: " + (int)r1trashDestroyedProcent + "% " + "Region: " + (int)r2trashDestroyedProcent + "% " + "Region: " + (int)r3trashDestroyedProcent + "% " + "Region: " + (int)r4trashDestroyedProcent + "% " + "Region: " + (int)r5trashDestroyedProcent + "% " + "Region: " + (int)r6trashDestroyedProcent + "% ");
-
-        slider.value = polutionProcent;
+        slider.value = polutionPercentage;
         
-        polutionProcentText.text = ((int)polutionProcent + "%").ToString();
-       
-
+        polutionProcentText.text = ((int)polutionPercentage + "%").ToString();
 
     }
 

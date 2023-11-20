@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +18,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] float dayTimer;
     [SerializeField] int dayNumber = 1;
     private float dayMaxTime = 60;
+    private bool dailyEventHappened;
+    public Button pauseButton;
+    public Button resumeButton;
+    public Button fastForwardButton;
 
     [Header("Company Stats")]
     public string companyName;
@@ -65,11 +71,21 @@ public class GameManager : MonoBehaviour
         {
             dayNumber++;
             Debug.Log("day: " + dayNumber);
+
+            money += income;
+
             dayTimer = 0;
+
+            dailyEventHappened = false;
         }
         else
         {
             dayTimer += Time.fixedDeltaTime;
+        }
+
+        if (dayTimer >= dayMaxTime * 0.5f && dailyEventHappened == false)
+        {
+            dailyEventHappened = true;
         }
 
 
@@ -98,18 +114,47 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0; 
+        Time.timeScale = 0;
+        Debug.Log("Time is paused");
     }
 
     public void Resume()
     {
         Time.timeScale = 1;
+        Debug.Log("Time is resumed");
     }
 
     public void FastForward()
     {
         Time.timeScale = 2;
+        Debug.Log("Time is fast forwarded");
     }
+
+    public void OnTimerButtons1(InputValue button)
+    {
+        Pause();
+        Debug.Log("hotkey: pause");
+        EventSystem.current.SetSelectedGameObject(null); //Deselects selected game objects
+        pauseButton.Select();
+            
+    }
+
+    public void OnTimerButtons2(InputValue button)
+    {
+        Resume();
+        Debug.Log("hotkey: resume");
+        EventSystem.current.SetSelectedGameObject(null);
+        resumeButton.Select();
+    }
+
+    public void OnTimerButtons3(InputValue button)
+    {
+        FastForward();
+        Debug.Log("hotkey: fast forward");
+        EventSystem.current.SetSelectedGameObject(null);
+        fastForwardButton.Select();
+    }
+
 
 
 
