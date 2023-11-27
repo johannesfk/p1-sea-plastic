@@ -35,7 +35,7 @@
                 {
                     "name": "BurgerButton",
                     "type": "Button",
-                    "id": "956d261e-00d6-41b7-99d5-11cae47d9979",
+                    "id": "b42445c9-c32c-421c-9487-6b0a57d4fa53",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -78,8 +78,8 @@
                 },
                 {
                     "name": "",
-                    "id": "8bc372a5-84a6-45ad-bb64-d04c508fa0d7",
-                    "path": "",
+                    "id": "6715b6d8-9804-46af-ba33-54f2e3f7e503",
+                    "path": "<Keyboard>/ESC",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

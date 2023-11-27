@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
@@ -138,6 +139,11 @@ public class Menu : MonoBehaviour
         BurgerMenu.SetActive(true);
     }
 
+    public void OnBurgerButton(InputValue Button)
+    {
 
+        //if ()
+
+    }
 
 }
