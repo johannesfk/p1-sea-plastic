@@ -17,6 +17,7 @@ public class Menu : MonoBehaviour
     public GameObject Region4Object;
     public GameObject Region5Object;
     public GameObject Region6Object;
+    public GameObject BurgerMenu;
 
     public void OpenGlobalStatScreen()
     {
@@ -128,4 +129,15 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
         Debug.Log("Loading Menu");
     }
+
+
+    //Burger MENU STUFF
+
+    public void BurgerButton()
+    {
+        BurgerMenu.SetActive(true);
+    }
+
+
+
 }

@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BurgerButton",
+                    "type": "Button",
+                    "id": "956d261e-00d6-41b7-99d5-11cae47d9979",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -64,6 +73,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "TimerButtons3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bc372a5-84a6-45ad-bb64-d04c508fa0d7",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BurgerButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
