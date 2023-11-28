@@ -14,17 +14,40 @@ public class UpgradeSystem : MonoBehaviour
     public Button upgradeButton3;
     public Button confirmButton;
 
-    // selectedUpgradeIndex is set to a number that's not in any array. So that default means no upgrade is selected.
     private int selectedUpgradeIndex = -1;
-
-    // Variables for upgrade data, such as titles, descriptions, costs.
-    private string[] upgradeTitles = { "Upgrade 1", "Upgrade 2", "Upgrade 3" };
-    private string[] upgradeDescriptions = { "Description 1", "Description 2", "Description 3" };
-    private int[] upgradeCosts = { 10, 20, 10 };
     private int upgradeMoney = 30;
+
+    // Variables for upgrade data
+    private UpgradeData[] upgrades;
+    private class UpgradeData
+    {
+        public string title;
+        public string description;
+        public int cost;
+        public bool isPurchased;
+        public int prerequisiteIndex;  // Index of the prerequisite upgrade, -1 if none
+
+        public UpgradeData(string title, string description, int cost, bool isPurchased, int prerequisiteIndex = -1)
+        {
+            this.title = title;
+            this.description = description;
+            this.cost = cost;
+            this.isPurchased = isPurchased;
+            this.prerequisiteIndex = prerequisiteIndex;
+        }
+    }
 
     void Start()
     {
+        // Initialize upgrade data
+        upgrades = new UpgradeData[]
+        {
+            // Title, Description, cost, ispurcheased, prerequisite upgrade
+            new UpgradeData("Upgrade 1", "Description 1", 10, false), // Prerequisite: None
+            new UpgradeData("Upgrade 2", "Description 2 <br>Prerequisite: Upgrade 1", 20, false, 0),  // Prerequisite: Upgrade 1
+            new UpgradeData("Upgrade 3", "Description 3", 10, false, 0)   // Prerequisite: Upgrade 1
+        };
+
         // Attach functions to button click events
         upgradeButton1.onClick.AddListener(() => UpgradeClicked(0));
         upgradeButton2.onClick.AddListener(() => UpgradeClicked(1));
@@ -38,58 +61,70 @@ public class UpgradeSystem : MonoBehaviour
 
     public void SelectUpgrade(int index)
     {
-        // This method is called when an upgrade button is clicked
-        selectedUpgradeIndex = index;
-        Debug.Log("Selected Upgrade: " + upgradeTitles[index]);
+        // Check if the index is valid before updating selectedUpgradeIndex
+        if (index >= 0 && index < upgrades.Length)
+        {
+            selectedUpgradeIndex = index;
+            Debug.Log("Selected Upgrade: " + upgrades[index].title);
+        }
+        else
+        {
+            Debug.LogError("Invalid upgradeIndex: " + index);
+        }
     }
 
     void ConfirmPurchase()
     {
-        // This method is called when the confirm button is clicked
-        if (selectedUpgradeIndex != -1)
+        if (selectedUpgradeIndex != -1 && !upgrades[selectedUpgradeIndex].isPurchased)
         {
-            int cost = upgradeCosts[selectedUpgradeIndex];
+            int cost = upgrades[selectedUpgradeIndex].cost;
 
-            // Check if the player has enough resources to purchase the upgrade
-            if (upgradeMoney >= cost)
+            if (upgradeMoney >= cost && ArePrerequisitesFulfilled(selectedUpgradeIndex))
             {
-                // Deduct the cost from player resources
                 upgradeMoney -= cost;
+                upgrades[selectedUpgradeIndex].isPurchased = true;
 
-                // Apply the upgrade
                 ApplyUpgrade(selectedUpgradeIndex);
 
-                // Log or perform any other actions related to successful purchase
-                Debug.Log("Upgrade Purchased: " + upgradeTitles[selectedUpgradeIndex]);
+                Debug.Log("Upgrade Purchased: " + upgrades[selectedUpgradeIndex].title);
 
-                // Reset selectedUpgradeIndex to indicate that no upgrade is currently selected
-                selectedUpgradeIndex = -1;
-
-                // Update UI to reflect changes
+                UpdateUpgradeUI(selectedUpgradeIndex);
                 UpdateMoneyUI();
+                UpdateButtonStates();
             }
             else
             {
-                // Log or perform actions for insufficient resources
-                Debug.Log("Insufficient resources to purchase upgrade");
+                Debug.Log("Insufficient resources or prerequisites not fulfilled");
             }
         }
         else
         {
-            // Log or perform actions for no upgrade selected
-            Debug.Log("No upgrade selected");
+            Debug.Log("No upgrade selected or already purchased");
         }
+    }
+
+    bool ArePrerequisitesFulfilled(int upgradeIndex)
+    {
+        // Check if all prerequisites for the selected upgrade are fulfilled
+        for (int i = 0; i < upgradeIndex; i++)
+        {
+            if (!upgrades[i].isPurchased)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     void ApplyUpgrade(int index)
     {
+        Debug.Log("Applying Upgrade: " + upgrades[index].title);
         // Add logic to apply the upgrade based on the selected index
-        // For simplicity, let's just log the upgrade application
-        Debug.Log("Applying Upgrade: " + upgradeTitles[index]);
     }
 
     void UpgradeClicked(int upgradeIndex)
     {
+        Debug.Log("UpgradeClicked with index: " + upgradeIndex);
         // Handle upgrade logic here
         // You can deduct the cost, apply the upgrade, etc.
 
@@ -99,15 +134,48 @@ public class UpgradeSystem : MonoBehaviour
 
     void UpdateUpgradeUI(int upgradeIndex)
     {
-        // Update the UI with data based on the selected upgrade
-        titleText.text = "Title: " + upgradeTitles[upgradeIndex];
-        descriptionText.text = "Description: " + upgradeDescriptions[upgradeIndex];
-        costText.text = "Cost: " + upgradeCosts[upgradeIndex];
+        if (upgradeIndex >= 0 && upgradeIndex < upgrades.Length)
+        {
+            titleText.text = "Title: " + upgrades[upgradeIndex].title;
+            descriptionText.text = "Description: " + upgrades[upgradeIndex].description;
+            costText.text = "Cost: " + upgrades[upgradeIndex].cost;
+        }
+        else
+        {
+            Debug.LogError("Invalid upgradeIndex: " + upgradeIndex);
+        }
     }
 
     void UpdateMoneyUI()
     {
-        // Update the UI with the current money value
         Money.text = "Money: " + upgradeMoney;
     }
+
+    // Data structure to represent upgrade information
+    
+    void UpdateButtonStates()
+    {
+        // Update button states based on upgrade availability
+        for (int i = 0; i < upgrades.Length; i++)
+        {
+            bool canPurchase = !upgrades[i].isPurchased && ArePrerequisitesFulfilled(i) && upgradeMoney >= upgrades[i].cost;
+            if (i == selectedUpgradeIndex)
+            {
+                // Handle the selected upgrade separately if needed
+            }
+            else
+            {
+                // Disable or change appearance based on canPurchase
+                if (canPurchase)
+                {
+                    // Enable or set normal appearance
+                }
+                else
+                {
+                    // Disable or set disabled appearance
+                }
+            }
+        }
+    }
+
 }
