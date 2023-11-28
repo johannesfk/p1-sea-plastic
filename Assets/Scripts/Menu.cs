@@ -141,8 +141,16 @@ public class Menu : MonoBehaviour
 
     public void OnBurgerButton(InputValue Button)
     {
-
-        //if ()
+        if (BurgerMenu.activeSelf)
+        {
+            BurgerMenu.SetActive(false);
+            
+        }
+        else
+        {
+            BurgerMenu.SetActive(true);
+            
+        }
 
     }
 

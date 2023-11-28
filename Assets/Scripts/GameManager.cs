@@ -106,9 +106,9 @@ public class GameManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(dayTimer / 60);
         int seconds = Mathf.FloorToInt(dayTimer % 60);
-        //timerText.text = ((int)dayTimer).ToString();
-      //  timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-      //  daytext.text = string.Format("Day " + dayNumber);
+        timerText.text = ((int)dayTimer).ToString();
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        daytext.text = string.Format("Day " + dayNumber);
     }
 
 
