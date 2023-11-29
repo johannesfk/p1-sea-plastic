@@ -156,6 +156,14 @@ MonoBehaviour:
   ManagementMenuObject: {fileID: 0}
   AdvertismentMenuObject: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  CurrentRegion: {fileID: 0}
+  GlobalRegionObject: {fileID: 0}
+  Region1Object: {fileID: 0}
+  Region2Object: {fileID: 0}
+  Region3Object: {fileID: 0}
+  Region4Object: {fileID: 0}
+  Region5Object: {fileID: 0}
+  Region6Object: {fileID: 0}
 --- !u!4 &158030829
 Transform:
   m_ObjectHideFlags: 0
@@ -1443,7 +1451,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1823,12 +1831,12 @@ PrefabInstance:
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -309.14822
+      value: -317
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 197.81831
+      value: 162
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}

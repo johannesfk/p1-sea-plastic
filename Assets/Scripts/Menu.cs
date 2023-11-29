@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
@@ -17,6 +18,7 @@ public class Menu : MonoBehaviour
     public GameObject Region4Object;
     public GameObject Region5Object;
     public GameObject Region6Object;
+    public GameObject BurgerMenu;
 
     public void OpenGlobalStatScreen()
     {
@@ -128,4 +130,28 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
         Debug.Log("Loading Menu");
     }
+
+
+    //Burger MENU STUFF
+
+    public void BurgerButton()
+    {
+        BurgerMenu.SetActive(true);
+    }
+
+    public void OnBurgerButton(InputValue Button)
+    {
+        if (BurgerMenu.activeSelf)
+        {
+            BurgerMenu.SetActive(false);
+            
+        }
+        else
+        {
+            BurgerMenu.SetActive(true);
+            
+        }
+
+    }
+
 }
