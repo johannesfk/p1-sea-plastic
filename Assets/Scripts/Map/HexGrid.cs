@@ -70,7 +70,6 @@ public class HexGrid : MonoBehaviour
                 }
             }
 
-
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
@@ -81,7 +80,6 @@ public class HexGrid : MonoBehaviour
                     cell.SetCellPrefab(map1.layout[i, j]);
                 }
             }
-
 
             for (int z = 0, i = 0; z < height; z++)
             {
@@ -116,7 +114,7 @@ public class HexGrid : MonoBehaviour
         Vector3 position;
         position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
         position.y = 0f;
-        position.z = z * (HexMetrics.outerRadius * 1.5f);
+        position.z = z * (HexMetrics.outerRadius * 1.5f) * -1; // * -1 to flip the map top to bottom
 
         // HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
         HexCell cell = cells[i];
@@ -138,31 +136,59 @@ public class HexGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /* if (Input.GetMouseButton(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            Debug.Log("Left click");
             HandleInput();
-        } */
+        }
     }
 
     void HandleInput()
     {
+        int layerMask = 1 << 8;
+        layerMask = ~layerMask;
+
         Ray inputRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
-        if (Physics.Raycast(inputRay, out hit))
+        Debug.Log("Mouse position " + Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        Debug.Log("Mouse world position " + Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+
+        // TouchCell(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+
+        if (Physics.Raycast(inputRay, out hit, Mathf.Infinity, layerMask))
         {
+            Debug.Log("Hit at " + hit.point);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             TouchCell(hit.point);
         }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.Log("No hit");
+        }
+        /*  // Does the ray intersect any objects excluding the player layer
+         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+         {
+             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+             Debug.Log("Did Hit");
+         }
+         else
+         {
+             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+             Debug.Log("Did not Hit");
+         } */
     }
 
     void TouchCell(Vector3 position)
     {
+        Debug.Log("touched at " + position + " -> " + transform.InverseTransformPoint(position));
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
         int index = coordinates.X + coordinates.Z * CellCountX + coordinates.Z / 2;
         HexCell cell = cells[index];
         cell.color = touchedColor;
         // hexMesh.Triangulate(cells);
-        Debug.Log("touched at " + coordinates.ToString());
+        Debug.Log("touched at " + coordinates.ToString() + " -> " + index);
     }
 
     public void OnDestroy()
