@@ -7,15 +7,75 @@ public struct HexCoordinates
 {
     [SerializeField]
     private int x, z;
-    public int X { get { return x; } }
-    public int Z { get { return z; } }
-    public int Y { get { return -X - Z; } }
+    public readonly int X => x;
+    public readonly int Z => z;
+    public readonly int Y => -X - Z;
+
+    public readonly float HexX => X + Z / 2 + ((Z & 1) == 0 ? 0f : 0.5f);
+    public readonly float HexZ => Z * HexMetrics.outerToInner;
 
     public HexCoordinates(int x, int z)
     {
+        if (HexMetrics.Wrapping)
+        {
+            Debug.Log("Wrapping hexGrid");
+            /*  int oX = x + z / 2;
+             if (oX < 0)
+             {
+                 Debug.Log("Wrapping hexGrid +x");
+                 x += HexMetrics.wrapSize;
+             }
+             else if (oX >= HexMetrics.wrapSize)
+             {
+                 Debug.Log("Wrapping hexGrid -x");
+                 x -= HexMetrics.wrapSize;
+             } */
+        }
         this.x = x;
         this.z = z;
     }
+
+    public readonly int DistanceTo(HexCoordinates other)
+    {
+        int xy =
+            (x < other.x ? other.x - x : x - other.x) +
+            (Y < other.Y ? other.Y - Y : Y - other.Y);
+
+        if (HexMetrics.Wrapping)
+        {
+            other.x += HexMetrics.wrapSize;
+            int xyWrapped =
+                (x < other.x ? other.x - x : x - other.x) +
+                (Y < other.Y ? other.Y - Y : Y - other.Y);
+            if (xyWrapped < xy)
+            {
+                xy = xyWrapped;
+            }
+            else
+            {
+                other.x -= 2 * HexMetrics.wrapSize;
+                xyWrapped =
+                    (x < other.x ? other.x - x : x - other.x) +
+                    (Y < other.Y ? other.Y - Y : Y - other.Y);
+                if (xyWrapped < xy)
+                {
+                    xy = xyWrapped;
+                }
+            }
+        }
+
+        return (xy + (z < other.z ? other.z - z : z - other.z)) / 2;
+    }
+
+    public readonly HexCoordinates Step(HexDirection direction) => direction switch
+    {
+        HexDirection.NE => new HexCoordinates(x, z + 1),
+        HexDirection.E => new HexCoordinates(x + 1, z),
+        HexDirection.SE => new HexCoordinates(x + 1, z - 1),
+        HexDirection.SW => new HexCoordinates(x, z - 1),
+        HexDirection.W => new HexCoordinates(x - 1, z),
+        _ => new HexCoordinates(x - 1, z + 1)
+    };
 
     public static HexCoordinates FromOffsetCoordinates(int x, int z)
     {
@@ -24,7 +84,7 @@ public struct HexCoordinates
 
     public static HexCoordinates FromPosition(Vector3 position)
     {
-        float x = position.x / HexMetrics.innerRadius * 2f;
+        float x = position.x / HexMetrics.innerDiameter;
         float y = -x;
 
         float offset = position.z / (HexMetrics.outerRadius * 3f);
