@@ -47,16 +47,12 @@ public class UpgradeSystem : MonoBehaviour
             new UpgradeData("Upgrade 2", "Description 2 <br>Prerequisite: Upgrade 1", 20, false, 0),  // Prerequisite: Upgrade 1
             new UpgradeData("Upgrade 3", "Description 3", 10, false, 0)   // Prerequisite: Upgrade 1
         };
-
-        // Attach functions to button click events
-        upgradeButton1.onClick.AddListener(() => UpgradeClicked(0));
-        upgradeButton2.onClick.AddListener(() => UpgradeClicked(1));
-        upgradeButton3.onClick.AddListener(() => UpgradeClicked(2));
         confirmButton.onClick.AddListener(ConfirmPurchase);
 
         // Update UI with initial data
         UpdateUpgradeUI(0);
         UpdateMoneyUI();
+        UpdateButtonColors();
     }
 
     public void SelectUpgrade(int index)
@@ -66,6 +62,8 @@ public class UpgradeSystem : MonoBehaviour
         {
             selectedUpgradeIndex = index;
             Debug.Log("Selected Upgrade: " + upgrades[index].title);
+            UpdateButtonColors();
+            UpdateUpgradeUI(index);
         }
         else
         {
@@ -90,7 +88,7 @@ public class UpgradeSystem : MonoBehaviour
 
                 UpdateUpgradeUI(selectedUpgradeIndex);
                 UpdateMoneyUI();
-                UpdateButtonStates();
+                UpdateButtonColors();
             }
             else
             {
@@ -102,18 +100,18 @@ public class UpgradeSystem : MonoBehaviour
             Debug.Log("No upgrade selected or already purchased");
         }
     }
-
     bool ArePrerequisitesFulfilled(int upgradeIndex)
     {
-        // Check if all prerequisites for the selected upgrade are fulfilled
-        for (int i = 0; i < upgradeIndex; i++)
+        int prerequisiteIndex = upgrades[upgradeIndex].prerequisiteIndex;
+
+        // If there is no prerequisite, or the prerequisite is already purchased, return true
+        if (prerequisiteIndex == -1 || upgrades[prerequisiteIndex].isPurchased)
         {
-            if (!upgrades[i].isPurchased)
-            {
-                return false;
-            }
+            return true;
         }
-        return true;
+
+        // If the prerequisite is not purchased, return false
+        return false;
     }
 
     void ApplyUpgrade(int index)
@@ -121,21 +119,11 @@ public class UpgradeSystem : MonoBehaviour
         Debug.Log("Applying Upgrade: " + upgrades[index].title);
         // Add logic to apply the upgrade based on the selected index
     }
-
-    void UpgradeClicked(int upgradeIndex)
-    {
-        Debug.Log("UpgradeClicked with index: " + upgradeIndex);
-        // Handle upgrade logic here
-        // You can deduct the cost, apply the upgrade, etc.
-
-        // Update UI with new data
-        UpdateUpgradeUI(upgradeIndex);
-    }
-
     void UpdateUpgradeUI(int upgradeIndex)
     {
         if (upgradeIndex >= 0 && upgradeIndex < upgrades.Length)
         {
+            Debug.Log("Updating UI for Upgrade: " + upgrades[upgradeIndex].title);
             titleText.text = "Title: " + upgrades[upgradeIndex].title;
             descriptionText.text = "Description: " + upgrades[upgradeIndex].description;
             costText.text = "Cost: " + upgrades[upgradeIndex].cost;
@@ -151,31 +139,41 @@ public class UpgradeSystem : MonoBehaviour
         Money.text = "Money: " + upgradeMoney;
     }
 
-    // Data structure to represent upgrade information
-    
-    void UpdateButtonStates()
+    void UpdateButtonColors()
     {
-        // Update button states based on upgrade availability
-        for (int i = 0; i < upgrades.Length; i++)
+        // Standard color is set to blue and if the upgrade is Purcheased its set to a darker blue
+        SetButtonColor(upgradeButton1, upgrades[0].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
+        SetButtonColor(upgradeButton2, upgrades[1].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
+        SetButtonColor(upgradeButton3, upgrades[2].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
+
+        // Highlights the selected upgrade button
+        if (selectedUpgradeIndex != -1)
         {
-            bool canPurchase = !upgrades[i].isPurchased && ArePrerequisitesFulfilled(i) && upgradeMoney >= upgrades[i].cost;
-            if (i == selectedUpgradeIndex)
+            Button selectedButton = null;
+
+            switch (selectedUpgradeIndex)
             {
-                // Handle the selected upgrade separately if needed
+                case 0:
+                    selectedButton = upgradeButton1;
+                    break;
+                case 1:
+                    selectedButton = upgradeButton2;
+                    break;
+                case 2:
+                    selectedButton = upgradeButton3;
+                    break;
             }
-            else
+
+            if (selectedButton != null)
             {
-                // Disable or change appearance based on canPurchase
-                if (canPurchase)
-                {
-                    // Enable or set normal appearance
-                }
-                else
-                {
-                    // Disable or set disabled appearance
-                }
+                // highlight in a different color
+                selectedButton.GetComponent<Image>().color = Color.green;
             }
         }
     }
 
+    void SetButtonColor(Button button, Color color)
+    {
+        button.GetComponent<Image>().color = color;
+    }
 }
