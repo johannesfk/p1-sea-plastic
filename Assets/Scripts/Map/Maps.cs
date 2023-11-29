@@ -54,12 +54,16 @@ public class Maps : MonoBehaviour
         "WWWWWWWWWWWSSSSSSSSWWWWWWWWWWW" +
         "WWWWSSSSSSSSSSSSSSSSSSSSSSWWWW";
 
-    /* readonly string map1Text =
-        "FFWFF\n" +
-        "MMWMM" +
-        "SSWSS" +
-        "DDWDD" +
-        "XXWXX"; */
+    readonly string map0Text =
+        "WWWWWWWW\n" +
+        "FFFFFSSS" +
+        "FFFFFSSS" +
+        "FFFFFFFS" +
+        "FFFFFFFD" +
+        "FFFFFFFD" +
+        "FFFFFFFF" +
+        "FFFFFFFD" +
+        "FFFFFFFD";
 
 
     // Start is called before the first frame update
