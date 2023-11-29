@@ -26,7 +26,6 @@ public class Region
     public float regionLandfillPercentage;
 }
 
-
 public class PollutionController : MonoBehaviour
 {
     public static PollutionController instance;
@@ -39,8 +38,20 @@ public class PollutionController : MonoBehaviour
     public UnityEngine.UI.Slider slider;
 
     [Header("World Stats")]
-    public float totalRegionPolution;
+    public float worldPolution = 0;
     public float polutionPercentage;
+
+    public float worldWaste;
+    public float wolrdWastePolluted;
+
+    public float worldLandfilled;
+    public float worldLandfilledPercentage;
+
+    public float worldRecycle;
+    public float worldRecyclePercentage;
+
+    public float worldTrashDestroyed;
+    public float worldTrashDestroyedPercentage;
 
     [SerializeField] private TMP_Text polutionPercentageText;
     [SerializeField] private TMP_Text regionPolutionPercentageText;
@@ -48,14 +59,12 @@ public class PollutionController : MonoBehaviour
     [SerializeField] private TMP_Text incineratedPercentageText;
     [SerializeField] private TMP_Text recyclePercentageText;
 
-    public float polution = 0;
-
     private float startPolution = 200;
     private float polutionThreshhold = 10000;
 
     void Awake()
     {
-        polution = startPolution;
+        worldPolution = startPolution;
         instance = this;
 
         currentRegion = 0;
@@ -73,10 +82,14 @@ public class PollutionController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
-        polutionPercentage = polution / polutionThreshhold * 100;
-
+        //World Percentages
+        polutionPercentage = worldPolution / polutionThreshhold * 100;
         slider.value = polutionPercentage;
+
+        worldLandfilledPercentage = worldLandfilled / worldWaste * 100;
+        worldRecyclePercentage = worldRecycle / worldWaste * 100;
+        worldTrashDestroyedPercentage = worldTrashDestroyed / worldWaste * 100;
+
 
         //region percentages
         regions[currentRegion].regionPolutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * 100;
@@ -103,8 +116,14 @@ public class PollutionController : MonoBehaviour
         if (regions.Count > 0)
         {
             for (int i = 0; i < regions.Count; i++)
-            {
-                polution =+ regions[i].regionPolution;
+            {   
+
+                worldPolution += regions[i].regionPolution;
+                worldWaste += regions[i].regionWaste;
+                worldLandfilled += regions[i].regionLandfilled;
+                worldRecycle += regions[i].regionRecycle;
+                worldTrashDestroyed += regions[i].regionTrashDestroyed;
+                
             }
         }
     }
