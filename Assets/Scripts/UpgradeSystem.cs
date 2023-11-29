@@ -34,6 +34,7 @@ public class UpgradeSystem : MonoBehaviour
             this.cost = cost;
             this.isPurchased = isPurchased;
             this.prerequisiteIndex = prerequisiteIndex;
+
         }
     }
 
@@ -45,13 +46,11 @@ public class UpgradeSystem : MonoBehaviour
             // Title, Description, cost, ispurcheased, prerequisite upgrade
             new UpgradeData("Upgrade 1", "Description 1", 10, false), // Prerequisite: None
             new UpgradeData("Upgrade 2", "Description 2 <br>Prerequisite: Upgrade 1", 20, false, 0),  // Prerequisite: Upgrade 1
-            new UpgradeData("Upgrade 3", "Description 3", 10, false, 0)   // Prerequisite: Upgrade 1
+            new UpgradeData("Upgrade 3", "Description 3 <br>Prerequisite: Upgrade 1", 10, false, 0)   // Prerequisite: Upgrade 1
         };
-        confirmButton.onClick.AddListener(ConfirmPurchase);
 
-        // Update UI with initial data
+        confirmButton.onClick.AddListener(ConfirmPurchase);
         UpdateUpgradeUI(0);
-        UpdateMoneyUI();
         UpdateButtonColors();
     }
 
@@ -86,9 +85,8 @@ public class UpgradeSystem : MonoBehaviour
 
                 Debug.Log("Upgrade Purchased: " + upgrades[selectedUpgradeIndex].title);
 
-                UpdateUpgradeUI(selectedUpgradeIndex);
-                UpdateMoneyUI();
                 UpdateButtonColors();
+                UpdateUpgradeUI(selectedUpgradeIndex);
             }
             else
             {
@@ -127,6 +125,7 @@ public class UpgradeSystem : MonoBehaviour
             titleText.text = "Title: " + upgrades[upgradeIndex].title;
             descriptionText.text = "Description: " + upgrades[upgradeIndex].description;
             costText.text = "Cost: " + upgrades[upgradeIndex].cost;
+            Money.text = "Money: " + upgradeMoney;
         }
         else
         {
@@ -134,17 +133,12 @@ public class UpgradeSystem : MonoBehaviour
         }
     }
 
-    void UpdateMoneyUI()
-    {
-        Money.text = "Money: " + upgradeMoney;
-    }
-
     void UpdateButtonColors()
     {
-        // Standard color is set to blue and if the upgrade is Purcheased its set to a darker blue
+        // Standard color is set to blue, darker blue for purchased upgrades
         SetButtonColor(upgradeButton1, upgrades[0].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
-        SetButtonColor(upgradeButton2, upgrades[1].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
-        SetButtonColor(upgradeButton3, upgrades[2].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
+        SetButtonColor(upgradeButton2, upgrades[1].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(1) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton3, upgrades[2].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(2) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
 
         // Highlights the selected upgrade button
         if (selectedUpgradeIndex != -1)
@@ -166,7 +160,7 @@ public class UpgradeSystem : MonoBehaviour
 
             if (selectedButton != null)
             {
-                // highlight in a different color
+                // highlight in a color
                 selectedButton.GetComponent<Image>().color = Color.green;
             }
         }

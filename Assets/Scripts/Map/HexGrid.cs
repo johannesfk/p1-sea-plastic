@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 using TMPro;
 using System;
 using UnityEngine.UIElements;
+using UnityEditor.ShaderGraph.Internal;
 
 public class HexGrid : MonoBehaviour
 {
-    public int CellCountX = 6;
-    public int CellCountZ = 6;
+    public int width;
+    public int height;
     public HexCell cellPrefab;
     public TMP_Text cellLabelPrefab;
 
@@ -58,9 +59,11 @@ public class HexGrid : MonoBehaviour
         {
             Map map1 = mapList[1];
 
-            int height = map1.layout.GetLength(0);
-            int width = map1.layout.GetLength(1);
+            height = map1.layout.GetLength(0);
+            width = map1.layout.GetLength(1);
             cells = new HexCell[map1.layout.Length];
+
+            Debug.Log("Map 1 height " + height + " width " + width + " cells " + cells.Length);
 
             for (int i = 0; i < height; i++)
             {
@@ -94,27 +97,15 @@ public class HexGrid : MonoBehaviour
         {
             Debug.LogError("No maps found");
         }
-
-
-
-
-        // InputSystem.onActionChange() += ctx => HandleInput();
-
-        //  InputActionChange.ActionPerformed(ctx => HandleInput());
-
-        // leftClickAction.performed += ctx => HandleInput();
-        // leftClickAction.Enable();
-
-
-
     }
 
     void CreateCell(int x, int z, int i)
     {
+        z = z * -1;
         Vector3 position;
         position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
         position.y = 0f;
-        position.z = z * (HexMetrics.outerRadius * 1.5f) * -1; // * -1 to flip the map top to bottom
+        position.z = z * (HexMetrics.outerRadius * 1.5f); // * -1 to flip the map top to bottom
 
         // HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
         HexCell cell = cells[i];
@@ -151,44 +142,36 @@ public class HexGrid : MonoBehaviour
         Ray inputRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
         Debug.Log("Mouse position " + Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        Debug.Log("Mouse world position " + Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
-
-        // TouchCell(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
 
         if (Physics.Raycast(inputRay, out hit, Mathf.Infinity, layerMask))
         {
             Debug.Log("Hit at " + hit.point);
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.DrawRay(inputRay.origin, inputRay.direction * hit.distance, Color.yellow);
             TouchCell(hit.point);
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.DrawRay(inputRay.origin, inputRay.direction * 1000, Color.white);
             Debug.Log("No hit");
         }
-        /*  // Does the ray intersect any objects excluding the player layer
-         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
-         {
-             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-             Debug.Log("Did Hit");
-         }
-         else
-         {
-             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-             Debug.Log("Did not Hit");
-         } */
     }
 
     void TouchCell(Vector3 position)
     {
-        Debug.Log("touched at " + position + " -> " + transform.InverseTransformPoint(position));
+        Debug.Log("touched position " + position + " -> " + transform.InverseTransformPoint(position));
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
-        int index = coordinates.X + coordinates.Z * CellCountX + coordinates.Z / 2;
-        HexCell cell = cells[index];
-        cell.color = touchedColor;
-        // hexMesh.Triangulate(cells);
+        int coordinateZ = coordinates.Z * -1;
+        int index = coordinates.X + (coordinateZ * width) + coordinates.Z / 2; /*  + (coordinates.Z * -1 / 2) */
+        // Debug.Log("touched index " + "(" + "X: " + (coordinateZ) + "*" + "W: " + width + " -> " + "X: " + coordinates.X + "+" + "Z*W:" + (coordinateZ * width) + "+ Z/2: " + (coordinateZ / 2) + " -> " + "i: " + index);
         Debug.Log("touched at " + coordinates.ToString() + " -> " + index);
+        if (index >= 0 && index < cells.Length)
+        {
+            HexCell cell = cells[index];
+            cell.color = touchedColor;
+        }
+        // hexMesh.Triangulate(cells);
+        Debug.Log("Cells count " + cells.Length);
     }
 
     public void OnDestroy()
