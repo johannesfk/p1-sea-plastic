@@ -28,31 +28,31 @@ public class Maps : MonoBehaviour
 
 
     readonly string map1Text =
-        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW\n" +
-        "WWWWWWWWSSSWWWWWWWWSWSWWWWWWWW" +
-        "WWSSSWWWWSSWWWWWWWSSSSSSSWWWWW" +
-        "WSSFFSWWWSWFWWFFFFFFFFFFFWWWWW" +
-        "WWFFFFSSWWWWWWFFFFFFFFFFFWWWWW" +
-        "WWFFFFFFFWWWFWWFFFFFFFFFFWWWWW" +
-        "WWFFFFFFFWWWWWFMMFFDDDDFFWFWWW" +
-        "WWFFFFFWWWWWFFMFWWDDDDDFWFWWWW" +
-        "WWWFFFWWWWWWWWWWWDDDDDMFFWWWWW" +
-        "WWWFWWWWWWWWDDDDVDWDDDFFFWWWWW" +
-        "WWWFWWWWWWWWDDDDDVDWFFWFWWWWWW" +
-        "WWWXWWWWWWWDDDDDDVWWFWWFWWWWWW" +
-        "WWWWFFFFWWWFFFFFFFDWWWWWWWWWWW" +
-        "WWWFFFFFWWWFFFFFFFWWWWWFFWWWWW" +
-        "WWWWFFFFFFWWWWFMFFWWWWWWFWWFFW" +
-        "WWWWFFFFFWWWWWFFFWWWWWWWWWWFWW" +
-        "WWWWWFFFFWWWWWFFFWFWWWWWWDDWWW" +
-        "WWWWWFFFWWWWWWFFWFWWWWWWDDDDWW" +
-        "WWWWWWFFWWWWWWWFWWWWWWWWDDDDDW" +
-        "WWWWWFFWWWWWWWWWWWWWWWWWDWDDWW" +
-        "WWWWWWFWWWWWWWWWWWWWWWWWWWWDWF" +
-        "WWWWWWFWWWWWWWWWWWWWWWWWWWWWFW" +
-        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
-        "WWWWWWWWWWWSSSSSSSSWWWWWWWWWWW" +
-        "WWWWSSSSSSSSSSSSSSSSSSSSSSWWWW";
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWW\n" +
+        "WWWWWWWSSSWWWWWWWWSWSWWWWWWW" +
+        "SSSWWWWSSWWWWWWWSSSSSSSWWWWW" +
+        "SSFFSWWWSWFWWFFFFFFFFFFFWWWW" +
+        "FFFFSSWWWWWWFFFFFFFFFFFWWWWW" +
+        "WFFFFFFFWWWFWWFFFFFFFFFFWWWW" +
+        "FFFFFFFWWWWWFMMFFDDDDFFWFWWW" +
+        "WFFFFFWWWWWFFMFWWDDDDDFWFWWW" +
+        "WFFFWWWWWWWWWWWDDDDDMFFWWWWW" +
+        "WWFWWWWWWWWDDDDVDWDDDFFFWWWW" +
+        "WFWWWWWWWWDDDDDVDWFFWFWWWWWW" +
+        "WWXWWWWWWWDDDDDDVWWFWWFWWWWW" +
+        "WWFFFFWWWFFFFFFFDWWWWWWWWWWW" +
+        "WWFFFFFWWWFFFFFFFWWWWWFFWWWW" +
+        "WWFFFFFFWWWWFMFFWWWWWWFWWFFW" +
+        "WWWFFFFFWWWWWFFFWWWWWWWWWWFW" +
+        "WWWFFFFWWWWWFFFWFWWWWWWDDWWW" +
+        "WWWWFFFWWWWWWFFWFWWWWWWDDDDW" +
+        "WWWWFFWWWWWWWFWWWWWWWWDDDDDW" +
+        "WWWWFFWWWWWWWWWWWWWWWWWDWDDW" +
+        "WWWWFWWWWWWWWWWWWWWWWWWWWDWF" +
+        "WWWWWFWWWWWWWWWWWWWWWWWWWWWF" +
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+        "WWWWWWWWWWSSSSSSSSWWWWWWWWWW" +
+        "WWSSSSSSSSSSSSSSSSSSSSSSWWWW";
 
     readonly string map0Text =
         "WWWWWWWW\n" +
@@ -86,40 +86,19 @@ public class Maps : MonoBehaviour
         }
         mapList = new List<Map>();
 
-        Map map0 = new Map(map0Width, map0Height);
+
         Debug.Log("map 0 " + map0Width + "x" + map0Height);
 
         terrainType[,] map0Terrain = ConvertTo2DArray(map0Text, map0Width, map0Height);
 
         terrainType[,] map1Terrain = ConvertTo2DArray(map1Text, map1CellCountX, map1CellCountZ);
 
-        Map map1 = new Map(map1Terrain.GetLength(1), map1Terrain.GetLength(0));
 
-        Map map2 = new Map(CellCountX, CellCountZ);
 
 
 
         Debug.Log(map1Terrain.GetLength(1) + " ✕ " + map1Terrain.GetLength(0));
 
-        /* Debug.Log
-        (
-            map2Terrain[0, 0] + " " + map2Terrain[0, 1] + " " + map2Terrain[0, 2] + " " + map2Terrain[0, 3] + "\n" +
-            map2Terrain[1, 0] + " " + map2Terrain[1, 1] + " " + map2Terrain[1, 2] + " " + map2Terrain[1, 3] + "\n" +
-            map2Terrain[2, 0] + " " + map2Terrain[2, 1] + " " + map2Terrain[2, 2] + " " + map2Terrain[2, 3] + "\n" +
-            map2Terrain[3, 0] + " " + map2Terrain[3, 1] + " " + map2Terrain[3, 2] + " " + map2Terrain[3, 3] + "\n" +
-            map2Terrain[4, 0] + " " + map2Terrain[4, 1] + " " + map2Terrain[4, 2] + " " + map2Terrain[4, 3]
-        ); */
-
-
-
-        /// Map 1 
-        for (int i = 0; i < map1.layout.GetLength(0); i++)
-        {
-            for (int j = 0; j < map1.layout.GetLength(1); j++)
-            {
-                map1.layout[i, j] = terrainType.water;
-            }
-        }
 
         terrainType[,] mapLayout = new terrainType[CellCountX, CellCountZ] {
             { water, water, water, water, water, water },
@@ -132,31 +111,15 @@ public class Maps : MonoBehaviour
             { water, water, water, water, water, water }
         };
 
-        // Create a new array that is 10x10 larger than the original
-        terrainType[,] borderedLayout = new terrainType[mapLayout.GetLength(0) + 10, mapLayout.GetLength(1) + 10];
-        // Fill the new array with water
-        for (int i = 0; i < borderedLayout.GetLength(0); i++)
-        {
-            for (int j = 0; j < borderedLayout.GetLength(1); j++)
-            {
-                borderedLayout[i, j] = terrainType.water;
-            }
-        }
 
-        // Copy the original map into the middle of the new array
-        for (int i = 0; i < mapLayout.GetLength(0); i++)
-        {
-            for (int j = 0; j < mapLayout.GetLength(1); j++)
-            {
-                borderedLayout[i + 5, j + 5] = mapLayout[i, j];
-            }
-        }
 
         // Map 1 end
-
+        Map map0 = new Map(map0Width, map0Height);
+        Map map1 = new Map(map1Terrain.GetLength(1), map1Terrain.GetLength(0));
+        Map map2 = new Map(CellCountX, CellCountZ);
         map0.layout = map0Terrain;
-        map1.layout = map1Terrain;
-        map2.layout = borderedLayout;
+        map1.layout = AddWorldBorder(map1Terrain, 2);
+        map2.layout = mapLayout;
         mapList.Add(map0);
         mapList.Add(map1);
         mapList.Add(map2);
@@ -210,6 +173,43 @@ public class Maps : MonoBehaviour
             default:
                 throw new ArgumentException($"Invalid terrain character: {terrainChar}");
         }
+    }
+
+    private terrainType[,] AddWorldBorder(terrainType[,] originalMap, int borderSize)
+    {
+        /// Checks if bordersize is even, if not, make it even.
+        /// This is to prevent the map layout to shift by 1 cell every other row.
+        if ((int)Math.Ceiling((double)borderSize) % 2 != 0)
+        {
+            borderSize++;
+        }
+        // Create a new array that is 10x10 larger than the original
+        terrainType[,] borderedMap = new terrainType[originalMap.GetLength(0) + borderSize * 2, originalMap.GetLength(1) + borderSize * 2];
+        // Fill the new array with water
+        for (int i = 0; i < borderedMap.GetLength(0); i++)
+        {
+            for (int j = 0; j < borderedMap.GetLength(1); j++)
+            {
+                if (i >= originalMap.GetLength(0) + borderSize)
+                {
+                    borderedMap[i, j] = terrainType.snow; // Add snow to the bottom
+                }
+                else
+                {
+                    borderedMap[i, j] = terrainType.water; // Add water to the rest
+                }
+            }
+        }
+
+        // Copy the original map into the middle of the new array
+        for (int i = 0; i < originalMap.GetLength(0); i++)
+        {
+            for (int j = 0; j < originalMap.GetLength(1); j++)
+            {
+                borderedMap[i + borderSize, j + borderSize] = originalMap[i, j];
+            }
+        }
+        return borderedMap;
     }
 }
 

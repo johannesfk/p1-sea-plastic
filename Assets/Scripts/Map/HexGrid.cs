@@ -53,6 +53,8 @@ public class HexGrid : MonoBehaviour
         hexMesh = GetComponentInChildren<HexMesh>();
         hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
 
+        gridCanvas.gameObject.SetActive(false);
+
         List<Map> mapList = Maps.instance.mapList;
 
         if (mapList.Count > 0)
