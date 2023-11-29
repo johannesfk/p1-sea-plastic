@@ -20,12 +20,11 @@ public class Region
     public float regionRecycle;
     public float regionTrashDestroyed;
     [Header("Percentages")]
-    public float regionPollutionPercentage;
+    public float regionPolutionPercentage;
     public float regionRecyclePercentage;
     public float regionTrashDestroyedPercentage;
     public float regionLandfillPercentage;
 }
-
 
 public class PollutionController : MonoBehaviour
 {
@@ -39,20 +38,33 @@ public class PollutionController : MonoBehaviour
     public UnityEngine.UI.Slider slider;
 
     [Header("World Stats")]
-    public float totalRegionPolution;
+    public float worldPolution = 0;
     public float polutionPercentage;
 
-    [SerializeField] private TMP_Text polutionPercentageText;
-    [SerializeField] private TMP_Text landfillPercentageText;
+    public float worldWaste;
+    public float wolrdWastePolluted;
 
-    public float polution = 0;
+    public float worldLandfilled;
+    public float worldLandfilledPercentage;
+
+    public float worldRecycle;
+    public float worldRecyclePercentage;
+
+    public float worldTrashDestroyed;
+    public float worldTrashDestroyedPercentage;
+
+    [SerializeField] private TMP_Text polutionPercentageText;
+    [SerializeField] private TMP_Text regionPolutionPercentageText;
+    [SerializeField] private TMP_Text landfillPercentageText;
+    [SerializeField] private TMP_Text incineratedPercentageText;
+    [SerializeField] private TMP_Text recyclePercentageText;
 
     private float startPolution = 200;
     private float polutionThreshhold = 10000;
 
     void Awake()
     {
-        polution = startPolution;
+        worldPolution = startPolution;
         instance = this;
 
         currentRegion = 0;
@@ -64,30 +76,37 @@ public class PollutionController : MonoBehaviour
                 regions[i].regionNumber = i;
             }
         }
-
+        
     }
-
+    
     // Update is called once per frame
     private void Update()
     {
+        //World Percentages
+        polutionPercentage = worldPolution / polutionThreshhold * 100;
+        slider.value = polutionPercentage;
 
-        polutionPercentage = polution / polutionThreshhold * 100;
+        worldLandfilledPercentage = worldLandfilled / worldWaste * 100;
+        worldRecyclePercentage = worldRecycle / worldWaste * 100;
+        worldTrashDestroyedPercentage = worldTrashDestroyed / worldWaste * 100;
+
 
         //region percentages
-        regions[currentRegion].regionPollutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * 100;
+        regions[currentRegion].regionPolutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * 100;
         regions[currentRegion].regionRecyclePercentage = regions[currentRegion].regionRecycle / regions[currentRegion].regionWaste * 100;
         regions[currentRegion].regionTrashDestroyedPercentage = regions[currentRegion].regionTrashDestroyed / regions[currentRegion].regionWaste * 100;
         regions[currentRegion].regionLandfillPercentage = regions[currentRegion].regionLandfilled / regions[currentRegion].regionWaste * 100;
 
-        slider.value = polutionPercentage;
-        
-
-
-        landfillPercentageText.text = regions[currentRegion].regionLandfillPercentage + "%";
-
+        //Text Percentages
         polutionPercentageText.text = ((int)polutionPercentage + "%").ToString();
 
+        regionPolutionPercentageText.text = ((int)regions[currentRegion].regionPolutionPercentage + "%").ToString();
 
+        landfillPercentageText.text = ((int)regions[currentRegion].regionLandfillPercentage + "%").ToString();
+
+        recyclePercentageText.text = ((int)regions[currentRegion].regionRecyclePercentage + "%").ToString();
+
+        incineratedPercentageText.text = ((int)regions[currentRegion].regionTrashDestroyedPercentage + "%").ToString();
 
     }
     
@@ -97,8 +116,14 @@ public class PollutionController : MonoBehaviour
         if (regions.Count > 0)
         {
             for (int i = 0; i < regions.Count; i++)
-            {
-                polution =+ regions[i].regionPolution;
+            {   
+
+                worldPolution += regions[i].regionPolution;
+                worldWaste += regions[i].regionWaste;
+                worldLandfilled += regions[i].regionLandfilled;
+                worldRecycle += regions[i].regionRecycle;
+                worldTrashDestroyed += regions[i].regionTrashDestroyed;
+                
             }
         }
     }

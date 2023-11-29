@@ -136,13 +136,30 @@ public class Menu : MonoBehaviour
 
     public void BurgerButton()
     {
-        BurgerMenu.SetActive(true);
+        if (BurgerMenu.activeSelf)
+        {
+            BurgerMenu.SetActive(false);
+
+        }
+        else
+        {
+            BurgerMenu.SetActive(true);
+
+        }
     }
 
     public void OnBurgerButton(InputValue Button)
     {
-
-        //if ()
+        if (BurgerMenu.activeSelf)
+        {
+            BurgerMenu.SetActive(false);
+            
+        }
+        else
+        {
+            BurgerMenu.SetActive(true);
+            
+        }
 
     }
 
