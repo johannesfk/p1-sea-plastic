@@ -20,7 +20,7 @@ public class Region
     public float regionRecycle;
     public float regionTrashDestroyed;
     [Header("Percentages")]
-    public float regionPollutionPercentage;
+    public float regionPolutionPercentage;
     public float regionRecyclePercentage;
     public float regionTrashDestroyedPercentage;
     public float regionLandfillPercentage;
@@ -43,7 +43,10 @@ public class PollutionController : MonoBehaviour
     public float polutionPercentage;
 
     [SerializeField] private TMP_Text polutionPercentageText;
+    [SerializeField] private TMP_Text regionPolutionPercentageText;
     [SerializeField] private TMP_Text landfillPercentageText;
+    [SerializeField] private TMP_Text incineratedPercentageText;
+    [SerializeField] private TMP_Text recyclePercentageText;
 
     public float polution = 0;
 
@@ -64,30 +67,33 @@ public class PollutionController : MonoBehaviour
                 regions[i].regionNumber = i;
             }
         }
-
+        
     }
-
+    
     // Update is called once per frame
     private void Update()
     {
 
         polutionPercentage = polution / polutionThreshhold * 100;
 
+        slider.value = polutionPercentage;
+
         //region percentages
-        regions[currentRegion].regionPollutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * 100;
+        regions[currentRegion].regionPolutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * 100;
         regions[currentRegion].regionRecyclePercentage = regions[currentRegion].regionRecycle / regions[currentRegion].regionWaste * 100;
         regions[currentRegion].regionTrashDestroyedPercentage = regions[currentRegion].regionTrashDestroyed / regions[currentRegion].regionWaste * 100;
         regions[currentRegion].regionLandfillPercentage = regions[currentRegion].regionLandfilled / regions[currentRegion].regionWaste * 100;
 
-        slider.value = polutionPercentage;
-        
-
-
-        landfillPercentageText.text = regions[currentRegion].regionLandfillPercentage + "%";
-
+        //Text Percentages
         polutionPercentageText.text = ((int)polutionPercentage + "%").ToString();
 
+        regionPolutionPercentageText.text = ((int)regions[currentRegion].regionPolutionPercentage + "%").ToString();
 
+        landfillPercentageText.text = ((int)regions[currentRegion].regionLandfillPercentage + "%").ToString();
+
+        recyclePercentageText.text = ((int)regions[currentRegion].regionRecyclePercentage + "%").ToString();
+
+        incineratedPercentageText.text = ((int)regions[currentRegion].regionTrashDestroyedPercentage + "%").ToString();
 
     }
     
