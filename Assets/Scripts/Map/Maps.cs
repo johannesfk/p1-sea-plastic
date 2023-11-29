@@ -61,7 +61,7 @@ public class Maps : MonoBehaviour
         "FFFFFFFS" +
         "FFFFFFFD" +
         "FFFFFFFD" +
-        "FFFFFFFF" +
+        "FFFFFFFD" +
         "FFFFFFFD" +
         "FFFFFFFD";
 
@@ -69,6 +69,9 @@ public class Maps : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+
+        int map0Width = map0Text.IndexOf('\n');
+        int map0Height = (map0Text.Length - 1) / map0Width;
 
         int map1CellCountX = map1Text.IndexOf('\n');
         int map1CellCountZ = (map1Text.Length - 1) / map1CellCountX;
@@ -83,14 +86,20 @@ public class Maps : MonoBehaviour
         }
         mapList = new List<Map>();
 
+        Map map0 = new Map(map0Width, map0Height);
+        Debug.Log("map 0 " + map0Width + "x" + map0Height);
+
+        terrainType[,] map0Terrain = ConvertTo2DArray(map0Text, map0Width, map0Height);
+
+        terrainType[,] map1Terrain = ConvertTo2DArray(map1Text, map1CellCountX, map1CellCountZ);
+
+        Map map1 = new Map(map1Terrain.GetLength(1), map1Terrain.GetLength(0));
+
+        Map map2 = new Map(CellCountX, CellCountZ);
 
 
-        Map map1 = new Map(CellCountX, CellCountZ);
 
-        terrainType[,] map2Terrain = ConvertTo2DArray(map1Text, map1CellCountX, map1CellCountZ);
-        Map map2 = new Map(map2Terrain.GetLength(1), map2Terrain.GetLength(0));
-
-        Debug.Log(map2Terrain.GetLength(1) + " ✕ " + map2Terrain.GetLength(0));
+        Debug.Log(map1Terrain.GetLength(1) + " ✕ " + map1Terrain.GetLength(0));
 
         /* Debug.Log
         (
@@ -145,8 +154,10 @@ public class Maps : MonoBehaviour
 
         // Map 1 end
 
-        map1.layout = borderedLayout;
-        map2.layout = map2Terrain;
+        map0.layout = map0Terrain;
+        map1.layout = map1Terrain;
+        map2.layout = borderedLayout;
+        mapList.Add(map0);
         mapList.Add(map1);
         mapList.Add(map2);
 

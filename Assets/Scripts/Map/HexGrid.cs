@@ -165,8 +165,11 @@ public class HexGrid : MonoBehaviour
         int index = coordinates.X + (coordinateZ * width) + coordinates.Z / 2; /*  + (coordinates.Z * -1 / 2) */
         // Debug.Log("touched index " + "(" + "X: " + (coordinateZ) + "*" + "W: " + width + " -> " + "X: " + coordinates.X + "+" + "Z*W:" + (coordinateZ * width) + "+ Z/2: " + (coordinateZ / 2) + " -> " + "i: " + index);
         Debug.Log("touched at " + coordinates.ToString() + " -> " + index);
-        HexCell cell = cells[index];
-        cell.color = touchedColor;
+        if (index >= 0 && index < cells.Length)
+        {
+            HexCell cell = cells[index];
+            cell.color = touchedColor;
+        }
         // hexMesh.Triangulate(cells);
         Debug.Log("Cells count " + cells.Length);
     }
