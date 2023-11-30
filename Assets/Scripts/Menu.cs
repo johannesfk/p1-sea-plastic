@@ -1,87 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Device;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 
 public class Menu : MonoBehaviour
-{  
+{
     public GameObject UpgradeMenuObject;
     public GameObject ManagementMenuObject;
     public GameObject AdvertismentMenuObject;
     public GameObject CurrentMenu;
-    public GameObject CurrentRegion;
-    public GameObject GlobalRegionObject;
-    public GameObject Region1Object;
-    public GameObject Region2Object;
-    public GameObject Region3Object;
-    public GameObject Region4Object;
-    public GameObject Region5Object;
-    public GameObject Region6Object;
     public GameObject BurgerMenu;
-
-    public void OpenGlobalStatScreen()
-    {
-        if (CurrentRegion != null)
-        { 
-            CurrentRegion.SetActive(false); 
-        }
-        GlobalRegionObject.SetActive(true);
-        CurrentRegion = GlobalRegionObject;
-    }
-    public void OpenRegion1()
-    {
-        CurrentMenu.SetActive(false);
-        Region1Object.SetActive(true);
-        CurrentRegion = Region1Object;
-    }
-    public void OpenRegion2()
-    {
-        CurrentMenu.SetActive(false);
-        Region2Object.SetActive(true);
-        CurrentRegion = Region2Object;
-    }
-    public void OpenRegion3()
-    {
-        CurrentMenu.SetActive(false);
-        Region3Object.SetActive(true);
-        CurrentRegion = Region3Object;
-    }
-    public void OpenRegion4()
-    {
-        CurrentMenu.SetActive(false);
-        Region4Object.SetActive(true);
-        CurrentRegion = Region4Object;
-    }
-    public void OpenRegion5()
-    {
-        CurrentMenu.SetActive(false);
-        Region5Object.SetActive(true);
-        CurrentRegion = Region5Object;
-    }
-    public void OpenRegion6()
-    {
-        CurrentMenu.SetActive(false);
-        Region6Object.SetActive(true);
-        CurrentRegion = Region6Object;
-    }
-    public void ExitStatScreen()
-    {
-        CurrentRegion.SetActive(false);
-        CurrentRegion = null;
-    }
+    public List<GameObject> StatScreens;
+    private int currentScreenIndex = 0;
 
     // Below are upgrade menu
-    public void OpenUpgradeMenu()
+    void SwitchMenu(GameObject newMenu)
     {
         if (CurrentMenu != null)
         {
             CurrentMenu.SetActive(false);
         }
 
-        UpgradeMenuObject.SetActive(true);
-        CurrentMenu = UpgradeMenuObject;
+        newMenu.SetActive(true);
+        CurrentMenu = newMenu;
+    }
+    void UpdateStatScreen()
+    {
+        SwitchMenu(StatScreens[currentScreenIndex]);
+    }
+    // ... (other methods remain unchanged)
 
+    public void NextStatScreen()
+    {
+        currentScreenIndex = (currentScreenIndex + 1);
+        UpdateStatScreen();
+        Debug.Log($"Switched to stat screen {currentScreenIndex}");
+    }
+
+    public void PreviousStatScreen()
+    {
+        currentScreenIndex = (currentScreenIndex - 1);
+        UpdateStatScreen();
+    }
+    public void OpenStatScreen(int index)
+    {
+        if (index >= 0)
+        {
+            currentScreenIndex = index;
+            UpdateStatScreen();
+        }
+        else
+        {
+            Debug.LogError($"Invalid stat screen index: {index}");
+        }
+    }
+    public void UpgradeMenu()
+    {
+        SwitchMenu(UpgradeMenuObject);
     }
 
     public void ExitUpgradeMenu()
@@ -92,23 +71,13 @@ public class Menu : MonoBehaviour
 
     public void ManagementMenu()
     {
-        CurrentMenu.SetActive(false);
-
-        ManagementMenuObject.SetActive(true);
-
-        CurrentMenu = ManagementMenuObject;
-
+        SwitchMenu(ManagementMenuObject);
     }
 
     public void AdvertiseMenu()
     {
-        CurrentMenu.SetActive(false);
-
-        AdvertismentMenuObject.SetActive(true);
-
-        CurrentMenu = AdvertismentMenuObject;
+        SwitchMenu(AdvertismentMenuObject);
     }
-
     public void StartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -116,7 +85,7 @@ public class Menu : MonoBehaviour
     }
     public void QuitGame()
     {
-        Application.Quit();
+        UnityEngine.Application.Quit();
         Debug.Log("Game Quit");
     }
     public void RestartButton()
@@ -153,12 +122,12 @@ public class Menu : MonoBehaviour
         if (BurgerMenu.activeSelf)
         {
             BurgerMenu.SetActive(false);
-            
+
         }
         else
         {
             BurgerMenu.SetActive(true);
-            
+
         }
 
     }
