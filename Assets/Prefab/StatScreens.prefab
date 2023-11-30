@@ -884,7 +884,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2678136423145415978, guid: 7c3bce54bb37c4046a25152369ef336c,
           type: 3}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: PreviousStatScreen
+        m_MethodName: OpenRegion6
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2681,7 +2681,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2678136423145415978, guid: 7c3bce54bb37c4046a25152369ef336c,
           type: 3}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: NextStatScreen
+        m_MethodName: OpenRegion1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

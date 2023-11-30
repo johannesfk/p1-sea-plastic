@@ -14,9 +14,17 @@ public class Menu : MonoBehaviour
     public GameObject AdvertismentMenuObject;
     public GameObject CurrentMenu;
     public GameObject BurgerMenu;
-    public List<GameObject> StatScreens;
-    private int currentScreenIndex = 0;
 
+    public GameObject CurrentRegion;
+    public GameObject GlobalRegionObject;
+    public GameObject Region1Object;
+    public GameObject Region2Object;
+    public GameObject Region3Object;
+    public GameObject Region4Object;
+    public GameObject Region5Object;
+    public GameObject Region6Object;
+
+    
     // Below are upgrade menu
     void SwitchMenu(GameObject newMenu)
     {
@@ -28,35 +36,47 @@ public class Menu : MonoBehaviour
         newMenu.SetActive(true);
         CurrentMenu = newMenu;
     }
-    void UpdateStatScreen()
+    void SwitchRegion(GameObject newRegion)
     {
-        SwitchMenu(StatScreens[currentScreenIndex]);
-    }
-    // ... (other methods remain unchanged)
-
-    public void NextStatScreen()
-    {
-        currentScreenIndex = (currentScreenIndex + 1);
-        UpdateStatScreen();
-        Debug.Log($"Switched to stat screen {currentScreenIndex}");
-    }
-
-    public void PreviousStatScreen()
-    {
-        currentScreenIndex = (currentScreenIndex - 1);
-        UpdateStatScreen();
-    }
-    public void OpenStatScreen(int index)
-    {
-        if (index >= 0)
+        if (CurrentRegion != null)
         {
-            currentScreenIndex = index;
-            UpdateStatScreen();
+            CurrentRegion.SetActive(false);
         }
-        else
-        {
-            Debug.LogError($"Invalid stat screen index: {index}");
-        }
+
+        newRegion.SetActive(true);
+        CurrentRegion = newRegion;
+    }
+    public void OpenGlobalRegion()
+    {
+        SwitchRegion(GlobalRegionObject);
+    }
+    public void OpenRegion1()
+    {
+        SwitchRegion(Region1Object);
+    }
+    public void OpenRegion2()
+    {
+        SwitchRegion(Region2Object);
+    }
+
+    public void OpenRegion3()
+    {
+        SwitchRegion(Region3Object);
+    }
+
+    public void OpenRegion4()
+    {
+        SwitchRegion(Region4Object);
+    }
+
+    public void OpenRegion5()
+    {
+        SwitchRegion(Region5Object);
+    }
+
+    public void OpenRegion6()
+    {
+        SwitchRegion(Region6Object);
     }
     public void UpgradeMenu()
     {

@@ -12,6 +12,9 @@ public class UpgradeSystem : MonoBehaviour
     public Button upgradeButton1;
     public Button upgradeButton2;
     public Button upgradeButton3;
+    public Button upgradeButton4;
+    public Button upgradeButton5;
+    public Button upgradeButton6;
     public Button confirmButton;
 
     private int selectedUpgradeIndex = -1;
@@ -46,7 +49,10 @@ public class UpgradeSystem : MonoBehaviour
             // Title, Description, cost, ispurcheased, prerequisite upgrade
             new UpgradeData("Upgrade 1", "Description 1", 10, false), // Prerequisite: None
             new UpgradeData("Upgrade 2", "Description 2 <br>Prerequisite: Upgrade 1", 20, false, 0),  // Prerequisite: Upgrade 1
-            new UpgradeData("Upgrade 3", "Description 3 <br>Prerequisite: Upgrade 1", 10, false, 0)   // Prerequisite: Upgrade 1
+            new UpgradeData("Upgrade 3", "Description 3 <br>Prerequisite: Upgrade 1", 10, false, 0),   // Prerequisite: Upgrade 1
+            new UpgradeData("Upgrade 4", "Description 4", 10, false), // Prerequisite: None
+            new UpgradeData("Upgrade 5", "Description 5 <br>Prerequisite: Upgrade 4", 20, false, 3),  // Prerequisite: Upgrade 1
+            new UpgradeData("Upgrade 6", "Description 6 <br>Prerequisite: Upgrade 4", 10, false, 3),   // Prerequisite: Upgrade 1
         };
 
         confirmButton.onClick.AddListener(ConfirmPurchase);
@@ -139,7 +145,9 @@ public class UpgradeSystem : MonoBehaviour
         SetButtonColor(upgradeButton1, upgrades[0].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
         SetButtonColor(upgradeButton2, upgrades[1].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(1) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton3, upgrades[2].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(2) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
-
+        SetButtonColor(upgradeButton4, upgrades[3].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
+        SetButtonColor(upgradeButton5, upgrades[4].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(4) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton6, upgrades[5].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(5) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         // Highlights the selected upgrade button
         if (selectedUpgradeIndex != -1)
         {
@@ -156,12 +164,21 @@ public class UpgradeSystem : MonoBehaviour
                 case 2:
                     selectedButton = upgradeButton3;
                     break;
+                case 3:
+                    selectedButton = upgradeButton4;
+                    break;
+                case 4:
+                    selectedButton = upgradeButton5;
+                    break;
+                case 5:
+                    selectedButton = upgradeButton6;
+                    break;
             }
 
             if (selectedButton != null)
             {
                 // highlight in a color
-                selectedButton.GetComponent<Image>().color = Color.green;
+                selectedButton.GetComponent<Image>().color = Color.magenta;
             }
         }
     }
