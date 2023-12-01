@@ -11,7 +11,7 @@ using Unity.Mathematics;
 public class Region
 {
 
-
+    public string regionName;   
     public int regionNumber;
     [Header("Amounts")]
     public float regionPolution;
@@ -58,6 +58,7 @@ public class PollutionController : MonoBehaviour
     [SerializeField] private TMP_Text landfillPercentageText;
     [SerializeField] private TMP_Text incineratedPercentageText;
     [SerializeField] private TMP_Text recyclePercentageText;
+    [SerializeField] private TMP_Text currentRegionName;
 
     private float startPolution = 200;
     private float polutionThreshhold = 10000;
@@ -108,6 +109,7 @@ public class PollutionController : MonoBehaviour
 
         incineratedPercentageText.text = ((int)regions[currentRegion].regionTrashDestroyedPercentage + "%").ToString();
 
+        currentRegionName.text = regions[currentRegion].regionName;
     }
     
     public void EndDayAdd()

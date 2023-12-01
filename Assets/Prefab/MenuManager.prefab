@@ -49,3 +49,18 @@ MonoBehaviour:
   AdvertismentMenuObject: {fileID: 0}
   CurrentMenu: {fileID: 0}
   BurgerMenu: {fileID: 0}
+  CurrentRegion: {fileID: 0}
+  GlobalRegionObject: {fileID: 1763105717004919501, guid: 1397615093bde18419552e59fd9535f1,
+    type: 3}
+  Region1Object: {fileID: 3724381905165963301, guid: 447fde895b32e4942bb713a2aa1f86bb,
+    type: 3}
+  Region2Object: {fileID: 5015636426046601742, guid: 4003e2c129590fc43bc961a438a085eb,
+    type: 3}
+  Region3Object: {fileID: 4031781949266458038, guid: af4b7afc17eb5a34b8f8c657f281f18b,
+    type: 3}
+  Region4Object: {fileID: 1403205402310131350, guid: 536acb7b9f803c340818b7c27b92e557,
+    type: 3}
+  Region5Object: {fileID: 3791626995228862881, guid: ec2b2f54bc40fc746b8cd5325266e88d,
+    type: 3}
+  Region6Object: {fileID: 7062036192519547437, guid: eb2b17cff132c6a409ebf621075b2421,
+    type: 3}
