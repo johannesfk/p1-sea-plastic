@@ -23,9 +23,6 @@ public class Menu : MonoBehaviour
     public GameObject Region4Object;
     public GameObject Region5Object;
     public GameObject Region6Object;
-
-    
-    // Below are upgrade menu
     void SwitchMenu(GameObject newMenu)
     {
         if (CurrentMenu != null)
@@ -38,45 +35,37 @@ public class Menu : MonoBehaviour
     }
     void SwitchRegion(GameObject newRegion)
     {
+        if (newRegion == null)
+        {
+            Debug.LogError($"Trying to switch to a null region! CurrentRegion: {CurrentRegion?.name}");
+            return;
+        }
+
+        Debug.Log($"Switching to region: {newRegion.name}");
+
         if (CurrentRegion != null)
         {
             CurrentRegion.SetActive(false);
+            Debug.Log($"Deactivating current region: {CurrentRegion.name}");
         }
 
         newRegion.SetActive(true);
         CurrentRegion = newRegion;
+
+        Debug.Log($"Activating new region: {newRegion.name}");
     }
     public void OpenGlobalRegion()
     {
         SwitchRegion(GlobalRegionObject);
+        Debug.Log("Button Clicked");
     }
-    public void OpenRegion1()
+    public void NextRegion()
     {
-        SwitchRegion(Region1Object);
+        PollutionController.instance.currentRegion++;
     }
-    public void OpenRegion2()
+    public void PreviousRegion()
     {
-        SwitchRegion(Region2Object);
-    }
-
-    public void OpenRegion3()
-    {
-        SwitchRegion(Region3Object);
-    }
-
-    public void OpenRegion4()
-    {
-        SwitchRegion(Region4Object);
-    }
-
-    public void OpenRegion5()
-    {
-        SwitchRegion(Region5Object);
-    }
-
-    public void OpenRegion6()
-    {
-        SwitchRegion(Region6Object);
+        PollutionController.instance.currentRegion--;
     }
     public void UpgradeMenu()
     {
