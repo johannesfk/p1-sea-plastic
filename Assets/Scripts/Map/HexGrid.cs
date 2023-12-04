@@ -59,7 +59,7 @@ public class HexGrid : MonoBehaviour
 
         if (mapList.Count > 0)
         {
-            Map map1 = mapList[1];
+            Map map1 = mapList[0];
 
             height = map1.layout.GetLength(0);
             width = map1.layout.GetLength(1);
@@ -71,7 +71,7 @@ public class HexGrid : MonoBehaviour
             {
                 for (int j = 0; j < width; j++)
                 {
-                    terrainType terrainType = map1.layout[i, j];
+                    terrainType terrainType = map1.layout[i, j].terrainType;
                 }
             }
 
@@ -82,7 +82,9 @@ public class HexGrid : MonoBehaviour
                     // Debug.Log("Cell " + i + " " + j + " " + map1.layout[i, j]);
                     int index = i * width + j;
                     HexCell cell = cells[index] = Instantiate<HexCell>(cellPrefab);
-                    cell.SetCellPrefab(map1.layout[i, j]);
+                    cell.terrainType = map1.layout[i, j].terrainType;
+                    cell.SetCellPrefab(map1.layout[i, j].terrainType);
+                    cell.region = map1.layout[i, j].region;
                 }
             }
 
@@ -118,12 +120,23 @@ public class HexGrid : MonoBehaviour
         cell.position = position;
 
 
-        TMP_Text label = Instantiate<TMP_Text>(cellLabelPrefab);
+        // Cell Coordinates as label for debugging
+        /* TMP_Text label = Instantiate<TMP_Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition =
             new Vector2(position.x, position.z);
-        label.text = cell.coordinates.ToStringOnSeparateLines();
+        label.text = cell.coordinates.ToStringOnSeparateLines(); */
 
+        if (cell.region != 0)
+        {
+            TMP_Text regionlabel = Instantiate<TMP_Text>(cellLabelPrefab);
+            regionlabel.rectTransform.SetParent(gridCanvas.transform, false);
+            regionlabel.rectTransform.anchoredPosition =
+                new Vector2(position.x, position.z);
+            regionlabel.fontSize = 10;
+            regionlabel.text = cell.region.ToString();
+            regionlabel.color = Color.red;
+        }
     }
 
     // Update is called once per frame
@@ -171,6 +184,11 @@ public class HexGrid : MonoBehaviour
         {
             HexCell cell = cells[index];
             cell.color = touchedColor;
+            Debug.Log("Touched region " + cell.region);
+            PollutionController pollutionController = new()
+            {
+                currentRegion = cell.region
+            };
         }
         // hexMesh.Triangulate(cells);
         Debug.Log("Cells count " + cells.Length);

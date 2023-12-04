@@ -9,6 +9,7 @@ public class HexCell : MonoBehaviour
     public HexCoordinates coordinates;
     public Vector3 position;
     public terrainType terrainType;
+    public int region;
     public Color color;
 
     public GameObject forest;

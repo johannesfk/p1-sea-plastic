@@ -11,7 +11,7 @@ using Unity.Mathematics;
 public class Region
 {
 
-    public string regionName;   
+    public string regionName;
     public int regionNumber;
     [Header("Amounts")]
     public float regionPolution;
@@ -73,14 +73,14 @@ public class PollutionController : MonoBehaviour
 
         if (regions.Count > 0)
         {
-            for (int i = 0;i < regions.Count; i++)
+            for (int i = 0; i < regions.Count; i++)
             {
                 regions[i].regionNumber = i;
             }
         }
-        
+
     }
-    
+
     // Update is called once per frame
     private void Update()
     {
@@ -112,24 +112,22 @@ public class PollutionController : MonoBehaviour
 
         currentRegionName.text = regions[currentRegion].regionName;
     }
-    
+
     public void EndDayAdd()
     {
 
         if (regions.Count > 0)
         {
             for (int i = 0; i < regions.Count; i++)
-            {   
+            {
 
                 worldPolution += regions[i].regionPolution;
                 worldWaste += regions[i].regionWaste;
                 worldLandfilled += regions[i].regionLandfilled;
                 worldRecycle += regions[i].regionRecycle;
                 worldTrashDestroyed += regions[i].regionTrashDestroyed;
-                
+
             }
         }
     }
-
-
 }
