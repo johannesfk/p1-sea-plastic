@@ -10614,6 +10614,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
+      propertyPath: currentRegionName
+      value: 
+      objectReference: {fileID: 7326086858448216178}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
       propertyPath: regions.Array.size
       value: 7
       objectReference: {fileID: 0}
