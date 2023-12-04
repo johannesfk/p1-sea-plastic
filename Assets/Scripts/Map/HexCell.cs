@@ -17,19 +17,21 @@ public class HexCell : MonoBehaviour
     public Color color;
 
     public GameObject forest;
+    public GameObject plains;
     public GameObject mountain;
     public GameObject snow;
     public GameObject desert;
     public GameObject recycler;
     public GameObject incinerator;
+    public GameObject landfill;
     public GameObject water;
     public GameObject contaminatedWater;
     public GameObject boatCleaner;
     public GameObject riverBarricade;
-    public GameObject riverZ;
-    public GameObject riverX;
-    public GameObject riverXZ;
-    public GameObject riverZX;
+    public GameObject riverWE;
+    public GameObject riverNS;
+    public GameObject riverNE;
+    public GameObject riverNW;
 
     private GameObject cellPrefab;
 
@@ -41,19 +43,21 @@ public class HexCell : MonoBehaviour
         terrainPrefabs = new Dictionary<terrainType, GameObject>
         {
             { terrainType.forest, forest },
+            { terrainType.plains, plains },
             { terrainType.mountain, mountain },
             { terrainType.snow, snow },
             { terrainType.desert, desert },
             { terrainType.recycler, recycler },
             { terrainType.incinerator, incinerator },
+            { terrainType.landfill, landfill },
             { terrainType.water, water },
             { terrainType.contaminatedWater, contaminatedWater },
             { terrainType.boatCleaner, boatCleaner },
             { terrainType.riverBarricade, riverBarricade },
-            { terrainType.riverZ, riverZ },
-            { terrainType.riverX, riverX },
-            { terrainType.riverXZ, riverXZ },
-            { terrainType.riverZX, riverZX }
+            { terrainType.riverWE, riverWE },
+            { terrainType.riverNS, riverNS },
+            { terrainType.riverNE, riverNE },
+            { terrainType.riverNW, riverNW }
         };
     }
 

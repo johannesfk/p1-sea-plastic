@@ -57,16 +57,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   position: {x: 0, y: 0, z: 0}
-  terrainType: 2
+  terrainType: 1
   region: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   forest: {fileID: 7046648532484257570, guid: 4888361147992764eaa965edb5a928b2, type: 3}
+  plains: {fileID: 574582901088545651, guid: 11ab235c0ef7cbb4592f98081ec109c2, type: 3}
   mountain: {fileID: 434796790441446895, guid: 73b02082e2f3e844099ae84a1fc1022f, type: 3}
   snow: {fileID: 296365925496530503, guid: d292bf5c7e67be44bb510c02728fb5fb, type: 3}
   desert: {fileID: 670127751538096339, guid: 4ab67d5439435bc43b76d8b844267242, type: 3}
   recycler: {fileID: 2656812261806649005, guid: 184a3172be14c3f42aca579f40e40f30,
     type: 3}
   incinerator: {fileID: 8913375794068425766, guid: 4c5f28ee5129d2249952e79adcd7a68a,
+    type: 3}
+  landfill: {fileID: 2697255788521413886, guid: f015ac9735cfe0745a627122452f1c4f,
     type: 3}
   water: {fileID: 5870962720609190026, guid: c47e136ce6989384689f3f475d309dc5, type: 3}
   contaminatedWater: {fileID: 4424847441501427136, guid: 2de9fb7dd1f0dff49b7cac0600024f41,
@@ -75,10 +78,10 @@ MonoBehaviour:
     type: 3}
   riverBarricade: {fileID: 1534422938747379658, guid: 4352b5d98e0da7b47a6fe7b25f8f59c9,
     type: 3}
-  riverZ: {fileID: 6385626903990982784, guid: 660792baa5f101c43b6e07e9e98c11d2, type: 3}
-  riverX: {fileID: 4474287011982248245, guid: 3657711ce493b384c8332c8389148b23, type: 3}
-  riverXZ: {fileID: 4474287011982248245, guid: c6b1453174f6cac4695f620f2f356224, type: 3}
-  riverZX: {fileID: 6385626903990982784, guid: a9a17cdb5cb4d714fb8c3da573a2c83e, type: 3}
+  riverWE: {fileID: 4474287011982248245, guid: 3657711ce493b384c8332c8389148b23, type: 3}
+  riverNS: {fileID: 6385626903990982784, guid: 660792baa5f101c43b6e07e9e98c11d2, type: 3}
+  riverNE: {fileID: 4474287011982248245, guid: c6b1453174f6cac4695f620f2f356224, type: 3}
+  riverNW: {fileID: 6385626903990982784, guid: a9a17cdb5cb4d714fb8c3da573a2c83e, type: 3}
 --- !u!135 &8865267810972653266
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -48,25 +48,25 @@ public class Maps : MonoBehaviour
         "............................\n" +
         ".......SSS........S.S......." +
         "SSS....SS.......SSSSSSS....." +
-        "SSFFS...S.F..FFFFFFFFFFF...." +
+        "SSFFS...S.P..FFFFFFFFFFF...." +
         "FFFFSS......FFFFFFFFFFF....." +
-        ".FFFFFFF...F..FFFFFFFFFF...." +
-        "FFFFFFF.....FMMFFDDDDFF.F..." +
-        ".FFFFF.....FFMF..DDDDDF.F..." +
-        ".FFF...........DDDDDMFF....." +
-        "..F........DDDDVD.DDDFFF...." +
-        ".F........DDDDDVD.FF.F......" +
-        "..X.......DDDDDDV..F..F....." +
-        "..FFFF...FFFFFFFD..........." +
-        "..FFFFF...FFFFFFF.....FF...." +
-        "..FFFFFF....FMFF......F..FF." +
+        ".PFFFFFF...P..FFFFFFFFFF...." +
+        "PPFFFFF.....FMMFFPPPPFF.F..." +
+        ".MPPFF.....PPMF..DDMMDF.F..." +
+        ".MDP...........DDDDFMFF....." +
+        "..D........DDDDVD.PPFFFF...." +
+        ".D........DDDDDVD.PP.F......" +
+        "..C.......PPDPPDV..P..F....." +
+        "..FFFF...FFFFPPPD..........." +
+        "..FFFFF...FFFFPPP.....FF...." +
+        "..FFFFFF....FMFP......F..FF." +
         "...FFFFF.....FFF..........F." +
         "...FFFF.....FFF.F......DD..." +
-        "....FFF......FF.F......DDDD." +
-        "....FF.......F........DDDDD." +
-        "....FF.................D.DD." +
-        "....F....................D.F" +
-        ".....F.....................F" +
+        "....FFF......PP.F......DDDP." +
+        "....FF.......P........DDDDP." +
+        "....FF.................D.DP." +
+        "....F....................P.F" +
+        ".....F.....................M" +
         "............................" +
         "..........SSSSSSSS.........." +
         "..SSSSSSSSSSSSSSSSSSSSSS....";
@@ -86,9 +86,9 @@ public class Maps : MonoBehaviour
         "NNNNN...N.E..EEEECCCCCCC...." +
         "NNNNNN......EEEEECCCCCC....." +
         ".NNNNNNN...E..EEECCCCCCC...." +
-        "NNNNNNN.....EEEEEEECCCC.C..." +
-        ".NNNNN.....EEEE..AACCCC.C..." +
-        ".NNN...........AAAAACCC....." +
+        "NNNNNNN.....EEEEEACCCCC.C..." +
+        ".NNNNN.....EEEE..ACCCCC.C..." +
+        ".NNN...........AAACCCCC....." +
         "..N........AAAAAA.CCCCCC...." +
         ".N........AAAAAAA.CC.C......" +
         "..S.......AAAAAAA..C..C....." +
@@ -206,6 +206,8 @@ public class Maps : MonoBehaviour
         {
             case 'F':
                 return terrainType.forest;
+            case 'P':
+                return terrainType.plains;
             case 'M':
                 return terrainType.mountain;
             case 'S':
@@ -215,13 +217,13 @@ public class Maps : MonoBehaviour
             case '.':
                 return terrainType.water;
             case 'Z':
-                return terrainType.riverZ;
+                return terrainType.riverWE;
             case 'X':
-                return terrainType.riverX;
+                return terrainType.riverNS;
             case 'C':
-                return terrainType.riverXZ;
+                return terrainType.riverNE;
             case 'V':
-                return terrainType.riverZX;
+                return terrainType.riverNW;
             default:
                 throw new ArgumentException($"Invalid terrain character: {terrainChar}");
         }

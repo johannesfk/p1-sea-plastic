@@ -18,19 +18,21 @@ public class HexGrid : MonoBehaviour
     public enum terrainType
     {
         forest,
+        plains,
         mountain,
         snow,
         desert,
         recycler,
         incinerator,
+        landfill,
         water,
         contaminatedWater,
         boatCleaner,
         riverBarricade,
-        riverZ,
-        riverX,
-        riverXZ,
-        riverZX
+        riverWE,
+        riverNS,
+        riverNE,
+        riverNW
     };
 
     public Color defaultColor = Color.white;
