@@ -35,6 +35,7 @@ public class Maps : MonoBehaviour
 
     /// <summary>
     /// F: Forest
+    /// P: Plains
     /// M: Mountain
     /// S: Snow
     /// D: Desert
@@ -44,7 +45,8 @@ public class Maps : MonoBehaviour
     /// C: River XZ
     /// V: River ZX
     /// </summary>
-    readonly string map1Text =
+    /// 
+    readonly string map1Textorgi =
         "............................\n" +
         ".......SSS........S.S......." +
         "SSS....SS.......SSSSSSS....." +
@@ -71,6 +73,75 @@ public class Maps : MonoBehaviour
         "..........SSSSSSSS.........." +
         "..SSSSSSSSSSSSSSSSSSSSSS....";
 
+
+
+
+
+
+
+    readonly string map1Textold =
+        "............................\n" +
+        ".......SSS........S.S......." +
+        "SSS....SS.......SSSSSSS....." +
+        "SSFFS...S.P..FFFFFFFFFFF...." +
+        "FFFFSS......FFFFFFFFFFF....." +
+        ".PFFFFFF...P..FFFFFFFFFF...." +
+        "PPFFFFF.....FMMFFPPPPFF.F..." +
+        ".MPPFF.....PPMF..DDMMDF.F..." +
+        ".MDP...........DDDDFMFF....." +
+        "..D........DDDDVD.PPFFFF...." +
+        ".D........DDDDDVD.PP.F......" +
+        "..C.......PPDPPDV..P..F....." +
+        "..FFFF...FFFFPPPD..........." +
+        "..FFFFF...FFFFPPP.....FF...." +
+        "..FFFFFF....FMFP......F..FF." +
+        "...FFFFF.....FFF..........F." +
+        "...FFFF.....FFF.F......DD..." +
+        "....FFF......PP.F......DDDP." +
+        "....FF.......P........DDDDP." +
+        "....FF.................D.DP." +
+        "....F....................P.F" +
+        ".....F.....................M" +
+        "............................" +
+        "..........SSSSSSSS.........." +
+        "..SSSSSSSSSSSSSSSSSSSSSS....";
+
+
+
+
+
+
+
+
+    readonly string map1Text =
+        "....S.SSS.....S.............\n" +
+        "FFFFS..SSS........S.S......." +
+        "SSFFSS.SS.......SSSSSSS....." +
+        "MFFFFFS.S.P..FFFFFFFFFFF...." +
+        "FPPFFCF.....FFFFFFFZZZF....." +
+        ".PFFFCF....P..FFFFDDPPFFFF.." +
+        "PPFFFF......FMMFFDDDPPFFF.F." +
+        ".MPPFF.....PPMF..DDMMPPFF.F." +
+        ".DDP...........DDDDFMPPFF..." +
+        "..D........DDDDVDD.PPPFFFF.." +
+        "..F.......DDDDDVDD.PPPFFFF.." +
+        "...Z......PPDPPDV...PPFFFF.." +
+        "..PPFF...FFFFPPPD...PP.F...." +
+        "..FFFFF...FFFFVPP....P..F..." +
+        "..FFFFFP....FMVP.........F.." +
+        "...FFFPP.....FFV.......FF..." +
+        "...DFFP.....FFF.F.......F.FF" +
+        "....DFP......PP.F..........." +
+        "....MP.......P.........DD..." +
+        "....MP.................DDDP." +
+        "....M.................DDDDP." +
+        ".....M.................D.DP." +
+        ".........................P.F" +
+        "...........................M" +
+        "............................" +
+        "..........SSSSSSSS.........." +
+        "..SSSSSSSSSSSSSSSSSSSSSS....";
+
     /// <summary>
     ///  E: Europe
     ///  N: North America
@@ -80,28 +151,30 @@ public class Maps : MonoBehaviour
     ///  A: Africa & Middle East
     /// </summary>
     readonly string map1Regions =
-        "............................\n" +
-        ".......NNN........C.C......." +
-        "NNN....NN.......CCCCCCC....." +
-        "NNNNN...N.E..EEEECCCCCCC...." +
-        "NNNNNN......EEEEECCCCCC....." +
-        ".NNNNNNN...E..EEECCCCCCC...." +
-        "NNNNNNN.....EEEEEACCCCC.C..." +
-        ".NNNNN.....EEEE..ACCCCC.C..." +
-        ".NNN...........AAACCCCC....." +
-        "..N........AAAAAA.CCCCCC...." +
-        ".N........AAAAAAA.CC.C......" +
-        "..S.......AAAAAAA..C..C....." +
-        "..SSSS...AAAAAAAA..........." +
-        "..SSSSS...AAAAAAA.....OO...." +
-        "..SSSSSS....AAAA......O..OO." +
-        "...SSSSS.....AAA..........O." +
-        "...SSSS.....AAA.A......OO..." +
-        "....SSS......AA.A......OOOO." +
-        "....SS.......A........OOOOO." +
-        "....SS.................O.OO." +
-        "....S....................O.O" +
-        ".....S.....................O" +
+        "....N.NNN.....E.............\n" +
+        "NNNNN..NNN........C.C......." +
+        "NNNNNN.NN.......CCCCCCC....." +
+        "NNNNNNN.N.E..EEEECCCCCCC...." +
+        "NNNNNNN.....EEEEECCCCCC....." +
+        ".NNNNNN....E..EEECCCCCCCCC.." +
+        "NNNNNN......EEEEEACCCCCCC.C." +
+        ".NNNNN.....EEEE..ACCCCCCC.C." +
+        ".NNN...........AAACCCCCC...." +
+        "..N........AAAAAAA.CCCCCCC.." +
+        "..S.......AAAAAAAA.CCCCCCC.." +
+        "...S......AAAAAAA...CCCCCC.." +
+        "..SSSS...AAAAAAAA...CC.C...." +
+        "..SSSSS...AAAAAAA....C..C..." +
+        "..SSSSSS....AAAA.........O.." +
+        "...SSSSS.....AAA.......OO..." +
+        "...SSSS.....AAA.A.......O.OO" +
+        "....SSS......AA.A..........." +
+        "....SS.......A.........OO..." +
+        "....SS.................OOOO." +
+        "....S.................OOOOO." +
+        ".....S.................O.OO." +
+        ".........................O.O" +
+        "...........................O" +
         "............................" +
         "............................" +
         "............................";
@@ -162,7 +235,7 @@ public class Maps : MonoBehaviour
         Map map1 = new Map(map1Terrain.GetLength(1), map1Terrain.GetLength(0));
         Map map2 = new Map(CellCountX, CellCountZ);
         //map0.layout = map0Terrain;
-        map1.layout = AddWorldBorder(map1Terrain, 2);
+        map1.layout = AddWorldBorder(map1Terrain, 5);
         // map1.layout = map1Terrain;
         // map2.layout = mapLayout;
         //mapList.Add(map0);
