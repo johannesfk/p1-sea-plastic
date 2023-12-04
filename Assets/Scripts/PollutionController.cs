@@ -33,6 +33,7 @@ public class PollutionController : MonoBehaviour
     public List<Region> regions;
 
     public int currentRegion;
+    private int percentageCalculation = 100;
 
     [Header("Stuff")]
     public UnityEngine.UI.Slider slider;
@@ -83,19 +84,19 @@ public class PollutionController : MonoBehaviour
     private void Update()
     {
         //World Percentages
-        polutionPercentage = worldPolution / polutionThreshhold * 100;
+        polutionPercentage = worldPolution / polutionThreshhold * percentageCalculation;
         slider.value = polutionPercentage;
 
-        worldLandfilledPercentage = worldLandfilled / worldWaste * 100;
-        worldRecyclePercentage = worldRecycle / worldWaste * 100;
-        worldTrashDestroyedPercentage = worldTrashDestroyed / worldWaste * 100;
+        worldLandfilledPercentage = worldLandfilled / worldWaste * percentageCalculation;
+        worldRecyclePercentage = worldRecycle / worldWaste * percentageCalculation;
+        worldTrashDestroyedPercentage = worldTrashDestroyed / worldWaste * percentageCalculation;
 
 
         //region percentages
-        regions[currentRegion].regionPolutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * 100;
-        regions[currentRegion].regionRecyclePercentage = regions[currentRegion].regionRecycle / regions[currentRegion].regionWaste * 100;
-        regions[currentRegion].regionTrashDestroyedPercentage = regions[currentRegion].regionTrashDestroyed / regions[currentRegion].regionWaste * 100;
-        regions[currentRegion].regionLandfillPercentage = regions[currentRegion].regionLandfilled / regions[currentRegion].regionWaste * 100;
+        regions[currentRegion].regionPolutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * percentageCalculation;
+        regions[currentRegion].regionRecyclePercentage = regions[currentRegion].regionRecycle / regions[currentRegion].regionWaste * percentageCalculation;
+        regions[currentRegion].regionTrashDestroyedPercentage = regions[currentRegion].regionTrashDestroyed / regions[currentRegion].regionWaste * percentageCalculation;
+        regions[currentRegion].regionLandfillPercentage = regions[currentRegion].regionLandfilled / regions[currentRegion].regionWaste * percentageCalculation;
 
         //Text Percentages
         polutionPercentageText.text = ((int)polutionPercentage + "%").ToString();
