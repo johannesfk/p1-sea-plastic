@@ -12,7 +12,7 @@ public class WaterContamination : MonoBehaviour
     private HexCell[] cells;
     private int[] contamitableWaterIndices;
     private int contaminateIndex = 0;
-    private bool mostlyContaminated = false;
+    private int mostlyContaminated = 0;
     void Start()
     {
         StartCoroutine(WaitForCellsAndProcess());
@@ -71,7 +71,7 @@ public class WaterContamination : MonoBehaviour
         Queue<(HexCell cell, int distance)> queue = new Queue<(HexCell cell, int distance)>();
         Dictionary<int, int> distances = new Dictionary<int, int>();
 
-        int bufferDistance = !mostlyContaminated ? 2 : 1;
+        // int bufferDistance = !mostlyContaminated ? 2 : 1;
 
         // Debug.Log("Buffer distance: " + bufferDistance);
 
@@ -98,7 +98,7 @@ public class WaterContamination : MonoBehaviour
 
             foreach (HexCell neighbor in cell.neighbors)
             {
-                if (neighbor != null && (neighbor.terrainType == terrainType.water | neighbor.contaminatedWater) && (!distances.ContainsKey(neighbor.index) || distances[neighbor.index] > distance + 1))
+                if (neighbor != null && (neighbor.terrainType == terrainType.water || neighbor.terrainType == terrainType.contaminatedWater) && (!distances.ContainsKey(neighbor.index) || distances[neighbor.index] > distance + 1))
                 {
                     distances[neighbor.index] = distance + 1;
                     queue.Enqueue((neighbor, distance + 1));
@@ -110,9 +110,32 @@ public class WaterContamination : MonoBehaviour
         /// or equal to the buffer distance, to the indices list.
         foreach (KeyValuePair<int, int> entry in distances)
         {
-            if (entry.Value >= bufferDistance)
+            /* if (entry.Value >= bufferDistance)
             {
                 indices.Add(entry.Key);
+            } */
+            switch (mostlyContaminated)
+            {
+                case 0:
+                    if (entry.Value == 1)
+                    {
+                        indices.Add(entry.Key);
+                    }
+                    break;
+                case 1:
+                    if (entry.Value >= 1 && entry.Value < 2)
+                    {
+                        indices.Add(entry.Key);
+                    }
+                    break;
+                case 2:
+                    if (entry.Value >= 1)
+                    {
+                        indices.Add(entry.Key);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -123,7 +146,7 @@ public class WaterContamination : MonoBehaviour
     {
         int amount;
 
-        amount = (int)Math.Round((decimal)contamitableWaterIndices.Length / 100);
+        amount = (int)Math.Round((decimal)contamitableWaterIndices.Length / 100 * 10);
 
         // Debug.Log("Can Contaminate " + contamitableWaterIndices.Length);
         // Debug.Log("contaminateIndex" + contaminateIndex);
@@ -148,10 +171,10 @@ public class WaterContamination : MonoBehaviour
         }
         else
         {
-            if (!mostlyContaminated)
+            if (mostlyContaminated < 2)
             {
-                Debug.Log("All water contaminated");
-                mostlyContaminated = true;
+                Debug.Log("Stage " + mostlyContaminated + " contaminated");
+                mostlyContaminated++;
                 StartCoroutine(WaitForCellsAndProcess());
             }
             else
