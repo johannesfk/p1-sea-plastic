@@ -45,11 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f87ab9702a92641ac2dc3a8d034b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   coordinates:
     x: 0
     z: 0
+  neighbors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   position: {x: 0, y: 0, z: 0}
   terrainType: 2
+  region: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   forest: {fileID: 7046648532484257570, guid: 4888361147992764eaa965edb5a928b2, type: 3}
   mountain: {fileID: 434796790441446895, guid: 73b02082e2f3e844099ae84a1fc1022f, type: 3}
@@ -60,6 +69,8 @@ MonoBehaviour:
   incinerator: {fileID: 8913375794068425766, guid: 4c5f28ee5129d2249952e79adcd7a68a,
     type: 3}
   water: {fileID: 5870962720609190026, guid: c47e136ce6989384689f3f475d309dc5, type: 3}
+  contaminatedWater: {fileID: 4424847441501427136, guid: 2de9fb7dd1f0dff49b7cac0600024f41,
+    type: 3}
   boatCleaner: {fileID: 1527569906693964376, guid: 242fede71ab41524395dbaecd505c548,
     type: 3}
   riverBarricade: {fileID: 1534422938747379658, guid: 4352b5d98e0da7b47a6fe7b25f8f59c9,

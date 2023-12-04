@@ -139,18 +139,9 @@ public class Maps : MonoBehaviour
         }
         mapList = new List<Map>();
 
-
-        Debug.Log("map 0 " + map0Width + "x" + map0Height);
-
         // terrainType[,] map0Terrain = ConvertTo2DArray(map0Text, map0Width, map0Height);
 
         CellData[,] map1Terrain = ConvertTo2DArray(map1Text, map1Regions, map1CellCountX, map1CellCountZ);
-
-
-
-
-
-        Debug.Log(map1Terrain.GetLength(1) + " ✕ " + map1Terrain.GetLength(0));
 
 
         terrainType[,] mapLayout = new terrainType[CellCountX, CellCountZ] {
@@ -196,7 +187,7 @@ public class Maps : MonoBehaviour
                     charIndex++;
                 }
                 char terrainChar = mapText[charIndex];
-                Debug.Log("terrainChar " + terrainChar + " @ " + charIndex);
+                // Debug.Log("terrainChar " + terrainChar + " @ " + charIndex);
                 char regionChar = regionText[charIndex];
                 map[i, j] = new CellData
                 {
@@ -269,7 +260,7 @@ public class Maps : MonoBehaviour
         {
             for (int j = 0; j < originalMap.GetLength(1); j++)
             {
-                Debug.Log("i " + i + " j " + j);
+                // Debug.Log("i " + i + " j " + j);
                 borderedMap[i + borderSize, j + borderSize] = originalMap[i, j];
             }
         }
