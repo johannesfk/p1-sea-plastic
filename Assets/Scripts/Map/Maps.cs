@@ -117,25 +117,25 @@ public class Maps : MonoBehaviour
         "....S.SSS.....S.............\n" +
         "FFFFS..SSS........S.S......." +
         "SSFFSS.SS.......SSSSSSS....." +
-        "MFFFFFS.S.P..FFFFFFFFFFF...." +
-        "FPPFFCF.....FFFFFFFZZZF....." +
-        ".PFFFCF....P..FFFFDDPPFFFF.." +
-        "PPFFFF......FMMFFDDDPPFFF.F." +
-        ".MPPFF.....PPMF..DDMMPPFF.F." +
-        ".DDP...........DDDDFMPPFF..." +
-        "..D........DDDDVDD.PPPFFFF.." +
-        "..F.......DDDDDVDD.PPPFFFF.." +
-        "...Z......PPDPPDV...PPFFFF.." +
-        "..PPFF...FFFFPPPD...PP.F...." +
-        "..FFFFF...FFFFVPP....P..F..." +
-        "..FFFFFP....FMVP.........F.." +
-        "...FFFPP.....FFV.......FF..." +
-        "...DFFP.....FFF.F.......F.FF" +
-        "....DFP......PP.F..........." +
-        "....MP.......P.........DD..." +
-        "....MP.................DDDP." +
-        "....M.................DDDDP." +
-        ".....M.................D.DP." +
+        "MFFFFFS.S.P..FFFFPPPPPFF...." +
+        "FPPFFCF.....FFFFFFFPZZF....." +
+        ".PFFFCF....P..FFFFFFPPFFFF.." +
+        "PPFFFF......PPPPPFFFPPFFF.F." +
+        ".MPPFF......PPPPPPDMMPPFF.F." +
+        ".DDP........FMMFFDDFMPPFF..." +
+        "..D........PPMF.DDDPPPFFFF.." +
+        "..F.............DDDPPPFFFF.." +
+        "...Z.......DDDDVDDD.PPFFFF.." +
+        "..PPFF....DDDDDVDD..PP.F...." +
+        "..FFFFF...PPDPPDV....P..F..." +
+        "..FFFFFP.FFFFPPPD........F.." +
+        "...FFFPP..FFFFVPD......FF..." +
+        "...DFFP.....FMVP........F.FF" +
+        "....DFP......FFP.P.........." +
+        "....MP......FFF.P......DD..." +
+        "....MP.......PP........DDDD." +
+        "....M........P........DDDDP." +
+        ".....P.................D.DP." +
         ".........................P.F" +
         "...........................M" +
         "............................" +
@@ -152,26 +152,26 @@ public class Maps : MonoBehaviour
     /// </summary>
     readonly string map1Regions =
         "....N.NNN.....E.............\n" +
-        "NNNNN..NNN........C.C......." +
-        "NNNNNN.NN.......CCCCCCC....." +
-        "NNNNNNN.N.E..EEEECCCCCCC...." +
-        "NNNNNNN.....EEEEECCCCCC....." +
-        ".NNNNNN....E..EEECCCCCCCCC.." +
-        "NNNNNN......EEEEEACCCCCCC.C." +
-        ".NNNNN.....EEEE..ACCCCCCC.C." +
-        ".NNN...........AAACCCCCC...." +
-        "..N........AAAAAAA.CCCCCCC.." +
-        "..S.......AAAAAAAA.CCCCCCC.." +
-        "...S......AAAAAAA...CCCCCC.." +
-        "..SSSS...AAAAAAAA...CC.C...." +
+        "NNNNN..NNN........E.C......." +
+        "NNNNNN.NN.......EECCCCC....." +
+        "NNNNNNN.N.E..EEEEECCCCCC...." +
+        "NNNNNNN.....EEEEEECCCCC....." +
+        ".NNNNNN....E..EEEECCCCCCCC.." +
+        "NNNNNN......EEEEECCCCCCCC.C." +
+        ".NNNNN......EEEEECCCCCCCC.C." +
+        ".NNN........EEEEECCCCCCC...." +
+        "..N........EEEE.AAACCCCCCC.." +
+        "..S.............AAACCCCCCC.." +
+        "...S.......AAAAAAAA.CCCCCC.." +
+        "..SSSS....AAAAAAAA..CC.C...." +
         "..SSSSS...AAAAAAA....C..C..." +
-        "..SSSSSS....AAAA.........O.." +
-        "...SSSSS.....AAA.......OO..." +
-        "...SSSS.....AAA.A.......O.OO" +
-        "....SSS......AA.A..........." +
-        "....SS.......A.........OO..." +
-        "....SS.................OOOO." +
-        "....S.................OOOOO." +
+        "..SSSSSS.AAAAAAAA........O.." +
+        "...SSSSS..AAAAAAA......OO..." +
+        "...SSSS.....AAAA........O.OO" +
+        "....SSS......AAA.A.........." +
+        "....SS......AAA.A......OO..." +
+        "....SS.......AA........OOOO." +
+        "....S........A........OOOOO." +
         ".....S.................O.OO." +
         ".........................O.O" +
         "...........................O" +
