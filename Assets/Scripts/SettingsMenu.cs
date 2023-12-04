@@ -45,13 +45,15 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetVolume (float volume)
+   /* public void SetVolume (float volume)
    {
         audioMixer.SetFloat("volume", volume);
    }
+   */
 
    public void SetFullscreen (bool isFullscreen)
     {
+        FindObjectOfType<AudioManager>().Play("Sound FX");
         Screen.fullScreen = isFullscreen;
     }
 

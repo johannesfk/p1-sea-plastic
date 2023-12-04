@@ -6,14 +6,18 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
-
+    public AudioMixer audioMixer;
 
     void Awake()
     {
+
+        DontDestroyOnLoad(gameObject);
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
+            
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
@@ -21,6 +25,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+/*
+    public void SetVolume (float volume)
+   {
+        audioMixer.SetFloat("volume", volume);
+   }
+*/
 
     public void Play(string name)
     {
