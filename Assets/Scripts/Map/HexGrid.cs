@@ -228,13 +228,13 @@ public class HexGrid : MonoBehaviour
             HexCell cell = cells[index];
             cell.color = touchedColor;
             Debug.Log("Touched region " + cell.region);
-            if (cell.terrainType == terrainType.water)
+            if (cell.terrainType == terrainType.water || cell.terrainType == terrainType.contaminatedWater)
             {
                 cell.SetCellType(terrainType.boatCleaner);
             }
             else
             {
-                cell.SetCellType(terrainType.recycler);
+                cell.SetCellType(terrainType.recycler); // TODO: Change to chosen type
             }
 
             Debug.Log("Touched cell position " + cell.transform.position);
