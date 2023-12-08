@@ -54,6 +54,7 @@ public class PollutionController : MonoBehaviour
     public float worldTrashDestroyed;
     public float worldTrashDestroyedPercentage;
 
+    [SerializeField] private TMP_Text worldPollutionText;
     [SerializeField] private TMP_Text polutionPercentageText;
     [SerializeField] private TMP_Text regionPolutionPercentageText;
     [SerializeField] private TMP_Text landfillPercentageText;
@@ -85,6 +86,7 @@ public class PollutionController : MonoBehaviour
     private void Update()
     {
         //World Percentages
+        worldPollutionText.text = worldPolution.ToString();
         polutionPercentage = worldPolution / polutionThreshhold * percentageCalculation;
         slider.value = polutionPercentage;
 
