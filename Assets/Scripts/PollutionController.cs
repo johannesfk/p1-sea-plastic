@@ -131,7 +131,7 @@ public class PollutionController : MonoBehaviour
 
         if (regions.Count > 0)
         {
-            for (int i = 0; i < regions.Count; i++)
+            for (int i = 1; i < regions.Count; i++)
             {
 
                 worldPolution += regions[i].regionPolution;

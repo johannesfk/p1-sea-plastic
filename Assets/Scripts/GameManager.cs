@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
             dayNumber++;
             Debug.Log("day: " + dayNumber);
 
+            PollutionController.instance.EndDayAdd();
+
             money += income;
 
             dayTimer = 0;
