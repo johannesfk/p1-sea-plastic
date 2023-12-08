@@ -16,14 +16,7 @@ public class Menu : MonoBehaviour
     public GameObject BurgerMenu;
     public GameObject SettingMenu;
 
-    public GameObject CurrentRegion;
     public GameObject GlobalRegionObject;
-    public GameObject Region1Object;
-    public GameObject Region2Object;
-    public GameObject Region3Object;
-    public GameObject Region4Object;
-    public GameObject Region5Object;
-    public GameObject Region6Object;
     void SwitchMenu(GameObject newMenu)
     {
         if (CurrentMenu != null)
@@ -34,30 +27,14 @@ public class Menu : MonoBehaviour
         newMenu.SetActive(true);
         CurrentMenu = newMenu;
     }
-    void SwitchRegion(GameObject newRegion)
-    {
-        if (newRegion == null)
-        {
-            Debug.LogError($"Trying to switch to a null region! CurrentRegion: {CurrentRegion?.name}");
-            return;
-        }
-
-        Debug.Log($"Switching to region: {newRegion.name}");
-
-        if (CurrentRegion != null)
-        {
-            CurrentRegion.SetActive(false);
-            Debug.Log($"Deactivating current region: {CurrentRegion.name}");
-        }
-
-        newRegion.SetActive(true);
-        CurrentRegion = newRegion;
-
-        Debug.Log($"Activating new region: {newRegion.name}");
-    }
     public void OpenGlobalRegion()
     {
-        SwitchRegion(GlobalRegionObject);
+        GlobalRegionObject.SetActive(true);
+        Debug.Log("Button Clicked");
+    }
+    public void ExitRegion()
+    {
+        GlobalRegionObject.SetActive(false);
         Debug.Log("Button Clicked");
     }
     public void NextRegion()

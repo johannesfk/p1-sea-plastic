@@ -57,7 +57,8 @@ public class HexCell : MonoBehaviour
             { terrainType.riverWE, riverWE },
             { terrainType.riverNS, riverNS },
             { terrainType.riverNE, riverNE },
-            { terrainType.riverNW, riverNW }
+            { terrainType.riverNW, riverNW },
+            { terrainType.artic, snow }
         };
     }
 

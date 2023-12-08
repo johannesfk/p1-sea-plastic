@@ -44,74 +44,9 @@ public class Maps : MonoBehaviour
     /// X: River X
     /// C: River XZ
     /// V: River ZX
+    /// R: Arctic
     /// </summary>
     /// 
-    readonly string map1Textorgi =
-        "............................\n" +
-        ".......SSS........S.S......." +
-        "SSS....SS.......SSSSSSS....." +
-        "SSFFS...S.P..FFFFFFFFFFF...." +
-        "FFFFSS......FFFFFFFFFFF....." +
-        ".PFFFFFF...P..FFFFFFFFFF...." +
-        "PPFFFFF.....FMMFFPPPPFF.F..." +
-        ".MPPFF.....PPMF..DDMMDF.F..." +
-        ".MDP...........DDDDFMFF....." +
-        "..D........DDDDVD.PPFFFF...." +
-        ".D........DDDDDVD.PP.F......" +
-        "..C.......PPDPPDV..P..F....." +
-        "..FFFF...FFFFPPPD..........." +
-        "..FFFFF...FFFFPPP.....FF...." +
-        "..FFFFFF....FMFP......F..FF." +
-        "...FFFFF.....FFF..........F." +
-        "...FFFF.....FFF.F......DD..." +
-        "....FFF......PP.F......DDDP." +
-        "....FF.......P........DDDDP." +
-        "....FF.................D.DP." +
-        "....F....................P.F" +
-        ".....F.....................M" +
-        "............................" +
-        "..........SSSSSSSS.........." +
-        "..SSSSSSSSSSSSSSSSSSSSSS....";
-
-
-
-
-
-
-
-    readonly string map1Textold =
-        "............................\n" +
-        ".......SSS........S.S......." +
-        "SSS....SS.......SSSSSSS....." +
-        "SSFFS...S.P..FFFFFFFFFFF...." +
-        "FFFFSS......FFFFFFFFFFF....." +
-        ".PFFFFFF...P..FFFFFFFFFF...." +
-        "PPFFFFF.....FMMFFPPPPFF.F..." +
-        ".MPPFF.....PPMF..DDMMDF.F..." +
-        ".MDP...........DDDDFMFF....." +
-        "..D........DDDDVD.PPFFFF...." +
-        ".D........DDDDDVD.PP.F......" +
-        "..C.......PPDPPDV..P..F....." +
-        "..FFFF...FFFFPPPD..........." +
-        "..FFFFF...FFFFPPP.....FF...." +
-        "..FFFFFF....FMFP......F..FF." +
-        "...FFFFF.....FFF..........F." +
-        "...FFFF.....FFF.F......DD..." +
-        "....FFF......PP.F......DDDP." +
-        "....FF.......P........DDDDP." +
-        "....FF.................D.DP." +
-        "....F....................P.F" +
-        ".....F.....................M" +
-        "............................" +
-        "..........SSSSSSSS.........." +
-        "..SSSSSSSSSSSSSSSSSSSSSS....";
-
-
-
-
-
-
-
 
     readonly string map1Text =
         "....S.SSS.....S.............\n" +
@@ -139,8 +74,8 @@ public class Maps : MonoBehaviour
         ".........................P.F" +
         "...........................M" +
         "............................" +
-        "..........SSSSSSSS.........." +
-        "..SSSSSSSSSSSSSSSSSSSSSS....";
+        "..........RRRRRRRR.........." +
+        "..RRRRRRRRRRRRRRRRRRRRRR....";
 
     /// <summary>
     ///  E: Europe
@@ -297,6 +232,8 @@ public class Maps : MonoBehaviour
                 return terrainType.riverNE;
             case 'V':
                 return terrainType.riverNW;
+            case 'R':
+                return terrainType.artic;
             default:
                 throw new ArgumentException($"Invalid terrain character: {terrainChar}");
         }
