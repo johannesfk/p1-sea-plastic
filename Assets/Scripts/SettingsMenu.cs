@@ -7,7 +7,7 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    //public AudioMixer audioMixer;
 
     public TMP_Dropdown resolutionDropdown;
 
@@ -56,5 +56,7 @@ public class SettingsMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Sound FX");
         Screen.fullScreen = isFullscreen;
     }
+
+
 
 }

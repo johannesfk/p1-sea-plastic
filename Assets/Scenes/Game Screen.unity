@@ -4889,6 +4889,7 @@ GameObject:
   - component: {fileID: 574618554}
   - component: {fileID: 574618553}
   - component: {fileID: 574618552}
+  - component: {fileID: 574618555}
   m_Layer: 5
   m_Name: Management Screen
   m_TagString: Untagged
@@ -4958,6 +4959,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0008544922, y: 0}
   m_SizeDelta: {x: 0.0018, y: 0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &574618555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574618551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95372e01249b7943ab14d2ab37d15e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &589300386
 GameObject:
   m_ObjectHideFlags: 0
@@ -9590,6 +9603,7 @@ GameObject:
   - component: {fileID: 1121696184}
   - component: {fileID: 1121696186}
   - component: {fileID: 1121696185}
+  - component: {fileID: 1121696187}
   m_Layer: 5
   m_Name: GameOverBackGround
   m_TagString: Untagged
@@ -9658,6 +9672,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121696183}
   m_CullTransparentMesh: 1
+--- !u!114 &1121696187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121696183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95372e01249b7943ab14d2ab37d15e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1124795954
 GameObject:
   m_ObjectHideFlags: 0
@@ -10273,6 +10299,11 @@ PrefabInstance:
       propertyPath: regions.Array.size
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: worldPollutionText
+      value: 
+      objectReference: {fileID: 1422615287}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: ResyclePercentageText
@@ -17462,6 +17493,7 @@ GameObject:
   - component: {fileID: 1887034612}
   - component: {fileID: 1887034614}
   - component: {fileID: 1887034613}
+  - component: {fileID: 1887034615}
   m_Layer: 5
   m_Name: Advertisment Screen
   m_TagString: Untagged
@@ -17531,6 +17563,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887034611}
   m_CullTransparentMesh: 1
+--- !u!114 &1887034615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887034611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95372e01249b7943ab14d2ab37d15e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1887622177
 GameObject:
   m_ObjectHideFlags: 0
@@ -17619,6 +17663,7 @@ GameObject:
   - component: {fileID: 1908454783}
   - component: {fileID: 1908454785}
   - component: {fileID: 1908454784}
+  - component: {fileID: 1908454786}
   m_Layer: 5
   m_Name: Upgrade Screen
   m_TagString: Untagged
@@ -17688,6 +17733,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908454782}
   m_CullTransparentMesh: 1
+--- !u!114 &1908454786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908454782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95372e01249b7943ab14d2ab37d15e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1910430874
 GameObject:
   m_ObjectHideFlags: 0
@@ -22511,6 +22568,7 @@ GameObject:
   - component: {fileID: 4603088369910784134}
   - component: {fileID: 3220939169292555237}
   - component: {fileID: 3259736281482197328}
+  - component: {fileID: 6727621816622802285}
   m_Layer: 5
   m_Name: StatScreen
   m_TagString: Untagged
@@ -22518,6 +22576,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &6727621816622802285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727621816622802284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95372e01249b7943ab14d2ab37d15e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6747600179438220925
 MonoBehaviour:
   m_ObjectHideFlags: 0
