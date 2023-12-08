@@ -11,6 +11,7 @@ public class WaterContamination : MonoBehaviour
     // private HexCell[] cells;
     private HexCell[] cells;
     private int[] contamitableWaterIndices;
+    private int totalContamitableWater;
     private int contaminateIndex = 0;
     private int mostlyContaminated = 0;
     void Start()
@@ -26,7 +27,18 @@ public class WaterContamination : MonoBehaviour
             cells = hexGrid.cells;
             if (cells != null)
             {
+                for
+                (int i = 0; i < cells.Length; i++)
+                {
+                    if (cells[i].terrainType == terrainType.water)
+                    {
+                        totalContamitableWater++;
+                    }
+                }
+
                 contamitableWaterIndices = GetWater();
+
+
 
                 // Debug.Log("Contamitable water indices: " + contamitableWaterIndices.Length);
                 // Iterate over the array
@@ -146,10 +158,10 @@ public class WaterContamination : MonoBehaviour
     {
         int amount;
 
-        amount = (int)Math.Round((decimal)contamitableWaterIndices.Length / 100);
+        amount = (int)Math.Round((decimal)totalContamitableWater / 100);
 
-        // Debug.Log("Can Contaminate " + contamitableWaterIndices.Length);
-        // Debug.Log("contaminateIndex" + contaminateIndex);
+        Debug.Log("Can Contaminate " + totalContamitableWater);
+        Debug.Log("contaminateIndex" + contaminateIndex);
 
 
         /// If there are more cells to contaminate than the amount
