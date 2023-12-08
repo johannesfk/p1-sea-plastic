@@ -169,7 +169,7 @@ public class HexGrid : MonoBehaviour
             new Vector2(position.x, position.z);
         label.text = cell.coordinates.ToStringOnSeparateLines(); */
 
-        if (cell.region != 0)
+        /* if (cell.region != 0)
         {
             TMP_Text regionlabel = Instantiate<TMP_Text>(cellLabelPrefab);
             regionlabel.rectTransform.SetParent(gridCanvas.transform, false);
@@ -178,7 +178,7 @@ public class HexGrid : MonoBehaviour
             regionlabel.fontSize = 10;
             regionlabel.text = cell.region.ToString();
             regionlabel.color = Color.red;
-        }
+        } */
 
 
     }
