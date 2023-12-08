@@ -114,6 +114,8 @@ public class Menu : MonoBehaviour
 
     public void BurgerButton()
     {
+        FindObjectOfType<AudioManager>().Play("SoundFX");
+        Debug.Log("Sound LOG");
         if (BurgerMenu.activeSelf)
         {
             BurgerMenu.SetActive(false);

@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 using TMPro;
 using System;
 using UnityEngine.UIElements;
-using UnityEditor.ShaderGraph.Internal;
 
 public class HexGrid : MonoBehaviour
 {
@@ -19,18 +18,22 @@ public class HexGrid : MonoBehaviour
     public enum terrainType
     {
         forest,
+        plains,
         mountain,
         snow,
         desert,
         recycler,
         incinerator,
+        landfill,
         water,
+        contaminatedWater,
         boatCleaner,
         riverBarricade,
-        riverZ,
-        riverX,
-        riverXZ,
-        riverZX
+        riverWE,
+        riverNS,
+        riverNE,
+        riverNW,
+        artic
     };
 
     public Color defaultColor = Color.white;
@@ -39,7 +42,7 @@ public class HexGrid : MonoBehaviour
     private InputAction leftClickAction;
 
 
-    HexCell[] cells;
+    public HexCell[] cells { get; private set; }
 
     Canvas gridCanvas;
     HexMesh hexMesh;
@@ -53,25 +56,25 @@ public class HexGrid : MonoBehaviour
         hexMesh = GetComponentInChildren<HexMesh>();
         hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
 
-        gridCanvas.gameObject.SetActive(false);
+        // gridCanvas.gameObject.SetActive(false);
 
         List<Map> mapList = Maps.instance.mapList;
 
         if (mapList.Count > 0)
         {
-            Map map1 = mapList[1];
+            Map map1 = mapList[0];
 
             height = map1.layout.GetLength(0);
             width = map1.layout.GetLength(1);
             cells = new HexCell[map1.layout.Length];
 
-            Debug.Log("Map 1 height " + height + " width " + width + " cells " + cells.Length);
+            Debug.Log("Map size: " + height + " ✕ " + width);
 
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    terrainType terrainType = map1.layout[i, j];
+                    terrainType terrainType = map1.layout[i, j].terrainType;
                 }
             }
 
@@ -82,7 +85,9 @@ public class HexGrid : MonoBehaviour
                     // Debug.Log("Cell " + i + " " + j + " " + map1.layout[i, j]);
                     int index = i * width + j;
                     HexCell cell = cells[index] = Instantiate<HexCell>(cellPrefab);
-                    cell.SetCellPrefab(map1.layout[i, j]);
+                    cell.terrainType = map1.layout[i, j].terrainType;
+                    // cell.SetCellType(map1.layout[i, j].terrainType);
+                    cell.region = map1.layout[i, j].region;
                 }
             }
 
@@ -115,14 +120,66 @@ public class HexGrid : MonoBehaviour
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
         cell.color = defaultColor;
+        cell.index = i;
         cell.position = position;
 
+        // Set neighboring cells
 
-        TMP_Text label = Instantiate<TMP_Text>(cellLabelPrefab);
+        /// If the cell is not on the leftmost column,
+        /// set the cell to the west as the previous cell in the array.
+        if (x > 0)
+        {
+            cell.SetNeighbor(HexDirection.W, cells[i - 1]);
+        }
+        // If the cell is not on the first row
+        if (-z > 0)
+        {
+            /// If the cell is on an even row set the cell to
+            /// the north west as the cell at index - width of the map.
+            /// Uses bitwise AND to check if the cell is on an even row.
+            if ((-z & 1) == 0)
+            {
+                cell.SetNeighbor(HexDirection.NW, cells[i - width]);
+                /// If the cell is not on the rightmost column set the cell to
+                /// the north east as the cell at index - width of the map + 1.
+                if (x < width - 1)
+                {
+                    cell.SetNeighbor(HexDirection.NE, cells[i - width + 1]);
+                }
+            }
+            /// If the cell is on an odd row set the cell to 
+            /// the north west as the cell at index - width of the map - 1.
+            else
+            {
+                cell.SetNeighbor(HexDirection.NE, cells[i - width]);
+                /// If the cell is not on the rightmost column set the cell to
+                /// the north east as the cell at index - width of the map.
+                if (x > 0)
+                {
+                    cell.SetNeighbor(HexDirection.NW, cells[i - width - 1]);
+                }
+            }
+        }
+
+
+        // Cell Coordinates as label for debugging
+        /* TMP_Text label = Instantiate<TMP_Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition =
             new Vector2(position.x, position.z);
-        label.text = cell.coordinates.ToStringOnSeparateLines();
+        label.text = cell.coordinates.ToStringOnSeparateLines(); */
+
+        /* if (cell.region != 0)
+        {
+            TMP_Text regionlabel = Instantiate<TMP_Text>(cellLabelPrefab);
+            regionlabel.rectTransform.SetParent(gridCanvas.transform, false);
+            regionlabel.rectTransform.anchoredPosition =
+                new Vector2(position.x, position.z);
+            regionlabel.fontSize = 10;
+            regionlabel.text = cell.region.ToString();
+            regionlabel.color = Color.red;
+        } */
+
 
     }
 
@@ -171,6 +228,52 @@ public class HexGrid : MonoBehaviour
         {
             HexCell cell = cells[index];
             cell.color = touchedColor;
+            Debug.Log("Touched region " + cell.region);
+
+            /// TODO: Don't allow to build next to cell with same type
+            if (cell.terrainType == terrainType.water || cell.terrainType == terrainType.contaminatedWater)
+            {
+                cell.SetCellType(terrainType.boatCleaner);
+            }
+            else if (
+                cell.terrainType == terrainType.plains ||
+                cell.terrainType == terrainType.forest ||
+                cell.terrainType == terrainType.desert)
+            {
+                cell.SetCellType(terrainType.recycler); // TODO: Change to chosen type
+
+                // Rotate cell in random increments of 60 degrees
+                cell.transform.Rotate(0, UnityEngine.Random.Range(0, 6) * 60, 0);
+            }
+
+            Debug.Log("Touched cell position " + cell.transform.position);
+
+            for (int i = 0; i < cell.neighbors.Length; i++)
+            {
+                HexCell neighbor = cell.neighbors[i];
+                if (neighbor != null)
+                {
+                    // Debug.Log("Neighbor " + ((HexDirection)i).ToString() + neighbor.coordinates.ToString());
+
+                    // Debug directions
+                    /* TMP_Text neighborlabel = Instantiate<TMP_Text>(cellLabelPrefab);
+                    neighborlabel.rectTransform.SetParent(gridCanvas.transform, false);
+                    neighborlabel.rectTransform.anchoredPosition =
+                        new Vector2(neighbor.position.x, neighbor.position.z);
+                    neighborlabel.fontSize = 5;
+                    neighborlabel.color = Color.yellow;
+                    neighborlabel.text = ((HexDirection)i).ToString() + "\n" + index.ToString(); */
+                }
+            }
+
+
+            /// TODO: Disabled until implemented
+            /// Should probably not be "new" but rather
+            /// a reference to the existing controller.
+            /* PollutionController pollutionController = new()
+            {
+                currentRegion = cell.region
+            }; */
         }
         // hexMesh.Triangulate(cells);
         Debug.Log("Cells count " + cells.Length);
@@ -179,5 +282,12 @@ public class HexGrid : MonoBehaviour
     public void OnDestroy()
     {
         // leftClickAction.Disable();
+    }
+    public IEnumerator WaitForCells()
+    {
+        while (cells == null || cells.Length == 0)
+        {
+            yield return null;
+        }
     }
 }
