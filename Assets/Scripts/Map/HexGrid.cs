@@ -32,7 +32,8 @@ public class HexGrid : MonoBehaviour
         riverWE,
         riverNS,
         riverNE,
-        riverNW
+        riverNW,
+        artic
     };
 
     public Color defaultColor = Color.white;
@@ -228,13 +229,21 @@ public class HexGrid : MonoBehaviour
             HexCell cell = cells[index];
             cell.color = touchedColor;
             Debug.Log("Touched region " + cell.region);
+
+            /// TODO: Don't allow to build next to cell with same type
             if (cell.terrainType == terrainType.water || cell.terrainType == terrainType.contaminatedWater)
             {
                 cell.SetCellType(terrainType.boatCleaner);
             }
-            else
+            else if (
+                cell.terrainType == terrainType.plains ||
+                cell.terrainType == terrainType.forest ||
+                cell.terrainType == terrainType.desert)
             {
                 cell.SetCellType(terrainType.recycler); // TODO: Change to chosen type
+
+                // Rotate cell in random increments of 60 degrees
+                cell.transform.Rotate(0, UnityEngine.Random.Range(0, 6) * 60, 0);
             }
 
             Debug.Log("Touched cell position " + cell.transform.position);
