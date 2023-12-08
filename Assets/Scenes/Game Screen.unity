@@ -10083,14 +10083,7 @@ MonoBehaviour:
   AdvertismentMenuObject: {fileID: 0}
   CurrentMenu: {fileID: 0}
   BurgerMenu: {fileID: 0}
-  CurrentRegion: {fileID: 0}
   GlobalRegionObject: {fileID: 0}
-  Region1Object: {fileID: 0}
-  Region2Object: {fileID: 0}
-  Region3Object: {fileID: 0}
-  Region4Object: {fileID: 0}
-  Region5Object: {fileID: 0}
-  Region6Object: {fileID: 0}
 --- !u!114 &1155990645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11226,14 +11219,7 @@ MonoBehaviour:
   AdvertismentMenuObject: {fileID: 0}
   CurrentMenu: {fileID: 0}
   BurgerMenu: {fileID: 0}
-  CurrentRegion: {fileID: 0}
   GlobalRegionObject: {fileID: 0}
-  Region1Object: {fileID: 0}
-  Region2Object: {fileID: 0}
-  Region3Object: {fileID: 0}
-  Region4Object: {fileID: 0}
-  Region5Object: {fileID: 0}
-  Region6Object: {fileID: 0}
 --- !u!114 &1259376255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14656,14 +14642,7 @@ MonoBehaviour:
   AdvertismentMenuObject: {fileID: 0}
   CurrentMenu: {fileID: 0}
   BurgerMenu: {fileID: 0}
-  CurrentRegion: {fileID: 0}
   GlobalRegionObject: {fileID: 0}
-  Region1Object: {fileID: 0}
-  Region2Object: {fileID: 0}
-  Region3Object: {fileID: 0}
-  Region4Object: {fileID: 0}
-  Region5Object: {fileID: 0}
-  Region6Object: {fileID: 0}
 --- !u!1 &1670140483
 GameObject:
   m_ObjectHideFlags: 0
@@ -20822,14 +20801,7 @@ MonoBehaviour:
   AdvertismentMenuObject: {fileID: 1887034611}
   CurrentMenu: {fileID: 0}
   BurgerMenu: {fileID: 0}
-  CurrentRegion: {fileID: 6727621816622802284}
   GlobalRegionObject: {fileID: 6727621816622802284}
-  Region1Object: {fileID: 0}
-  Region2Object: {fileID: 0}
-  Region3Object: {fileID: 0}
-  Region4Object: {fileID: 0}
-  Region5Object: {fileID: 0}
-  Region6Object: {fileID: 0}
 --- !u!222 &2109277569846016059
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21228,7 +21200,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2088805332089487026}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ExitCurrentScreen
+        m_MethodName: ExiteRegion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
