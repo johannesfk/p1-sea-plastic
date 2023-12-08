@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     public GameObject AdvertismentMenuObject;
     public GameObject CurrentMenu;
     public GameObject BurgerMenu;
+    public GameObject SettingMenu;
 
     public GameObject CurrentRegion;
     public GameObject GlobalRegionObject;
@@ -142,5 +143,22 @@ public class Menu : MonoBehaviour
         }
 
     }
+
+    //Settings MENU STUFF
+    public void SettingsMenu()
+    {
+        if (SettingMenu.activeSelf)
+        {
+            SettingMenu.SetActive(false);
+
+        }
+        else
+        {
+            SettingMenu.SetActive(true);
+
+        }
+    }
+
+
 
 }

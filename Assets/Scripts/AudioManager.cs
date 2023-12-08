@@ -2,16 +2,17 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 
+
 public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
-    public AudioMixer audioMixer;
+    //public AudioMixer audioMixer;
 
     void Awake()
     {
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         foreach (Sound s in sounds)
         {
@@ -40,5 +41,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+        Debug.Log("Sound shouldve played");
     }
 }
