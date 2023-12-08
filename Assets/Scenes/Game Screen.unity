@@ -21200,7 +21200,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2088805332089487026}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ExiteRegion
+        m_MethodName: ExitRegion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
