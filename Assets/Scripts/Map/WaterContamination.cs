@@ -146,7 +146,7 @@ public class WaterContamination : MonoBehaviour
     {
         int amount;
 
-        amount = (int)Math.Round((decimal)contamitableWaterIndices.Length / 100 * 10);
+        amount = (int)Math.Round((decimal)contamitableWaterIndices.Length / 100);
 
         // Debug.Log("Can Contaminate " + contamitableWaterIndices.Length);
         // Debug.Log("contaminateIndex" + contaminateIndex);
