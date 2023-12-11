@@ -9,12 +9,13 @@ using UnityEngine.UIElements;
 
 public class HexGrid : MonoBehaviour
 {
+    public static HexGrid instance;
+
     public int width;
     public int height;
     public HexCell cellPrefab;
     public TMP_Text cellLabelPrefab;
-
-
+    public bool uiActive;
     public enum terrainType
     {
         forest,
@@ -49,9 +50,14 @@ public class HexGrid : MonoBehaviour
 
     HexSpawnPrefab hexSpawner;
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
+        uiActive = false;
         gridCanvas = GetComponentInChildren<Canvas>();
         hexMesh = GetComponentInChildren<HexMesh>();
         hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
@@ -186,7 +192,8 @@ public class HexGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+
+        if (Mouse.current.leftButton.wasPressedThisFrame && !uiActive)
         {
             Debug.Log("Left click");
             HandleInput();

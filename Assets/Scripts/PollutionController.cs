@@ -85,6 +85,16 @@ public class PollutionController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        if (currentRegion > regions.Count - 1)
+        {
+            currentRegion = 0;
+        }
+        if (currentRegion < 0)
+        {
+            currentRegion = regions.Count - 1;
+        }
+
         //World Percentages
         worldPollutionText.text = worldPolution.ToString();
         polutionPercentage = worldPolution / polutionThreshhold * percentageCalculation;
@@ -113,18 +123,6 @@ public class PollutionController : MonoBehaviour
         incineratedPercentageText.text = ((int)regions[currentRegion].regionTrashDestroyedPercentage + "%").ToString();
 
         currentRegionName.text = regions[currentRegion].regionName;
-
-        if (currentRegion > regions.Count - 1)
-        {
-            currentRegion = 0;
-        }
-        if (currentRegion < 0)
-        {
-            currentRegion = regions.Count - 1;
-        }
-
-
-
 
     }
 
