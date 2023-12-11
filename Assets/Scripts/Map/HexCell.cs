@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static HexGrid;
 
@@ -85,6 +86,15 @@ public class HexCell : MonoBehaviour
 
     private void AddCellPrefab()
     {
+        terrainType[] rotatableTerrainTypes = {
+            terrainType.water,
+            terrainType.forest,
+            terrainType.plains,
+            terrainType.mountain,
+            terrainType.recycler,
+            terrainType.incinerator,
+            terrainType.landfill
+        };
         // Destroy any existing cell prefabs
         foreach (Transform child in transform)
         {
@@ -93,6 +103,10 @@ public class HexCell : MonoBehaviour
 
         var newCellPrefab = Instantiate(cellPrefab, this.transform.position, Quaternion.identity);
         newCellPrefab.transform.parent = this.transform;
+        if (rotatableTerrainTypes.Contains(terrainType))
+        {
+            newCellPrefab.transform.Rotate(0, UnityEngine.Random.Range(0, 6) * 60, 0);
+        }
     }
 
     public HexCell GetNeighbor(HexDirection direction)

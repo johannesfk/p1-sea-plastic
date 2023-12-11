@@ -125,7 +125,7 @@ public class HexGrid : MonoBehaviour
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
-        cell.color = defaultColor;
+        // cell.color = defaultColor;
         cell.index = i;
         cell.position = position;
 
@@ -247,7 +247,7 @@ public class HexGrid : MonoBehaviour
                 cell.terrainType == terrainType.forest ||
                 cell.terrainType == terrainType.desert)
             {
-                cell.SetCellType(terrainType.recycler); // TODO: Change to chosen type
+                cell.SetCellType(terrainType.incinerator); // TODO: Change to chosen type
 
                 // Rotate cell in random increments of 60 degrees
                 cell.transform.Rotate(0, UnityEngine.Random.Range(0, 6) * 60, 0);
