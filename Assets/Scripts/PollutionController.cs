@@ -114,13 +114,13 @@ public class PollutionController : MonoBehaviour
         //Text Percentages
         polutionPercentageText.text = ((int)polutionPercentage + "%").ToString();
 
-        regionPolutionPercentageText.text = ((int)regions[currentRegion].regionPolutionPercentage + "%").ToString();
+        regionPolutionPercentageText.text = ("Mismanaged: " + (int)regions[currentRegion].regionPolutionPercentage + "%").ToString();
 
-        landfillPercentageText.text = ((int)regions[currentRegion].regionLandfillPercentage + "%").ToString();
+        landfillPercentageText.text = ("Landfilled: " + (int)regions[currentRegion].regionLandfillPercentage + "%").ToString();
 
-        recyclePercentageText.text = ((int)regions[currentRegion].regionRecyclePercentage + "%").ToString();
+        recyclePercentageText.text = ("Recycled: " + (int)regions[currentRegion].regionRecyclePercentage + "%").ToString();
 
-        incineratedPercentageText.text = ((int)regions[currentRegion].regionTrashDestroyedPercentage + "%").ToString();
+        incineratedPercentageText.text = ("Incinerated: " + (int)regions[currentRegion].regionTrashDestroyedPercentage + "%").ToString();
 
         currentRegionName.text = regions[currentRegion].regionName;
 
