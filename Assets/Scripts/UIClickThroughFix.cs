@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class UIClickThroughFix : MonoBehaviour
 {
-
     public static bool uiActive;
+
+    private void Awake()
+    {
+        uiActive = false;
+    }
 
     void OnEnable()
     {
