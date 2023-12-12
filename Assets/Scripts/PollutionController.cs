@@ -140,7 +140,7 @@ public class PollutionController : MonoBehaviour
                 worldRecycle += regions[i].regionRecycle;
                 worldTrashDestroyed += regions[i].regionTrashDestroyed;
 
-                WaterContamination.Instance.
+                WaterContamination.Instance.Contaminate(polutionPercentage);
 
             }
         }
