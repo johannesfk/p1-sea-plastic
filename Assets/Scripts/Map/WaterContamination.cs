@@ -208,4 +208,9 @@ public class WaterContamination : MonoBehaviour
             }
         }
     }
+
+    public void ContaminateWater()
+    {
+        Contaminate(50);
+    }
 }
