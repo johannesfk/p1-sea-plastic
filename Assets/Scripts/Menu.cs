@@ -10,8 +10,7 @@ using UnityEngine.SocialPlatforms;
 public class Menu : MonoBehaviour
 {
     public GameObject UpgradeMenuObject;
-    public GameObject ManagementMenuObject;
-    public GameObject AdvertismentMenuObject;
+    public GameObject ShopMenuObject;
     public GameObject CurrentMenu;
     public GameObject BurgerMenu;
     public GameObject SettingMenu;
@@ -58,13 +57,9 @@ public class Menu : MonoBehaviour
 
     public void ManagementMenu()
     {
-        SwitchMenu(ManagementMenuObject);
+        SwitchMenu(ShopMenuObject);
     }
 
-    public void AdvertiseMenu()
-    {
-        SwitchMenu(AdvertismentMenuObject);
-    }
     public void StartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -87,6 +82,29 @@ public class Menu : MonoBehaviour
         Debug.Log("Loading Menu");
     }
 
+    #region ShopMenu
+
+    public void BuyRecycle()
+    {
+        ExitUpgradeMenu();
+    }
+
+    public void BuyLandfill()
+    {
+        ExitUpgradeMenu();
+    }
+
+    public void BuyBoat()
+    {
+        ExitUpgradeMenu();
+    }
+
+    public void BuyIncinirator()
+    {
+        ExitUpgradeMenu();
+    }
+
+    #endregion
 
     //Burger MENU STUFF
 
