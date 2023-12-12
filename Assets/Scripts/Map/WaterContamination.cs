@@ -171,7 +171,7 @@ public class WaterContamination : MonoBehaviour
     {
         int amount;
 
-        amount = (int)(Math.Round((decimal)totalContamitableWater / 100) * (decimal)Math.Round(percentage));
+        amount = (int)(Math.Round((decimal)totalContamitableWater / 100) * (decimal)Math.Round(percentage) / 100);
 
         Debug.Log("Can Contaminate " + totalContamitableWater);
         Debug.Log("contaminateIndex" + contaminateIndex);
@@ -181,7 +181,11 @@ public class WaterContamination : MonoBehaviour
         /// specified, contaminate the amount specified,
         /// else if there are more cells to contaminate than there are
         /// contamitable cells, contaminate all contamitable cells.
-        if (contaminateIndex < contamitableWaterIndices.Length)
+        /// 
+
+        /// If in other direction, get the amount of contaminate cells
+        /// and set cells type to water on random indices.
+        if (contaminateIndex < contamitableWaterIndices.Length && amount > 0)
         {
             amount = Math.Min(amount, contamitableWaterIndices.Length - contaminateIndex);
             //Debug.Log("Contaminating " + amount + " water");
