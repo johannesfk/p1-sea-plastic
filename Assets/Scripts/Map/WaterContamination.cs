@@ -167,11 +167,11 @@ public class WaterContamination : MonoBehaviour
         return indices.ToArray();
     }
 
-    public void Contaminate()
+    public void Contaminate(float percentage)
     {
         int amount;
 
-        amount = (int)Math.Round((decimal)totalContamitableWater / 100 * 10);
+        amount = (int)(Math.Round((decimal)totalContamitableWater / 100) * (decimal)Math.Round(percentage));
 
         Debug.Log("Can Contaminate " + totalContamitableWater);
         Debug.Log("contaminateIndex" + contaminateIndex);
