@@ -6,6 +6,7 @@ using static HexGrid;
 
 public class WaterContamination : MonoBehaviour
 {
+    public static WaterContamination Instance { get; private set; }
     // Start is called before the first frame update
 
     // private HexCell[] cells;
@@ -14,6 +15,18 @@ public class WaterContamination : MonoBehaviour
     private int totalContamitableWater;
     private int contaminateIndex = 0;
     private int mostlyContaminated = 0;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("Multiple WaterContamination instances");
+        }
+    }
     void Start()
     {
         StartCoroutine(WaitForCellsAndProcess());
@@ -154,7 +167,7 @@ public class WaterContamination : MonoBehaviour
         return indices.ToArray();
     }
 
-    public void ContaminateWater()
+    public void Contaminate()
     {
         int amount;
 
