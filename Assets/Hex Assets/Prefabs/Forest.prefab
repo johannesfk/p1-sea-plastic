@@ -29,11 +29,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5369957994249957778}
   - {fileID: 7472259175926628872}
-  - {fileID: 6404844893387681695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6874794319830943860
+--- !u!1001 &5552750484260181625
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -111,31 +111,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -6460164126727708541, guid: be4cb29051c0e434b8b479e61473681b,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be4cb29051c0e434b8b479e61473681b,
         type: 3}
       propertyPath: m_Name
-      value: final_hex forest
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: be4cb29051c0e434b8b479e61473681b,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: Forest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be4cb29051c0e434b8b479e61473681b, type: 3}
---- !u!4 &6404844893387681695 stripped
+--- !u!4 &5369957994249957778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be4cb29051c0e434b8b479e61473681b,
     type: 3}
-  m_PrefabInstance: {fileID: 6874794319830943860}
+  m_PrefabInstance: {fileID: 5552750484260181625}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6933420664409810403
 PrefabInstance:

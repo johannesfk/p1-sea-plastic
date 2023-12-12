@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4761656389759344409}
+  - {fileID: 6263140098132820434}
   - {fileID: 3102038677670160093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,7 +112,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3208285596823847222}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5016574850625337586
+--- !u!1001 &5864141642755941945
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -190,29 +190,19 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8188715271834039698, guid: 28ff74d863ef34fd9a5aeceb72a4bc48,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 28ff74d863ef34fd9a5aeceb72a4bc48,
         type: 3}
       propertyPath: m_Name
-      value: final_hex riverDiagonal
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 28ff74d863ef34fd9a5aeceb72a4bc48,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: RiverDiagonal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28ff74d863ef34fd9a5aeceb72a4bc48, type: 3}
---- !u!4 &4761656389759344409 stripped
+--- !u!4 &6263140098132820434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28ff74d863ef34fd9a5aeceb72a4bc48,
     type: 3}
-  m_PrefabInstance: {fileID: 5016574850625337586}
+  m_PrefabInstance: {fileID: 5864141642755941945}
   m_PrefabAsset: {fileID: 0}

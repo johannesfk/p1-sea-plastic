@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5759438096558920103}
+  - {fileID: 4936941000558462526}
   - {fileID: 990525232110336760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,7 +112,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 735692087009352979}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5217168459158419020
+--- !u!1001 &4830445760978100693
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -190,29 +190,19 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -6357068616535205750, guid: 80f162a21a22245879aaca37acf0ed7f,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80f162a21a22245879aaca37acf0ed7f,
         type: 3}
       propertyPath: m_Name
-      value: final_hex landfill
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 80f162a21a22245879aaca37acf0ed7f,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: Landfill
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80f162a21a22245879aaca37acf0ed7f, type: 3}
---- !u!4 &5759438096558920103 stripped
+--- !u!4 &4936941000558462526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80f162a21a22245879aaca37acf0ed7f,
     type: 3}
-  m_PrefabInstance: {fileID: 5217168459158419020}
+  m_PrefabInstance: {fileID: 4830445760978100693}
   m_PrefabAsset: {fileID: 0}

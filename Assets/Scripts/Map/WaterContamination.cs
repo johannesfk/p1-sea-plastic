@@ -6,6 +6,7 @@ using static HexGrid;
 
 public class WaterContamination : MonoBehaviour
 {
+    public static WaterContamination Instance { get; private set; }
     // Start is called before the first frame update
 
     // private HexCell[] cells;
@@ -14,6 +15,18 @@ public class WaterContamination : MonoBehaviour
     private int totalContamitableWater;
     private int contaminateIndex = 0;
     private int mostlyContaminated = 0;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("Multiple WaterContamination instances");
+        }
+    }
     void Start()
     {
         StartCoroutine(WaitForCellsAndProcess());
@@ -154,11 +167,11 @@ public class WaterContamination : MonoBehaviour
         return indices.ToArray();
     }
 
-    public void ContaminateWater()
+    public void Contaminate(float percentage)
     {
         int amount;
 
-        amount = (int)Math.Round((decimal)totalContamitableWater / 100 * 10);
+        amount = (int)(Math.Round((decimal)totalContamitableWater / 100) * (decimal)Math.Round(percentage) / 100);
 
         Debug.Log("Can Contaminate " + totalContamitableWater);
         Debug.Log("contaminateIndex" + contaminateIndex);
@@ -168,7 +181,11 @@ public class WaterContamination : MonoBehaviour
         /// specified, contaminate the amount specified,
         /// else if there are more cells to contaminate than there are
         /// contamitable cells, contaminate all contamitable cells.
-        if (contaminateIndex < contamitableWaterIndices.Length)
+        /// 
+
+        /// If in other direction, get the amount of contaminate cells
+        /// and set cells type to water on random indices.
+        if (contaminateIndex < contamitableWaterIndices.Length && amount > 0)
         {
             amount = Math.Min(amount, contamitableWaterIndices.Length - contaminateIndex);
             //Debug.Log("Contaminating " + amount + " water");
@@ -194,5 +211,10 @@ public class WaterContamination : MonoBehaviour
                 Debug.Log("All contamitable water contaminated");
             }
         }
+    }
+
+    public void ContaminateWater()
+    {
+        Contaminate(50);
     }
 }
