@@ -62,7 +62,7 @@ public class PollutionController : MonoBehaviour
     [SerializeField] private TMP_Text recyclePercentageText;
     [SerializeField] private TMP_Text currentRegionName;
 
-    private float startPolution = 200;
+    private float startPolution = 2000;
     private float polutionThreshhold = 10000;
 
     void Awake()
