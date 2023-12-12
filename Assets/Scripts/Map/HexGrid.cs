@@ -46,7 +46,6 @@ public class HexGrid : MonoBehaviour
     public HexCell[] cells { get; private set; }
 
     Canvas gridCanvas;
-    HexMesh hexMesh;
 
     HexSpawnPrefab hexSpawner;
 
@@ -59,7 +58,6 @@ public class HexGrid : MonoBehaviour
     {
         uiActive = false;
         gridCanvas = GetComponentInChildren<Canvas>();
-        hexMesh = GetComponentInChildren<HexMesh>();
         hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
 
         // gridCanvas.gameObject.SetActive(false);
@@ -234,12 +232,15 @@ public class HexGrid : MonoBehaviour
         if (index >= 0 && index < cells.Length)
         {
             HexCell cell = cells[index];
-            cell.color = touchedColor;
             Debug.Log("Touched region " + cell.region);
 
             /// TODO: Don't allow to build next to cell with same type
             if (cell.terrainType == terrainType.water || cell.terrainType == terrainType.contaminatedWater)
             {
+                if (cell.terrainType == terrainType.contaminatedWater)
+                {
+                    WaterContamination.Instance.contaminatedCells.Remove(cell);
+                }
                 cell.SetCellType(terrainType.boatCleaner);
             }
             else if (
@@ -249,8 +250,6 @@ public class HexGrid : MonoBehaviour
             {
                 cell.SetCellType(terrainType.incinerator); // TODO: Change to chosen type
 
-                // Rotate cell in random increments of 60 degrees
-                cell.transform.Rotate(0, UnityEngine.Random.Range(0, 6) * 60, 0);
             }
 
             Debug.Log("Touched cell position " + cell.transform.position);

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     //FindObjectOfType<GameManager>().GameOver();
     public void RestartGame()
     {
-        if (GameHasEnded == true) 
+        if (GameHasEnded == true)
         {
             GameHasEnded = false;
             GameOverBackground.SetActive(false);
@@ -122,13 +122,13 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 4;
         Debug.Log("Time is resumed");
     }
 
     public void FastForward()
     {
-        Time.timeScale = 2;
+        Time.timeScale = 8;
         Debug.Log("Time is fast forwarded");
     }
 
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("hotkey: pause");
         EventSystem.current.SetSelectedGameObject(null); //Deselects selected game objects
         pauseButton.Select();
-            
+
     }
 
     public void OnTimerButtons2(InputValue button)

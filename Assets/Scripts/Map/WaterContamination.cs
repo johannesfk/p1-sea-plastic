@@ -1,20 +1,37 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using static HexGrid;
 
 public class WaterContamination : MonoBehaviour
 {
     public static WaterContamination Instance { get; private set; }
-    // Start is called before the first frame update
 
-    // private HexCell[] cells;
     private HexCell[] cells;
-    private int[] contamitableWaterIndices;
+
+
+    [SerializeField]
+    public List<HexCell> contaminatedCells = new List<HexCell>();
+    [SerializeField]
+    private List<HexCell> cleanCells = new List<HexCell>();
     private int totalContamitableWater;
-    private int contaminateIndex = 0;
     private int mostlyContaminated = 0;
+
+    private terrainType[] waterTypes = {
+        terrainType.water,
+        terrainType.contaminatedWater,
+        terrainType.boatCleaner,
+        terrainType.snow,
+        terrainType.artic
+    };
+    private float previousPercentageContaminated = 0;
+
+    [SerializeField]
+    int addAmountCount = 0;
 
     void Awake()
     {
@@ -40,26 +57,8 @@ public class WaterContamination : MonoBehaviour
             cells = hexGrid.cells;
             if (cells != null)
             {
-                for
-                (int i = 0; i < cells.Length; i++)
-                {
-                    if (cells[i].terrainType == terrainType.water)
-                    {
-                        totalContamitableWater++;
-                    }
-                }
 
-                contamitableWaterIndices = GetWater();
-
-
-
-                // Debug.Log("Contamitable water indices: " + contamitableWaterIndices.Length);
-                // Iterate over the array
-                /* foreach (int index in contamitableWaterIndices)
-                {
-                    HexCell cell = cells[index];
-                    Debug.Log("Contaminating " + index);
-                } */
+                GetFreeWater();
             }
             else
             {
@@ -73,38 +72,25 @@ public class WaterContamination : MonoBehaviour
         }
     }
 
-    private int[] GetWater()
+    public IEnumerator WaitForCells()
     {
-        int[] waterIndices = GetFreeWater();
-        System.Random rng = new System.Random();
-        int n = waterIndices.Length;
-        while (n > 1)
+        while (cells == null || cells.Length == 0)
         {
-            n--;
-            int k = rng.Next(n + 1);
-            int value = waterIndices[k];
-            waterIndices[k] = waterIndices[n];
-            waterIndices[n] = value;
+            yield return null;
         }
-        contaminateIndex = 0;
-        return waterIndices;
     }
 
-    private int[] GetFreeWater()
+    private void GetFreeWater()
     {
         List<int> indices = new List<int>();
         Queue<(HexCell cell, int distance)> queue = new Queue<(HexCell cell, int distance)>();
         Dictionary<int, int> distances = new Dictionary<int, int>();
 
-        // int bufferDistance = !mostlyContaminated ? 2 : 1;
-
-        // Debug.Log("Buffer distance: " + bufferDistance);
-
         /// Enqueue all cells that are not water.
         /// Set their distance to 0.
         for (int i = 0; i < cells.Length; i++)
         {
-            if (cells[i].terrainType != terrainType.water)
+            if (!waterTypes.Contains(cells[i].terrainType))
             {
                 queue.Enqueue((cells[i], 0));
                 distances[i] = 0;
@@ -123,7 +109,7 @@ public class WaterContamination : MonoBehaviour
 
             foreach (HexCell neighbor in cell.neighbors)
             {
-                if (neighbor != null && (neighbor.terrainType == terrainType.water || neighbor.terrainType == terrainType.contaminatedWater) && (!distances.ContainsKey(neighbor.index) || distances[neighbor.index] > distance + 1))
+                if (neighbor != null && waterTypes.Contains(neighbor.terrainType) && (!distances.ContainsKey(neighbor.index) || distances[neighbor.index] > distance + 1))
                 {
                     distances[neighbor.index] = distance + 1;
                     queue.Enqueue((neighbor, distance + 1));
@@ -135,86 +121,114 @@ public class WaterContamination : MonoBehaviour
         /// or equal to the buffer distance, to the indices list.
         foreach (KeyValuePair<int, int> entry in distances)
         {
-            /* if (entry.Value >= bufferDistance)
+            if (cells[entry.Key].terrainType == terrainType.water)
             {
-                indices.Add(entry.Key);
-            } */
-            switch (mostlyContaminated)
-            {
-                case 0:
-                    if (entry.Value == 1)
-                    {
-                        indices.Add(entry.Key);
-                    }
-                    break;
-                case 1:
-                    if (entry.Value >= 1 && entry.Value < 2)
-                    {
-                        indices.Add(entry.Key);
-                    }
-                    break;
-                case 2:
-                    if (entry.Value >= 1)
-                    {
-                        indices.Add(entry.Key);
-                    }
-                    break;
-                default:
-                    break;
+                cells[entry.Key].coastDistance = entry.Value;
+                cleanCells.Add(cells[entry.Key]);
+                totalContamitableWater++;
             }
         }
 
-        return indices.ToArray();
+        // return indices.ToArray();
     }
 
-    public void Contaminate(float percentage)
+    public async Task Contaminate(float percentageContaminated)
     {
-        int amount;
-
-        amount = (int)(Math.Round((decimal)totalContamitableWater / 100) * (decimal)Math.Round(percentage) / 100);
-
-        Debug.Log("Can Contaminate " + totalContamitableWater);
-        Debug.Log("contaminateIndex" + contaminateIndex);
-
-
-        /// If there are more cells to contaminate than the amount
-        /// specified, contaminate the amount specified,
-        /// else if there are more cells to contaminate than there are
-        /// contamitable cells, contaminate all contamitable cells.
-        /// 
-
-        /// If in other direction, get the amount of contaminate cells
-        /// and set cells type to water on random indices.
-        if (contaminateIndex < contamitableWaterIndices.Length && amount > 0)
+        while (cleanCells == null || cleanCells.Count == 0)
         {
-            amount = Math.Min(amount, contamitableWaterIndices.Length - contaminateIndex);
-            //Debug.Log("Contaminating " + amount + " water");
+            Debug.Log("Waiting for clean cells");
+            await Task.Delay(100);
+        }
 
-            for (int i = 0; i < amount; i++)
+        if (percentageContaminated == previousPercentageContaminated || percentageContaminated <= 0 || percentageContaminated >= 100)
+        {
+            if (percentageContaminated <= 0 && previousPercentageContaminated > 0)
             {
-                HexCell cell = cells[contamitableWaterIndices[contaminateIndex]];
-                cell.terrainType = terrainType.contaminatedWater;
-                cell.SetCellType(terrainType.contaminatedWater);
-                contaminateIndex++;
+                // Decontaminate all cells
+                foreach (HexCell cell in contaminatedCells)
+                {
+                    cell.SetCellType(terrainType.water);
+                    cleanCells.Insert(0, cell);
+                }
+                contaminatedCells.Clear();
             }
+            // The percentage hasn't changed, so return without doing anything
         }
         else
         {
-            if (mostlyContaminated < 2)
+            Debug.Log("Contaminating water to " + percentageContaminated + "%");
+
+            cleanCells = cleanCells
+                .GroupBy(cell => cell.coastDistance)
+                .OrderBy(group => group.Key)
+                .SelectMany(group => group.OrderBy(x => Guid.NewGuid()))
+                .ToList();
+
+            // Debug.Log("totalContamitableWater" + totalContamitableWater);
+
+            // int amount = (int)Math.Abs(totalContamitableWater * (percentageContaminated - (contaminatedCells.Count / (float)totalContamitableWater)));
+            // int amount = (int)Math.Abs(totalContamitableWater * (percentageContaminated - (contaminatedCells.Count / (float)totalContamitableWater * 100)) / 100);
+            int amount = (int)Math.Abs(totalContamitableWater * (percentageContaminated - previousPercentageContaminated) / 100);
+            // int amount = (int)(cleanCells.Count * Math.Abs(percentageContaminated - previousPercentageContaminated) / 100);
+            // Debug.Log("Amount to add: " + amount);
+
+
+            /// To deal with floating point errors, we calculate the difference
+            /// between the previous percentage and the current percentage.
+            /// We then add or subtract the difference from the amount.
+            /// 
+            /// For example, if the previous percentage was 55 and the current
+            /// percentage is 52, the difference is 0.1. We then add 0.1 to the
+            /// amount, so that the amount is 1.1. This way, we can contaminate
+            /// 1.1 cells instead of 1 cell.
+            // int difference = (int)(previousPercentageContaminated - (contaminatedCells.Count / (float)totalContamitableWater) * 100f);
+            // amount += Math.Sign(difference) * difference;
+            // amount -= difference;
+
+
+            amount = (int)(amount / 2.5);
+
+
+
+            // Debug.Log("Contaminated cells: " + contaminatedCells.Count);
+            // Debug.Log("Clean cells: " + cleanCells.Count);
+            // Debug.Log("percentageContaminated " + percentageContaminated + " previousPercentageContaminated " + previousPercentageContaminated + " Real: " + ((float)contaminatedCells.Count / cleanCells.Count * 100));
+
+
+            if (percentageContaminated > previousPercentageContaminated)
             {
-                Debug.Log("Stage " + mostlyContaminated + " contaminated");
-                mostlyContaminated++;
-                StartCoroutine(WaitForCellsAndProcess());
+                Debug.Log("Contaminating " + amount + " water");
+                // Contaminate cells
+                for (int i = 0; i < amount && i < cleanCells.Count; i++)
+                {
+                    HexCell cell = cleanCells[i];
+                    cell.SetCellType(terrainType.contaminatedWater);
+                    contaminatedCells.Add(cell);
+                }
+
+                // Remove the contaminated cells from the clean water list
+                cleanCells.RemoveRange(0, Math.Min(amount, cleanCells.Count));
             }
             else
             {
-                Debug.Log("All contamitable water contaminated");
+                Debug.Log("Decontaminating " + amount + " water");
+                // Decontaminate cells
+                for (int i = 0; i < amount && i < contaminatedCells.Count; i++)
+                {
+                    HexCell cell = contaminatedCells[i];
+                    cell.SetCellType(terrainType.water);
+                    cleanCells.Insert(0, cell);
+                }
+                // Remove the decontaminated cells from the contaminated water list
+                contaminatedCells.RemoveRange(0, Math.Min(amount, contaminatedCells.Count));
             }
+            previousPercentageContaminated = percentageContaminated;
         }
     }
 
-    public void ContaminateWater()
+    public async Task ContaminateWater()
     {
-        Contaminate(50);
+        addAmountCount += 10;
+        await Contaminate(addAmountCount);
     }
 }

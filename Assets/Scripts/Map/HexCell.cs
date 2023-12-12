@@ -8,6 +8,7 @@ using static HexGrid;
 public class HexCell : MonoBehaviour
 {
     public int index;
+    public int coastDistance = 0;
     public HexCoordinates coordinates;
     [SerializeField]
     [HideInInspector]
@@ -15,7 +16,6 @@ public class HexCell : MonoBehaviour
     public Vector3 position;
     public terrainType terrainType;
     public int region;
-    public Color color;
 
     public GameObject forest;
     public GameObject plains;
@@ -88,6 +88,7 @@ public class HexCell : MonoBehaviour
     {
         terrainType[] rotatableTerrainTypes = {
             terrainType.water,
+            terrainType.boatCleaner,
             terrainType.forest,
             terrainType.plains,
             terrainType.mountain,

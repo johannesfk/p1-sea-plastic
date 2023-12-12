@@ -24,6 +24,8 @@ public class Region
     public float regionRecyclePercentage;
     public float regionTrashDestroyedPercentage;
     public float regionLandfillPercentage;
+
+    // public UnityEngine.UI.Slider slider;
 }
 
 public class PollutionController : MonoBehaviour
@@ -79,11 +81,15 @@ public class PollutionController : MonoBehaviour
                 regions[i].regionNumber = i;
             }
         }
+    }
 
+    async void Start()
+    {
+        await WaterContamination.Instance.Contaminate(0);
     }
 
     // Update is called once per frame
-    private void Update()
+    private async void Update()
     {
 
         if (currentRegion > regions.Count - 1)
@@ -124,6 +130,15 @@ public class PollutionController : MonoBehaviour
 
         currentRegionName.text = regions[currentRegion].regionName;
 
+
+        if (WaterContamination.Instance != null)
+        {
+            await WaterContamination.Instance.Contaminate(polutionPercentage);
+        }
+        else
+        {
+            Debug.LogError("WaterContamination instance is null");
+        }
     }
 
     public void EndDayAdd()
@@ -139,9 +154,6 @@ public class PollutionController : MonoBehaviour
                 worldLandfilled += regions[i].regionLandfilled;
                 worldRecycle += regions[i].regionRecycle;
                 worldTrashDestroyed += regions[i].regionTrashDestroyed;
-
-                WaterContamination.Instance.Contaminate(polutionPercentage);
-
             }
         }
     }
