@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2926,7 +2926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Incinirator
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3985,13 +3985,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c3a4a5823a27a438ae19018d18c84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopScreen: {fileID: 1326181988}
   startMoney: 0
   money: 0
+  startIncome: 0
+  income: 0
   recyclePrice: 0
   landfillPrice: 0
   boatPrice: 0
   incineratorPrice: 0
-  shopScreen: {fileID: 1326181988}
 --- !u!1 &791822319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4187,7 +4189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Landfill
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8601,7 +8603,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Recycle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9627,7 +9629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Boat
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12006,6 +12008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1753850342}
   daytext: {fileID: 1026404335}
+  time: 0
   dayTimer: 0
   dayNumber: 0
   pauseButton: {fileID: 2063978629}
@@ -12014,7 +12017,6 @@ MonoBehaviour:
   companyName: 
   money: 0
   income: 1
-  popularity: 0
   donationUpgrade: 0
   GameOverBackground: {fileID: 1121696183}
 --- !u!4 &2015740486

@@ -56,6 +56,13 @@ public class PollutionController : MonoBehaviour
     public float worldTrashDestroyed;
     public float worldTrashDestroyedPercentage;
 
+    [Header("StructureStats")]
+    [SerializeField] private float recyclePollutionRemove;
+    [SerializeField] private float landfillPollutionRemove;
+    [SerializeField] private float inciniratorPollutionRemove;
+    [SerializeField] private float boatPollutionRemove;
+
+    [Header("UI")]
     [SerializeField] private TMP_Text worldPollutionText;
     [SerializeField] private TMP_Text polutionPercentageText;
     [SerializeField] private TMP_Text regionPolutionPercentageText;
@@ -106,9 +113,6 @@ public class PollutionController : MonoBehaviour
         {
             currentRegion = regions.Count - 1;
         }
-
-
-
         //World Percentages
         worldPollutionText.text = worldPolution.ToString();
         polutionPercentage = worldPolution / polutionThreshhold * percentageCalculation;
@@ -155,6 +159,8 @@ public class PollutionController : MonoBehaviour
             for (int i = 1; i < regions.Count; i++)
             {
 
+                regions[i].regionPolution = regions[i].regionWaste - regions[i].regionLandfilled - regions[i].regionRecycle - regions[i].regionTrashDestroyed;
+
                 worldPolution += regions[i].regionPolution;
                 worldWaste += regions[i].regionWaste;
                 worldLandfilled += regions[i].regionLandfilled;
@@ -169,4 +175,25 @@ public class PollutionController : MonoBehaviour
 
         }
     }
+
+    public void BuyRecycle(int region)
+    {
+
+    }
+
+    public void BuyLandfill(int region) 
+    {
+        
+    }
+
+    public void BuyIncinerator(int region) 
+    {
+        
+    }
+
+    public void OnBoat()
+    {
+        worldPolution = -boatPollutionRemove;
+    }
+
 }
