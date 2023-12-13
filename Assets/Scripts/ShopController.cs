@@ -33,7 +33,7 @@ public class ShopController : MonoBehaviour
         {
             money -= recyclePrice;
             shopScreen.SetActive(false);
-            //HexGrid.instance.PlaceCell();
+            HexGrid.instance.PlaceCellType(HexGrid.Structures.recycler);
 
             Debug.Log("Buy THAT RECYCLE BASTARD");
         }
@@ -45,7 +45,7 @@ public class ShopController : MonoBehaviour
         {
             money -= landfillPrice;
             shopScreen.SetActive(false);
-            //HexGrid.instance.PlaceCellType();
+            HexGrid.instance.PlaceCellType(HexGrid.Structures.landfill);
 
             Debug.Log("Buy THAT LANDFILLSHIT");
         }
@@ -58,7 +58,7 @@ public class ShopController : MonoBehaviour
         {
             money -= boatPrice;
             shopScreen.SetActive(false);
-            //HexGrid.instance.PlaceCell();
+            HexGrid.instance.PlaceCellType(HexGrid.Structures.boatCleaner);
 
             Debug.Log("Buy THAT MF BOAT");
         }
@@ -71,7 +71,7 @@ public class ShopController : MonoBehaviour
         {
             money -= incineratorPrice;
             shopScreen.SetActive(false);
-            //HexGrid.instance.PlaceCell();
+            HexGrid.instance.PlaceCellType(HexGrid.Structures.incinerator);
 
             Debug.Log("Buy THAT BURNER THING");
         }
