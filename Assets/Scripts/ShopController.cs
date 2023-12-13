@@ -28,12 +28,12 @@ public class ShopController : MonoBehaviour
     #region ShopMenu
 
     public void BuyRecycle()
-    {   
+    {
         if (money >= recyclePrice)
         {
             money -= recyclePrice;
             shopScreen.SetActive(false);
-            HexGrid.instance.PlaceCellType(HexGrid.Structures.recycler);
+            HexInteraction.instance.PlaceCellType(HexGrid.Structures.recycler);
 
             Debug.Log("Buy THAT RECYCLE BASTARD");
         }
@@ -45,11 +45,11 @@ public class ShopController : MonoBehaviour
         {
             money -= landfillPrice;
             shopScreen.SetActive(false);
-            HexGrid.instance.PlaceCellType(HexGrid.Structures.landfill);
+            HexInteraction.instance.PlaceCellType(HexGrid.Structures.landfill);
 
             Debug.Log("Buy THAT LANDFILLSHIT");
         }
-  
+
     }
 
     public void BuyBoat()
@@ -58,11 +58,11 @@ public class ShopController : MonoBehaviour
         {
             money -= boatPrice;
             shopScreen.SetActive(false);
-            HexGrid.instance.PlaceCellType(HexGrid.Structures.boatCleaner);
+            HexInteraction.instance.PlaceCellType(HexGrid.Structures.boatCleaner);
 
             Debug.Log("Buy THAT MF BOAT");
         }
-       
+
     }
 
     public void BuyIncinirator()
@@ -71,11 +71,11 @@ public class ShopController : MonoBehaviour
         {
             money -= incineratorPrice;
             shopScreen.SetActive(false);
-            HexGrid.instance.PlaceCellType(HexGrid.Structures.incinerator);
+            HexInteraction.instance.PlaceCellType(HexGrid.Structures.incinerator);
 
             Debug.Log("Buy THAT BURNER THING");
         }
-        
+
     }
 
     #endregion

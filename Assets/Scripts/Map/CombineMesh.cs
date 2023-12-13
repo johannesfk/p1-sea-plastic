@@ -34,7 +34,7 @@ public class CreateSceneMesh : MonoBehaviour
     // - Create Mesh 47ms (mostly waiting for jobs)
     // - Prepare 8ms (89KB GC alloc)
     // - FindMeshes 2.1ms (180KB GC alloc)
-    [MenuItem("Mesh API Test/Create Mesh From Scene - New API %G")]
+    [MenuItem("FUCK DIN MOR/SUT DEN %G")]
     public static void CreateMesh_MeshDataApi()
     {
         var sw = Stopwatch.StartNew();
