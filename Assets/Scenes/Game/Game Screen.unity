@@ -989,7 +989,7 @@ PrefabInstance:
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -281.7
+      value: -275
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
@@ -1459,7 +1459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 49.799084, y: -9}
+  m_AnchoredPosition: {x: 100, y: -9}
   m_SizeDelta: {x: 170, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &309708698
@@ -2213,7 +2213,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1326181993}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
         m_MethodName: BuyRecycle
         m_Mode: 1
@@ -2497,7 +2497,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.85
+  m_fontSize: 24.6
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2691,7 +2691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -124.00089, y: -9}
+  m_AnchoredPosition: {x: -80, y: -9}
   m_SizeDelta: {x: 170, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541892091
@@ -3941,6 +3941,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761466488}
   m_CullTransparentMesh: 1
+--- !u!1 &787151180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 787151181}
+  - component: {fileID: 787151182}
+  m_Layer: 0
+  m_Name: ShopController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &787151181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787151180}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2119418988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &787151182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787151180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c3a4a5823a27a438ae19018d18c84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startMoney: 30
+  money: 0
+  recyclePrice: 0
+  landfillPrice: 0
+  boatPrice: 0
+  incineratorPrice: 0
+  shopScreen: {fileID: 1326181988}
 --- !u!1 &791822319
 GameObject:
   m_ObjectHideFlags: 0
@@ -7185,7 +7236,6 @@ GameObject:
   - component: {fileID: 1326181992}
   - component: {fileID: 1326181991}
   - component: {fileID: 1326181990}
-  - component: {fileID: 1326181993}
   m_Layer: 5
   m_Name: Shop Screen
   m_TagString: Untagged
@@ -7267,19 +7317,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326181988}
   m_CullTransparentMesh: 1
---- !u!114 &1326181993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326181988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c3a4a5823a27a438ae19018d18c84a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shopScreen: {fileID: 1326181988}
 --- !u!1 &1331633263
 GameObject:
   m_ObjectHideFlags: 0
@@ -7613,7 +7650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 49.799084, y: -9}
+  m_AnchoredPosition: {x: 100, y: -9}
   m_SizeDelta: {x: 170, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365784900
@@ -8360,7 +8397,7 @@ PrefabInstance:
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -281.7
+      value: -275
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
@@ -10340,7 +10377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -124.00089, y: -9}
+  m_AnchoredPosition: {x: -80, y: -9}
   m_SizeDelta: {x: 170, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1877195728
@@ -10664,7 +10701,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1326181993}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
         m_MethodName: BuyIncinirator
         m_Mode: 1
@@ -10970,7 +11007,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1326181993}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
         m_MethodName: BuyLandfill
         m_Mode: 1
@@ -11660,7 +11697,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1326181993}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
         m_MethodName: BuyBoat
         m_Mode: 1
@@ -12431,6 +12468,7 @@ Transform:
   - {fileID: 6163731803135151929}
   - {fileID: 1878143909}
   - {fileID: 1138646440}
+  - {fileID: 787151181}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2134355575

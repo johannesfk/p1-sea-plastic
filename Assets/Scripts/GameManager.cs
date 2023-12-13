@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] int dayNumber = 1;
     private float dayMaxTime = 60;
     private bool dailyEventHappened;
+
+    public delegate void NewDayHandler();
+    public event NewDayHandler OnNewDay;
     public Button pauseButton;
     public Button resumeButton;
     public Button fastForwardButton;
@@ -38,6 +41,8 @@ public class GameManager : MonoBehaviour
     bool GameHasEnded = false;
 
     public GameObject GameOverBackground;
+
+
     public void GameOver()
     {
         if (GameHasEnded == false)
@@ -71,6 +76,8 @@ public class GameManager : MonoBehaviour
         {
             dayNumber++;
             Debug.Log("day: " + dayNumber);
+
+            OnNewDay?.Invoke();
 
             PollutionController.instance.EndDayAdd();
 
