@@ -7,7 +7,7 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-    //public AudioMixer audioMixer;
+    public AudioMixer audioMixer;
 
     public TMP_Dropdown resolutionDropdown;
 
@@ -38,24 +38,35 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
-
+    //--------------DISPLAY SETTINGS-------------\\
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-   /* public void SetVolume (float volume)
-   {
-        audioMixer.SetFloat("volume", volume);
-   }
-   */
+   
 
-   public void SetFullscreen (bool isFullscreen)
+    public void SetFullscreen (bool isFullscreen)
     {
         //FindObjectOfType<AudioManager>().Play("Sound FX");
         Screen.fullScreen = isFullscreen;
     }
+
+
+
+    //--------------AUDIO SETTINGS-------------\\
+    public void SetMusicVolume (float volume)
+   {
+        audioMixer.SetFloat("MusicVolume", volume);
+   }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFXVolume", volume);
+    }
+
+
 
 
 
