@@ -14,18 +14,8 @@ public class Menu : MonoBehaviour
     public GameObject CurrentMenu;
     public GameObject BurgerMenu;
     public GameObject SettingMenu;
-
     public GameObject GlobalRegionObject;
-    void SwitchMenu(GameObject newMenu)
-    {
-        if (CurrentMenu != null)
-        {
-            CurrentMenu.SetActive(false);
-        }
 
-        newMenu.SetActive(true);
-        CurrentMenu = newMenu;
-    }
     public void OpenGlobalRegion()
     {
         GlobalRegionObject.SetActive(true);
@@ -44,20 +34,29 @@ public class Menu : MonoBehaviour
     {
         PollutionController.instance.currentRegion--;
     }
+    void SwitchMenu(GameObject newMenu)
+    {
+        if (CurrentMenu != null)
+        {
+            CurrentMenu.SetActive(false);
+        }
+
+        newMenu.SetActive(true);
+        CurrentMenu = newMenu;
+    }
     public void UpgradeMenu()
     {
         SwitchMenu(UpgradeMenuObject);
+    }
+    public void ManagementMenu()
+    {
+        SwitchMenu(ShopMenuObject);
     }
 
     public void ExitUpgradeMenu()
     {
         CurrentMenu.SetActive(false);
         CurrentMenu = null;
-    }
-
-    public void ManagementMenu()
-    {
-        SwitchMenu(ShopMenuObject);
     }
 
     public void StartGame()
