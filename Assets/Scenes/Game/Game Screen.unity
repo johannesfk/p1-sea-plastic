@@ -3985,13 +3985,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c3a4a5823a27a438ae19018d18c84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopScreen: {fileID: 1326181988}
   startMoney: 0
   money: 0
+  startIncome: 0
+  income: 0
   recyclePrice: 0
   landfillPrice: 0
   boatPrice: 0
   incineratorPrice: 0
-  shopScreen: {fileID: 1326181988}
 --- !u!1 &791822319
 GameObject:
   m_ObjectHideFlags: 0
@@ -8286,6 +8288,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map capture
       objectReference: {fileID: 0}
+    - target: {fileID: 6249004741116907691, guid: f2e43d402f65ab04aa6b42ecfa63a1bc,
+        type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249004741116907691, guid: f2e43d402f65ab04aa6b42ecfa63a1bc,
+        type: 3}
+      propertyPath: near clip plane
+      value: -1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8740,6 +8752,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hex Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7225975674162206846, guid: e21651da4292718408402071fff54c31,
+        type: 3}
+      propertyPath: canPlace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12006,6 +12023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1753850342}
   daytext: {fileID: 1026404335}
+  time: 0
   dayTimer: 0
   dayNumber: 0
   pauseButton: {fileID: 2063978629}
@@ -12014,7 +12032,6 @@ MonoBehaviour:
   companyName: 
   money: 0
   income: 1
-  popularity: 0
   donationUpgrade: 0
   GameOverBackground: {fileID: 1121696183}
 --- !u!4 &2015740486

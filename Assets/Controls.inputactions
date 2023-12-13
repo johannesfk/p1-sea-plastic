@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "a946c80f-9499-4a12-998d-4e1071d39cee",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -22,13 +31,41 @@
                     "path": "<Pointer>/press",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardControl",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b7b6389-2514-498d-a01c-4ec805787637",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "Normalize(min=-120,max=120)",
+                    "groups": "KeyboardControl",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "KeyboardControl",
+            "bindingGroup": "KeyboardControl",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }
