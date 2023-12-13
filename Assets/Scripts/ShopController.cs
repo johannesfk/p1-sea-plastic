@@ -6,9 +6,14 @@ public class ShopController : MonoBehaviour
 {
     public static ShopController instance;
 
+    [SerializeField] private GameObject shopScreen;
+
     [Header("Money")]
     [SerializeField] private int startMoney;
     public int money;
+    [SerializeField] private int startIncome;
+    public int income;
+
 
     [Header("Prices")]
     [SerializeField] private int recyclePrice;
@@ -16,7 +21,8 @@ public class ShopController : MonoBehaviour
     [SerializeField] private int boatPrice;
     [SerializeField] private int incineratorPrice;
 
-    [SerializeField] private GameObject shopScreen;
+    
+
     private void Awake()
     {
         instance = this;
@@ -24,6 +30,15 @@ public class ShopController : MonoBehaviour
         money = startMoney;
 
     }
+
+    #region Money
+
+    private void AddMoney()
+    {
+        money += income;
+    }
+
+    #endregion
 
     #region ShopMenu
     public void BuyRecycle()
