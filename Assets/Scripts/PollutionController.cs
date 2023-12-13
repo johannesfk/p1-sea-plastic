@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.UIElements;
 using Unity.Mathematics;
+using static HexGrid;
 
 
 [System.Serializable]
@@ -56,6 +57,15 @@ public class PollutionController : MonoBehaviour
     public float worldTrashDestroyed;
     public float worldTrashDestroyedPercentage;
 
+    [Header("StructureStats")]
+    [SerializeField] private float boatAmount;
+    [SerializeField] private float boatStrength;
+    [SerializeField] private float recyclePollutionRemove;
+    [SerializeField] private float landfillPollutionRemove;
+    [SerializeField] private float inciniratorPollutionRemove;
+    [SerializeField] private float boatPollutionRemove;
+
+    [Header("UI")]
     [SerializeField] private TMP_Text worldPollutionText;
     [SerializeField] private TMP_Text polutionPercentageText;
     [SerializeField] private TMP_Text regionPolutionPercentageText;
@@ -106,9 +116,6 @@ public class PollutionController : MonoBehaviour
         {
             currentRegion = regions.Count - 1;
         }
-
-
-
         //World Percentages
         worldPollutionText.text = worldPolution.ToString();
         polutionPercentage = worldPolution / polutionThreshhold * percentageCalculation;
@@ -155,6 +162,8 @@ public class PollutionController : MonoBehaviour
             for (int i = 1; i < regions.Count; i++)
             {
 
+                regions[i].regionPolution = regions[i].regionWaste - regions[i].regionLandfilled - regions[i].regionRecycle - regions[i].regionTrashDestroyed;
+
                 worldPolution += regions[i].regionPolution;
                 worldWaste += regions[i].regionWaste;
                 worldLandfilled += regions[i].regionLandfilled;
@@ -167,6 +176,51 @@ public class PollutionController : MonoBehaviour
             regions[0].regionWaste = worldWaste;
             regions[0].regionPolution = worldPolution;
 
+            worldPolution -= boatStrength * boatAmount;
+
+        }
+
+
+    }
+
+    public void ChangeRegionStats(int region, terrainType type)
+    {
+        switch (type)
+        {
+            case terrainType.recycler:
+                {
+                    regions[region].regionRecycle += recyclePollutionRemove;
+                    Debug.Log("built: " + type + " in: " + region);
+
+                    break;
+                }
+            case terrainType.incinerator:
+                {
+                    regions[region].regionRecycle += recyclePollutionRemove;
+                    Debug.Log("built: " + type + " in: " + region);
+
+                    break;
+                }
+            case terrainType.landfill:
+                {
+
+                    Debug.Log("built: " + type + " in: " + region);
+                    regions[region].regionRecycle += recyclePollutionRemove;
+
+                    break;
+                }
+            case terrainType.boatCleaner:
+                {
+
+                    boatAmount++;
+                    Debug.Log("You now have: " + boatAmount + " Boats");
+
+                    break;
+                }
         }
     }
+
+    
+    
+
 }

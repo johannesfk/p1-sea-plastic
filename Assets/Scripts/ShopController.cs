@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static HexGrid;
 
@@ -16,6 +17,8 @@ public class ShopController : MonoBehaviour
     [SerializeField] private int startIncome;
     public int income;
 
+    [SerializeField] private TMP_Text moneyText;
+
 
     [Header("Prices")]
     [SerializeField] private int recyclePrice;
@@ -23,6 +26,11 @@ public class ShopController : MonoBehaviour
     [SerializeField] private int boatPrice;
     [SerializeField] private int incineratorPrice;
 
+    //UI Price Text
+    [SerializeField] private TMP_Text recyclePriceText;
+    [SerializeField] private TMP_Text landfillPriceText;
+    [SerializeField] private TMP_Text boatPriceText;
+    [SerializeField] private TMP_Text incineratorPriceText;
     private void Awake()
     {
         instance = this;
@@ -35,13 +43,24 @@ public class ShopController : MonoBehaviour
     {
         HexInteraction.instance.OnCellTypePlaced += HandleCellTypePlaced;
         GameManager.instance.OnNewDay += HandleNewDay;
+
+        recyclePriceText.text = "cost: " + recyclePrice.ToString();
+        landfillPriceText.text = "cost: " + landfillPrice.ToString();
+        boatPriceText.text = "cost: " + boatPrice.ToString();
+        incineratorPriceText.text = "cost: " + incineratorPrice.ToString();
+
     }
 
+    private void Update()
+    {
+        moneyText.text = "Money: " + money.ToString();
+    }
 
     void HandleCellTypePlaced()
     {
         // This code will be executed when a cell type is placed
         Debug.Log("A cell type has been placed");
+
     }
 
     private void HandleNewDay()
