@@ -60,6 +60,8 @@ public class UpgradeSystem : MonoBehaviour
         UpdateButtonColors();
     }
 
+
+
     public void SelectUpgrade(int index)
     {
         // Check if the index is valid before updating selectedUpgradeIndex
