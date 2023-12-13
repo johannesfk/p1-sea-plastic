@@ -118,6 +118,7 @@ public class HexInteraction : MonoBehaviour
                         }
                         cell.SetCellType(nextStructure);
                         OnCellTypePlaced?.Invoke();
+                        PollutionController.instance.ChangeRegionStats(touchedRegion, nextStructure);
                         canPlace = false;
                     }
 
@@ -129,6 +130,7 @@ public class HexInteraction : MonoBehaviour
                 {
                     cell.SetCellType(nextStructure);
                     OnCellTypePlaced?.Invoke();
+                    PollutionController.instance.ChangeRegionStats(touchedRegion, nextStructure);
                     canPlace = false;
                 }
             }
@@ -159,7 +161,7 @@ public class HexInteraction : MonoBehaviour
     {
         nextStructure = type;
         canPlace = true;
-        Debug.Log("Placing " + type);
+        Debug.Log("Placing " + type + "In Region: " + touchedRegion);
         // hexSpawner.SpawnPrefab(type);
     }
 }
