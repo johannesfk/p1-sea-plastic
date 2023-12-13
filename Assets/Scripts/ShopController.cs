@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,8 +23,34 @@ public class ShopController : MonoBehaviour
         instance = this;
 
         money = startMoney;
-
     }
+
+    private void Start()
+    {
+        HexInteraction.instance.OnCellTypePlaced += HandleCellTypePlaced;
+        GameManager.instance.OnNewDay += HandleNewDay;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            shopScreen.SetActive(!shopScreen.activeSelf);
+        }
+    }
+
+    void HandleCellTypePlaced()
+    {
+        // This code will be executed when a cell type is placed
+        Debug.Log("A cell type has been placed");
+    }
+
+    private void HandleNewDay()
+    {
+        Debug.Log("New day");
+        throw new NotImplementedException();
+    }
+
 
     #region ShopMenu
     public void BuyRecycle()
@@ -94,5 +121,10 @@ public class ShopController : MonoBehaviour
     }
 
     #endregion
+
+    void OnDestroy()
+    {
+        HexInteraction.instance.OnCellTypePlaced -= HandleCellTypePlaced;
+    }
 
 }

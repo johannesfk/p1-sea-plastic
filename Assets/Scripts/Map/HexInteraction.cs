@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static HexGrid;
@@ -8,6 +9,9 @@ using static HexGrid;
 public class HexInteraction : MonoBehaviour
 {
     public static HexInteraction instance;
+
+    public delegate void CellTypePlacedHandler();
+    public event CellTypePlacedHandler OnCellTypePlaced;
 
     void Awake()
     {
@@ -92,6 +96,7 @@ public class HexInteraction : MonoBehaviour
                 cell.terrainType == terrainType.desert)
             {
                 cell.SetCellType(terrainType.incinerator); // TODO: Change to chosen type
+                OnCellTypePlaced?.Invoke();
 
             }
 
