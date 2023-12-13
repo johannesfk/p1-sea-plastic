@@ -22,8 +22,6 @@ public class ShopController : MonoBehaviour
     [SerializeField] private int boatPrice;
     [SerializeField] private int incineratorPrice;
 
-    
-
     private void Awake()
     {
         instance = this;
@@ -39,6 +37,8 @@ public class ShopController : MonoBehaviour
     }
 
     #endregion
+
+
     private void Start()
     {
         HexInteraction.instance.OnCellTypePlaced += HandleCellTypePlaced;
