@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     public string companyName;
     public float money = 0;
     public float income = 1;
-    public float popularity = 0;
 
     [Header("Upgrades")]
     [SerializeField] private bool donationUpgrade = false;
@@ -75,17 +74,13 @@ public class GameManager : MonoBehaviour
         if (dayTimer >= dayMaxTime)
         {
             dayNumber++;
+            dayTimer = 0;
             Debug.Log("day: " + dayNumber);
-
-            OnNewDay?.Invoke();
 
             PollutionController.instance.EndDayAdd();
 
-            // money += income;
+            OnNewDay?.Invoke();
 
-            dayTimer = 0;
-
-            dailyEventHappened = false;
         }
         else
         {
@@ -95,18 +90,6 @@ public class GameManager : MonoBehaviour
         if (dayTimer >= dayMaxTime * 0.5f && dailyEventHappened == false)
         {
             dailyEventHappened = true;
-        }
-
-
-        if (donationUpgrade)
-        {
-            donationChance = Random.Range(0, 100);
-
-            if (donationChance < popularity)
-            {
-                money += Random.Range(0, donationChance) / 2;
-                Debug.Log("You got a dontaion of: " + donationChance / 2 + " Dabloons");
-            }
         }
 
     }

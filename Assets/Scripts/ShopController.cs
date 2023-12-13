@@ -30,15 +30,6 @@ public class ShopController : MonoBehaviour
         money = startMoney;
     }
 
-    #region Money
-
-    private void AddMoney()
-    {
-        money += income;
-    }
-
-    #endregion
-
 
     private void Start()
     {
@@ -54,9 +45,10 @@ public class ShopController : MonoBehaviour
     }
 
     private void HandleNewDay()
-    {
+    {  
         Debug.Log("New day");
-        throw new NotImplementedException();
+
+        money += income;
     }
 
 

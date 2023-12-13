@@ -86,6 +86,12 @@ public class PollutionController : MonoBehaviour
     async void Start()
     {
         await WaterContamination.Instance.Contaminate(0);
+
+        regions[0].regionLandfilled = worldLandfilled;
+        regions[0].regionRecycle = worldRecycle;
+        regions[0].regionWaste = worldWaste;
+        regions[0].regionPolution = worldPolution;
+
     }
 
     // Update is called once per frame
@@ -101,6 +107,8 @@ public class PollutionController : MonoBehaviour
             currentRegion = regions.Count - 1;
         }
 
+
+
         //World Percentages
         worldPollutionText.text = worldPolution.ToString();
         polutionPercentage = worldPolution / polutionThreshhold * percentageCalculation;
@@ -109,7 +117,6 @@ public class PollutionController : MonoBehaviour
         worldLandfilledPercentage = worldLandfilled / worldWaste * percentageCalculation;
         worldRecyclePercentage = worldRecycle / worldWaste * percentageCalculation;
         worldTrashDestroyedPercentage = worldTrashDestroyed / worldWaste * percentageCalculation;
-
 
         //region percentages
         regions[currentRegion].regionPolutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * percentageCalculation;
@@ -154,6 +161,12 @@ public class PollutionController : MonoBehaviour
                 worldRecycle += regions[i].regionRecycle;
                 worldTrashDestroyed += regions[i].regionTrashDestroyed;
             }
+
+            regions[0].regionLandfilled = worldLandfilled;
+            regions[0].regionRecycle = worldRecycle;
+            regions[0].regionWaste = worldWaste;
+            regions[0].regionPolution = worldPolution;
+
         }
     }
 }
