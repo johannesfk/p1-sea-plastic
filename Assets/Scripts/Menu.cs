@@ -82,35 +82,11 @@ public class Menu : MonoBehaviour
         Debug.Log("Loading Menu");
     }
 
-    #region ShopMenu
-
-    public void BuyRecycle()
-    {
-        ExitUpgradeMenu();
-    }
-
-    public void BuyLandfill()
-    {
-        ExitUpgradeMenu();
-    }
-
-    public void BuyBoat()
-    {
-        ExitUpgradeMenu();
-    }
-
-    public void BuyIncinirator()
-    {
-        ExitUpgradeMenu();
-    }
-
-    #endregion
-
     //Burger MENU STUFF
 
     public void BurgerButton()
     {
-        FindObjectOfType<AudioManager>().Play("SoundFX");
+        //FindObjectOfType<AudioManager>().Play("SoundFX");
         Debug.Log("Sound LOG");
         if (BurgerMenu.activeSelf)
         {

@@ -53,7 +53,7 @@ public class SettingsMenu : MonoBehaviour
 
    public void SetFullscreen (bool isFullscreen)
     {
-        FindObjectOfType<AudioManager>().Play("Sound FX");
+        //FindObjectOfType<AudioManager>().Play("Sound FX");
         Screen.fullScreen = isFullscreen;
     }
 
