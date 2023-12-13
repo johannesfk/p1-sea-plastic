@@ -43,18 +43,18 @@ public class HexCell : MonoBehaviour
     {
         terrainPrefabs = new Dictionary<terrainType, GameObject>
         {
+            { terrainType.recycler, recycler },
+            { terrainType.incinerator, incinerator },
+            { terrainType.landfill, landfill },
+            { terrainType.boatCleaner, boatCleaner },
+            { terrainType.riverBarricade, riverBarricade },
             { terrainType.forest, forest },
             { terrainType.plains, plains },
             { terrainType.mountain, mountain },
             { terrainType.snow, snow },
             { terrainType.desert, desert },
-            { terrainType.recycler, recycler },
-            { terrainType.incinerator, incinerator },
-            { terrainType.landfill, landfill },
             { terrainType.water, water },
             { terrainType.contaminatedWater, contaminatedWater },
-            { terrainType.boatCleaner, boatCleaner },
-            { terrainType.riverBarricade, riverBarricade },
             { terrainType.riverWE, riverWE },
             { terrainType.riverNS, riverNS },
             { terrainType.riverNE, riverNE },

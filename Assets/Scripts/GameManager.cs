@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [Header("World Time")]
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] TextMeshProUGUI daytext;
+    [SerializeField]
+    private float time;
     [SerializeField] float dayTimer;
     [SerializeField] int dayNumber = 1;
     private float dayMaxTime = 60;
@@ -30,7 +32,6 @@ public class GameManager : MonoBehaviour
     public string companyName;
     public float money = 0;
     public float income = 1;
-    public float popularity = 0;
 
     [Header("Upgrades")]
     [SerializeField] private bool donationUpgrade = false;
@@ -71,21 +72,18 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        time = Time.deltaTime;
 
         if (dayTimer >= dayMaxTime)
         {
             dayNumber++;
+            dayTimer = 0;
             Debug.Log("day: " + dayNumber);
-
-            OnNewDay?.Invoke();
 
             PollutionController.instance.EndDayAdd();
 
-            money += income;
+            OnNewDay?.Invoke();
 
-            dayTimer = 0;
-
-            dailyEventHappened = false;
         }
         else
         {
@@ -98,28 +96,26 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (donationUpgrade)
-        {
-            donationChance = Random.Range(0, 100);
-
-            if (donationChance < popularity)
-            {
-                money += Random.Range(0, donationChance) / 2;
-                Debug.Log("You got a dontaion of: " + donationChance / 2 + " Dabloons");
-            }
-        }
-
-    }
-
-    private void Update()
-    {
         int minutes = Mathf.FloorToInt(dayTimer / 60);
         int seconds = Mathf.FloorToInt(dayTimer % 60);
-        timerText.text = ((int)dayTimer).ToString();
+        // timerText.text = ((int)dayTimer).ToString();
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         daytext.text = string.Format("Day " + dayNumber);
-    }
 
+
+        /// <summary>
+        /// Constant timer
+        /* 
+        float secondsInDay = 60 * 60 * 24;
+        float secondsInHour = 60 * 60;
+        int days = Mathf.FloorToInt(time / secondsInDay);
+        int hours = Mathf.FloorToInt(time % secondsInDay / 3600);
+        int minutes = Mathf.FloorToInt(time % secondsInHour / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+         */
+        /// </summary>
+
+    }
 
     public void Pause()
     {
@@ -129,13 +125,13 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
-        Time.timeScale = 4;
+        Time.timeScale = 1;
         Debug.Log("Time is resumed");
     }
 
     public void FastForward()
     {
-        Time.timeScale = 8;
+        Time.timeScale = 4;
         Debug.Log("Time is fast forwarded");
     }
 

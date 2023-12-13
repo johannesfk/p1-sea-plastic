@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static HexGrid;
 
 public class ShopController : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class ShopController : MonoBehaviour
     [SerializeField] private int startIncome;
     public int income;
 
+    [SerializeField] private TMP_Text moneyText;
+
 
     [Header("Prices")]
     [SerializeField] private int recyclePrice;
@@ -22,6 +26,11 @@ public class ShopController : MonoBehaviour
     [SerializeField] private int boatPrice;
     [SerializeField] private int incineratorPrice;
 
+    //UI Price Text
+    [SerializeField] private TMP_Text recyclePriceText;
+    [SerializeField] private TMP_Text landfillPriceText;
+    [SerializeField] private TMP_Text boatPriceText;
+    [SerializeField] private TMP_Text incineratorPriceText;
     private void Awake()
     {
         instance = this;
@@ -29,40 +38,36 @@ public class ShopController : MonoBehaviour
         money = startMoney;
     }
 
-    #region Money
-
-    private void AddMoney()
-    {
-        money += income;
-    }
-
-    #endregion
-
 
     private void Start()
     {
         HexInteraction.instance.OnCellTypePlaced += HandleCellTypePlaced;
         GameManager.instance.OnNewDay += HandleNewDay;
+
+        recyclePriceText.text = "cost: " + recyclePrice.ToString();
+        landfillPriceText.text = "cost: " + landfillPrice.ToString();
+        boatPriceText.text = "cost: " + boatPrice.ToString();
+        incineratorPriceText.text = "cost: " + incineratorPrice.ToString();
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            shopScreen.SetActive(!shopScreen.activeSelf);
-        }
+        moneyText.text = "Money: " + money.ToString();
     }
 
     void HandleCellTypePlaced()
     {
         // This code will be executed when a cell type is placed
         Debug.Log("A cell type has been placed");
+
     }
 
     private void HandleNewDay()
     {
         Debug.Log("New day");
-        throw new NotImplementedException();
+
+        money += income;
     }
 
 
@@ -73,7 +78,7 @@ public class ShopController : MonoBehaviour
         {
             money -= recyclePrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.recycler);
+            HexInteraction.instance.PlaceCellType(terrainType.recycler);
 
             Debug.Log("Buy THAT RECYCLE BASTARD");
         }
@@ -89,7 +94,7 @@ public class ShopController : MonoBehaviour
         {
             money -= landfillPrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.landfill);
+            HexInteraction.instance.PlaceCellType(terrainType.landfill);
 
             Debug.Log("Buy THAT LANDFILLSHIT");
         }
@@ -106,7 +111,7 @@ public class ShopController : MonoBehaviour
         {
             money -= boatPrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.boatCleaner);
+            HexInteraction.instance.PlaceCellType(terrainType.boatCleaner);
 
             Debug.Log("Buy THAT MF BOAT");
         }
@@ -123,7 +128,7 @@ public class ShopController : MonoBehaviour
         {
             money -= incineratorPrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.incinerator);
+            HexInteraction.instance.PlaceCellType(terrainType.incinerator);
 
             Debug.Log("Buy THAT BURNER THING");
         }
@@ -139,6 +144,7 @@ public class ShopController : MonoBehaviour
     void OnDestroy()
     {
         HexInteraction.instance.OnCellTypePlaced -= HandleCellTypePlaced;
+        GameManager.instance.OnNewDay -= HandleNewDay;
     }
 
 }
