@@ -60,7 +60,19 @@ public class UpgradeSystem : MonoBehaviour
         UpdateButtonColors();
     }
 
+    private void Update()
+    {
+        if (upgradeMoney != ShopController.instance.money)
+        {
+            ShopController.instance.money = upgradeMoney;
+        }
+        else
+        {
+            upgradeMoney = ShopController.instance.money;
+        }
 
+
+    }
 
     public void SelectUpgrade(int index)
     {

@@ -26,7 +26,6 @@ public class ShopController : MonoBehaviour
     }
 
     #region ShopMenu
-
     public void BuyRecycle()
     {   
         if (money >= recyclePrice)
@@ -36,6 +35,10 @@ public class ShopController : MonoBehaviour
             HexGrid.instance.PlaceCellType(HexGrid.Structures.recycler);
 
             Debug.Log("Buy THAT RECYCLE BASTARD");
+        }
+        else
+        {
+            Debug.Log(">YOU CANT BUY THAT SHIT YOU POOR FUCK");
         }
     }
 
@@ -49,7 +52,11 @@ public class ShopController : MonoBehaviour
 
             Debug.Log("Buy THAT LANDFILLSHIT");
         }
-  
+        else
+        {
+            Debug.Log(">YOU CANT BUY THAT SHIT YOU POOR FUCK");
+        }
+
     }
 
     public void BuyBoat()
@@ -62,7 +69,11 @@ public class ShopController : MonoBehaviour
 
             Debug.Log("Buy THAT MF BOAT");
         }
-       
+        else
+        {
+            Debug.Log(">YOU CANT BUY THAT SHIT YOU POOR FUCK");
+        }
+
     }
 
     public void BuyIncinirator()
@@ -75,7 +86,11 @@ public class ShopController : MonoBehaviour
 
             Debug.Log("Buy THAT BURNER THING");
         }
-        
+        else
+        {
+            Debug.Log(">YOU CANT BUY THAT SHIT YOU POOR FUCK");
+        }
+
     }
 
     #endregion
