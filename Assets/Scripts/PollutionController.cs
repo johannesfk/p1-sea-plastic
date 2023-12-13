@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.UIElements;
 using Unity.Mathematics;
+using static HexGrid;
 
 
 [System.Serializable]
@@ -57,6 +58,8 @@ public class PollutionController : MonoBehaviour
     public float worldTrashDestroyedPercentage;
 
     [Header("StructureStats")]
+    [SerializeField] private float boatAmount;
+    [SerializeField] private float boatStrength;
     [SerializeField] private float recyclePollutionRemove;
     [SerializeField] private float landfillPollutionRemove;
     [SerializeField] private float inciniratorPollutionRemove;
@@ -173,27 +176,51 @@ public class PollutionController : MonoBehaviour
             regions[0].regionWaste = worldWaste;
             regions[0].regionPolution = worldPolution;
 
+            worldPolution -= boatStrength * boatAmount;
+
+        }
+
+
+    }
+
+    public void ChangeRegionStats(int region, terrainType type)
+    {
+        switch (type)
+        {
+            case terrainType.recycler:
+                {
+                    regions[region].regionRecycle += recyclePollutionRemove;
+                    Debug.Log("built: " + type + " in: " + region);
+
+                    break;
+                }
+            case terrainType.incinerator:
+                {
+                    regions[region].regionRecycle += recyclePollutionRemove;
+                    Debug.Log("built: " + type + " in: " + region);
+
+                    break;
+                }
+            case terrainType.landfill:
+                {
+
+                    Debug.Log("built: " + type + " in: " + region);
+                    regions[region].regionRecycle += recyclePollutionRemove;
+
+                    break;
+                }
+            case terrainType.boatCleaner:
+                {
+
+                    boatAmount++;
+                    Debug.Log("You now have: " + boatAmount + " Boats");
+
+                    break;
+                }
         }
     }
 
-    public void BuyRecycle(int region)
-    {
-
-    }
-
-    public void BuyLandfill(int region) 
-    {
-        
-    }
-
-    public void BuyIncinerator(int region) 
-    {
-        
-    }
-
-    public void OnBoat()
-    {
-        worldPolution = -boatPollutionRemove;
-    }
+    
+    
 
 }

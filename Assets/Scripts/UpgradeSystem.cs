@@ -18,7 +18,6 @@ public class UpgradeSystem : MonoBehaviour
     public Button confirmButton;
 
     private int selectedUpgradeIndex = -1;
-    private int upgradeMoney = 30;
 
     // Variables for upgrade data
     private UpgradeData[] upgrades;
@@ -60,20 +59,6 @@ public class UpgradeSystem : MonoBehaviour
         UpdateButtonColors();
     }
 
-    private void Update()
-    {
-        if (upgradeMoney != ShopController.instance.money)
-        {
-            ShopController.instance.money = upgradeMoney;
-        }
-        else
-        {
-            upgradeMoney = ShopController.instance.money;
-        }
-
-
-    }
-
     public void SelectUpgrade(int index)
     {
         // Check if the index is valid before updating selectedUpgradeIndex
@@ -96,9 +81,9 @@ public class UpgradeSystem : MonoBehaviour
         {
             int cost = upgrades[selectedUpgradeIndex].cost;
 
-            if (upgradeMoney >= cost && ArePrerequisitesFulfilled(selectedUpgradeIndex))
+            if (ShopController.instance.money >= cost && ArePrerequisitesFulfilled(selectedUpgradeIndex))
             {
-                upgradeMoney -= cost;
+                ShopController.instance.money -= cost;
                 upgrades[selectedUpgradeIndex].isPurchased = true;
 
                 ApplyUpgrade(selectedUpgradeIndex);
@@ -145,7 +130,7 @@ public class UpgradeSystem : MonoBehaviour
             titleText.text = "Title: " + upgrades[upgradeIndex].title;
             descriptionText.text = "Description: " + upgrades[upgradeIndex].description;
             costText.text = "Cost: " + upgrades[upgradeIndex].cost;
-            Money.text = "Money: " + upgradeMoney;
+            Money.text = "Money: " + ShopController.instance.money;
         }
         else
         {
