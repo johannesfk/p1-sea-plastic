@@ -118,6 +118,7 @@ public class HexInteraction : MonoBehaviour
                         }
                         cell.SetCellType(nextStructure);
                         OnCellTypePlaced?.Invoke();
+                        canPlace = false;
                     }
 
                 }
@@ -128,6 +129,7 @@ public class HexInteraction : MonoBehaviour
                 {
                     cell.SetCellType(nextStructure);
                     OnCellTypePlaced?.Invoke();
+                    canPlace = false;
                 }
             }
 
@@ -156,6 +158,7 @@ public class HexInteraction : MonoBehaviour
     public void PlaceCellType(terrainType type)
     {
         nextStructure = type;
+        canPlace = true;
         Debug.Log("Placing " + type);
         // hexSpawner.SpawnPrefab(type);
     }

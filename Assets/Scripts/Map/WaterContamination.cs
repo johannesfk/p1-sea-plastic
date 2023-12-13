@@ -19,7 +19,7 @@ public class WaterContamination : MonoBehaviour
     [SerializeField]
     private List<HexCell> cleanCells = new List<HexCell>();
     private int totalContamitableWater;
-    private int mostlyContaminated = 0;
+    // private int mostlyContaminated = 0;
 
     private terrainType[] waterTypes = {
         terrainType.water,
