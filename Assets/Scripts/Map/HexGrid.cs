@@ -37,6 +37,15 @@ public class HexGrid : MonoBehaviour
         artic
     };
 
+    public enum Structures
+    {
+        recycler = terrainType.recycler,
+        incinerator = terrainType.incinerator,
+        landfill = terrainType.landfill,
+        boatCleaner = terrainType.boatCleaner,
+        riverBarricade = terrainType.riverBarricade,
+    };
+
     public Color defaultColor = Color.white;
     public Color touchedColor = Color.magenta;
 
@@ -44,6 +53,8 @@ public class HexGrid : MonoBehaviour
 
 
     public HexCell[] cells { get; private set; }
+
+
 
     Canvas gridCanvas;
 
@@ -295,5 +306,11 @@ public class HexGrid : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    public void PlaceCellType(Structures type)
+    {
+        Debug.Log("Placing " + type);
+        // hexSpawner.SpawnPrefab(type);
     }
 }
