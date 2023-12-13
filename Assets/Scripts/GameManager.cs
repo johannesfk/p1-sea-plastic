@@ -129,13 +129,13 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
-        Time.timeScale = 4;
+        Time.timeScale = 1;
         Debug.Log("Time is resumed");
     }
 
     public void FastForward()
     {
-        Time.timeScale = 8;
+        Time.timeScale = 4;
         Debug.Log("Time is fast forwarded");
     }
 
