@@ -15,7 +15,6 @@ public class HexGrid : MonoBehaviour
     public int height;
     public HexCell cellPrefab;
     public TMP_Text cellLabelPrefab;
-    public bool uiActive;
     public enum terrainType
     {
         forest,
@@ -46,15 +45,7 @@ public class HexGrid : MonoBehaviour
         riverBarricade = terrainType.riverBarricade,
     };
 
-    public Color defaultColor = Color.white;
-    public Color touchedColor = Color.magenta;
-
-    private InputAction leftClickAction;
-
-
     public HexCell[] cells { get; private set; }
-
-
 
     Canvas gridCanvas;
 
@@ -67,7 +58,6 @@ public class HexGrid : MonoBehaviour
 
     void Start()
     {
-        uiActive = false;
         gridCanvas = GetComponentInChildren<Canvas>();
         hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
 
@@ -134,7 +124,6 @@ public class HexGrid : MonoBehaviour
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
-        // cell.color = defaultColor;
         cell.index = i;
         cell.position = position;
 
@@ -198,104 +187,6 @@ public class HexGrid : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Mouse.current.leftButton.wasPressedThisFrame && !uiActive)
-        {
-            Debug.Log("Left click");
-            HandleInput();
-        }
-    }
-
-    void HandleInput()
-    {
-        int layerMask = 1 << 8;
-        layerMask = ~layerMask;
-
-        Ray inputRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-        Debug.Log("Mouse position " + Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()));
-
-        if (Physics.Raycast(inputRay, out hit, Mathf.Infinity, layerMask))
-        {
-            Debug.Log("Hit at " + hit.point);
-            Debug.DrawRay(inputRay.origin, inputRay.direction * hit.distance, Color.yellow);
-            TouchCell(hit.point);
-        }
-        else
-        {
-            Debug.DrawRay(inputRay.origin, inputRay.direction * 1000, Color.white);
-            Debug.Log("No hit");
-        }
-    }
-
-    void TouchCell(Vector3 position)
-    {
-        Debug.Log("touched position " + position + " -> " + transform.InverseTransformPoint(position));
-        position = transform.InverseTransformPoint(position);
-        HexCoordinates coordinates = HexCoordinates.FromPosition(position);
-        int coordinateZ = coordinates.Z * -1;
-        int index = coordinates.X + (coordinateZ * width) + coordinates.Z / 2; /*  + (coordinates.Z * -1 / 2) */
-        // Debug.Log("touched index " + "(" + "X: " + (coordinateZ) + "*" + "W: " + width + " -> " + "X: " + coordinates.X + "+" + "Z*W:" + (coordinateZ * width) + "+ Z/2: " + (coordinateZ / 2) + " -> " + "i: " + index);
-        Debug.Log("touched at " + coordinates.ToString() + " -> " + index);
-        if (index >= 0 && index < cells.Length)
-        {
-            HexCell cell = cells[index];
-            Debug.Log("Touched region " + cell.region);
-
-            /// TODO: Don't allow to build next to cell with same type
-            if (cell.terrainType == terrainType.water || cell.terrainType == terrainType.contaminatedWater)
-            {
-                if (cell.terrainType == terrainType.contaminatedWater)
-                {
-                    WaterContamination.Instance.contaminatedCells.Remove(cell);
-                }
-                cell.SetCellType(terrainType.boatCleaner);
-            }
-            else if (
-                cell.terrainType == terrainType.plains ||
-                cell.terrainType == terrainType.forest ||
-                cell.terrainType == terrainType.desert)
-            {
-                cell.SetCellType(terrainType.incinerator); // TODO: Change to chosen type
-
-            }
-
-            Debug.Log("Touched cell position " + cell.transform.position);
-
-            for (int i = 0; i < cell.neighbors.Length; i++)
-            {
-                HexCell neighbor = cell.neighbors[i];
-                if (neighbor != null)
-                {
-                    // Debug.Log("Neighbor " + ((HexDirection)i).ToString() + neighbor.coordinates.ToString());
-
-                    // Debug directions
-                    /* TMP_Text neighborlabel = Instantiate<TMP_Text>(cellLabelPrefab);
-                    neighborlabel.rectTransform.SetParent(gridCanvas.transform, false);
-                    neighborlabel.rectTransform.anchoredPosition =
-                        new Vector2(neighbor.position.x, neighbor.position.z);
-                    neighborlabel.fontSize = 5;
-                    neighborlabel.color = Color.yellow;
-                    neighborlabel.text = ((HexDirection)i).ToString() + "\n" + index.ToString(); */
-                }
-            }
-
-
-            /// TODO: Disabled until implemented
-            /// Should probably not be "new" but rather
-            /// a reference to the existing controller.
-            /* PollutionController pollutionController = new()
-            {
-                currentRegion = cell.region
-            }; */
-        }
-        // hexMesh.Triangulate(cells);
-        Debug.Log("Cells count " + cells.Length);
-    }
-
     public void OnDestroy()
     {
         // leftClickAction.Disable();
@@ -306,11 +197,5 @@ public class HexGrid : MonoBehaviour
         {
             yield return null;
         }
-    }
-
-    public void PlaceCellType(Structures type)
-    {
-        Debug.Log("Placing " + type);
-        // hexSpawner.SpawnPrefab(type);
     }
 }

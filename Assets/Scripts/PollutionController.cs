@@ -143,7 +143,6 @@ public class PollutionController : MonoBehaviour
 
     public void EndDayAdd()
     {
-
         if (regions.Count > 0)
         {
             for (int i = 1; i < regions.Count; i++)
