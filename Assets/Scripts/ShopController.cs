@@ -45,7 +45,7 @@ public class ShopController : MonoBehaviour
     }
 
     private void HandleNewDay()
-    {  
+    {
         Debug.Log("New day");
 
         money += income;
@@ -125,6 +125,7 @@ public class ShopController : MonoBehaviour
     void OnDestroy()
     {
         HexInteraction.instance.OnCellTypePlaced -= HandleCellTypePlaced;
+        GameManager.instance.OnNewDay -= HandleNewDay;
     }
 
 }
