@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,8 +11,20 @@ public class HexInteraction : MonoBehaviour
 {
     public static HexInteraction instance;
 
+    private int touchedRegion;
+
     public delegate void CellTypePlacedHandler();
     public event CellTypePlacedHandler OnCellTypePlaced;
+
+
+    public terrainType[] Structures = new terrainType[]
+    {
+        terrainType.recycler,
+        terrainType.incinerator,
+        terrainType.landfill,
+        terrainType.boatCleaner,
+        terrainType.riverBarricade
+    };
 
     void Awake()
     {
@@ -25,15 +38,14 @@ public class HexInteraction : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    [HideInInspector]
     public bool uiActive = false;
 
-    private Structures nextStructure;
+    [SerializeField]
+    private bool canPlace = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    [SerializeField]
+    private terrainType nextStructure;
 
     // Update is called once per frame
     void Update()
@@ -79,25 +91,44 @@ public class HexInteraction : MonoBehaviour
         if (index >= 0 && index < HexGrid.instance.cells.Length)
         {
             HexCell cell = HexGrid.instance.cells[index];
-            Debug.Log("Touched region " + cell.region);
+            touchedRegion = cell.region;
+            Debug.Log("Touched region " + touchedRegion);
 
-            /// TODO: Don't allow to build next to cell with same type
-            if (cell.terrainType == terrainType.water || cell.terrainType == terrainType.contaminatedWater)
+            /// Will return true if the touched cell is not already a structure
+            /// and the next structure is a structure.
+            /// Also checks if the cell is not a mountain, snow or artic.
+            if (canPlace
+                && !Structures.Contains(cell.terrainType)
+                && Structures.Contains(nextStructure)
+                && !(cell.terrainType == terrainType.mountain
+                        || cell.terrainType == terrainType.snow
+                        || cell.terrainType == terrainType.artic))
             {
-                if (cell.terrainType == terrainType.contaminatedWater)
+                // TODO: Implement river barricade
+                /// Will return true if the touched cell is a body of water.
+                if (cell.terrainType == terrainType.contaminatedWater || cell.terrainType == terrainType.water)
                 {
-                    WaterContamination.Instance.contaminatedCells.Remove(cell);
-                }
-                cell.SetCellType(terrainType.boatCleaner);
-            }
-            else if (
-                cell.terrainType == terrainType.plains ||
-                cell.terrainType == terrainType.forest ||
-                cell.terrainType == terrainType.desert)
-            {
-                cell.SetCellType(terrainType.incinerator); // TODO: Change to chosen type
-                OnCellTypePlaced?.Invoke();
+                    /// Will return true if the next structure is a boat cleaner.
+                    if (nextStructure == terrainType.boatCleaner)
+                    {
+                        /// Remove the cell from the contaminated cells list.
+                        if (cell.terrainType == terrainType.contaminatedWater)
+                        {
+                            WaterContamination.Instance.contaminatedCells.Remove(cell);
+                        }
+                        cell.SetCellType(nextStructure);
+                        OnCellTypePlaced?.Invoke();
+                    }
 
+                }
+                /// Else, if the touched cell is not a body of water,
+                /// and the next structure is not a boat cleaner,
+                /// place the structure.
+                else if (nextStructure != terrainType.boatCleaner)
+                {
+                    cell.SetCellType(nextStructure);
+                    OnCellTypePlaced?.Invoke();
+                }
             }
 
             Debug.Log("Touched cell position " + cell.transform.position);
@@ -122,13 +153,10 @@ public class HexInteraction : MonoBehaviour
         }
     }
 
-    public void PlaceCellType(Structures type)
+    public void PlaceCellType(terrainType type)
     {
-        // Not yet implemented
-
+        nextStructure = type;
         Debug.Log("Placing " + type);
         // hexSpawner.SpawnPrefab(type);
-
-        throw new NotImplementedException();
     }
 }

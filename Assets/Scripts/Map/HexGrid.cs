@@ -35,21 +35,13 @@ public class HexGrid : MonoBehaviour
         riverNW,
         artic
     };
-
-    public enum Structures
-    {
-        recycler = terrainType.recycler,
-        incinerator = terrainType.incinerator,
-        landfill = terrainType.landfill,
-        boatCleaner = terrainType.boatCleaner,
-        riverBarricade = terrainType.riverBarricade,
-    };
+    
 
     public HexCell[] cells { get; private set; }
 
     Canvas gridCanvas;
 
-    HexSpawnPrefab hexSpawner;
+    // HexSpawnPrefab hexSpawner;
 
     private void Awake()
     {
@@ -59,7 +51,7 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
-        hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
+        // hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
 
         // gridCanvas.gameObject.SetActive(false);
 

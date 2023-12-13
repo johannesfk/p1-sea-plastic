@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
             PollutionController.instance.EndDayAdd();
 
-            money += income;
+            // money += income;
 
             dayTimer = 0;
 

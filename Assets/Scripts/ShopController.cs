@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static HexGrid;
 
 public class ShopController : MonoBehaviour
 {
@@ -31,13 +32,6 @@ public class ShopController : MonoBehaviour
         GameManager.instance.OnNewDay += HandleNewDay;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            shopScreen.SetActive(!shopScreen.activeSelf);
-        }
-    }
 
     void HandleCellTypePlaced()
     {
@@ -59,7 +53,7 @@ public class ShopController : MonoBehaviour
         {
             money -= recyclePrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.recycler);
+            HexInteraction.instance.PlaceCellType(terrainType.recycler);
 
             Debug.Log("Buy THAT RECYCLE BASTARD");
         }
@@ -75,7 +69,7 @@ public class ShopController : MonoBehaviour
         {
             money -= landfillPrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.landfill);
+            HexInteraction.instance.PlaceCellType(terrainType.landfill);
 
             Debug.Log("Buy THAT LANDFILLSHIT");
         }
@@ -92,7 +86,7 @@ public class ShopController : MonoBehaviour
         {
             money -= boatPrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.boatCleaner);
+            HexInteraction.instance.PlaceCellType(terrainType.boatCleaner);
 
             Debug.Log("Buy THAT MF BOAT");
         }
@@ -109,7 +103,7 @@ public class ShopController : MonoBehaviour
         {
             money -= incineratorPrice;
             shopScreen.SetActive(false);
-            HexInteraction.instance.PlaceCellType(HexGrid.Structures.incinerator);
+            HexInteraction.instance.PlaceCellType(terrainType.incinerator);
 
             Debug.Log("Buy THAT BURNER THING");
         }
