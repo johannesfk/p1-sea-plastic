@@ -11,7 +11,7 @@ public class HexInteraction : MonoBehaviour
 {
     public static HexInteraction instance;
 
-    private int touchedRegion;
+    public int touchedRegion;
 
     public delegate void CellTypePlacedHandler();
     public event CellTypePlacedHandler OnCellTypePlaced;
