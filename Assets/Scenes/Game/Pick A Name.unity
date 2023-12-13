@@ -153,8 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeMenuObject: {fileID: 0}
-  ManagementMenuObject: {fileID: 0}
-  AdvertismentMenuObject: {fileID: 0}
+  ShopMenuObject: {fileID: 0}
   CurrentMenu: {fileID: 0}
   BurgerMenu: {fileID: 0}
   SettingMenu: {fileID: 0}
@@ -205,8 +204,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 322516194}
-  - {fileID: 1857798085}
-  - {fileID: 990732259}
   - {fileID: 1817046477}
   m_Father: {fileID: 1134335158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -265,7 +262,7 @@ GameObject:
   - component: {fileID: 322516196}
   - component: {fileID: 322516195}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Pick Company Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,11 +638,11 @@ RectTransform:
   m_Children:
   - {fileID: 486700778}
   - {fileID: 2004311324}
-  m_Father: {fileID: 254846417}
+  m_Father: {fileID: 1134335158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -126}
+  m_AnchoredPosition: {x: 0, y: -180}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &990732261
@@ -991,6 +988,8 @@ RectTransform:
   - {fileID: 254846417}
   - {fileID: 1210330038}
   - {fileID: 2049630571}
+  - {fileID: 1857798085}
+  - {fileID: 990732259}
   m_Father: {fileID: 1830687179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1551,11 +1550,11 @@ RectTransform:
   - {fileID: 1106158540}
   - {fileID: 1371413792}
   - {fileID: 543834251}
-  m_Father: {fileID: 254846417}
+  m_Father: {fileID: 1134335158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 18}
+  m_AnchoredPosition: {x: 0, y: -36}
   m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857798086
@@ -1999,12 +1998,12 @@ PrefabInstance:
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 181.7035
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 39.0431
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
@@ -2044,12 +2043,12 @@ PrefabInstance:
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -838
+      value: -770
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 506
+      value: 489
       objectReference: {fileID: 0}
     - target: {fileID: 1127028507542949192, guid: 81bec03bee7418b458fc5b04f7586c18,
         type: 3}
@@ -2065,6 +2064,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914017650481464735, guid: 81bec03bee7418b458fc5b04f7586c18,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914017650481464735, guid: 81bec03bee7418b458fc5b04f7586c18,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.4156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914017650481464735, guid: 81bec03bee7418b458fc5b04f7586c18,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.24705884
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914017650481464735, guid: 81bec03bee7418b458fc5b04f7586c18,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914017650481464735, guid: 81bec03bee7418b458fc5b04f7586c18,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
