@@ -202,8 +202,11 @@ public class WaterContamination : MonoBehaviour
                 for (int i = 0; i < amount && i < cleanCells.Count; i++)
                 {
                     HexCell cell = cleanCells[i];
-                    cell.SetCellType(terrainType.contaminatedWater);
-                    contaminatedCells.Add(cell);
+                    if (cell.terrainType != terrainType.boatCleaner)
+                    {
+                        cell.SetCellType(terrainType.contaminatedWater);
+                        contaminatedCells.Add(cell);
+                    }
                 }
 
                 // Remove the contaminated cells from the clean water list

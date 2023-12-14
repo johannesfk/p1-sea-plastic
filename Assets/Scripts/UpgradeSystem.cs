@@ -15,6 +15,12 @@ public class UpgradeSystem : MonoBehaviour
     public Button upgradeButton4;
     public Button upgradeButton5;
     public Button upgradeButton6;
+    public Button upgradeButton7;
+    public Button upgradeButton8;
+    public Button upgradeButton9;
+    public Button upgradeButton10;
+    public Button upgradeButton11;
+    public Button upgradeButton12;
     public Button confirmButton;
 
     private int selectedUpgradeIndex = -1;
@@ -52,6 +58,12 @@ public class UpgradeSystem : MonoBehaviour
             new UpgradeData("Upgrade 4", "Description 4", 10, false), // Prerequisite: None
             new UpgradeData("Upgrade 5", "Description 5 <br>Prerequisite: Upgrade 4", 20, false, 3),  // Prerequisite: Upgrade 4
             new UpgradeData("Upgrade 6", "Description 6 <br>Prerequisite: Upgrade 4", 10, false, 3),   // Prerequisite: Upgrade 4
+            new UpgradeData("Upgrade 7", "Description 7", 10, false), // Prerequisite: None
+            new UpgradeData("Upgrade 8", "Description 8 <br>Prerequisite: Upgrade 7", 20, false, 6),  // Prerequisite: Upgrade 7
+            new UpgradeData("Upgrade 9", "Description 9 <br>Prerequisite: Upgrade 7", 10, false, 6),   // Prerequisite: Upgrade 7
+            new UpgradeData("Upgrade 10", "Description 10", 10, false), // Prerequisite: None 
+            new UpgradeData("Upgrade 11", "Description 11 <br>Prerequisite: Upgrade 10", 20, false, 9),  // Prerequisite: Upgrade 10
+            new UpgradeData("Upgrade 12", "Description 12 <br>Prerequisite: Upgrade 10", 10, false, 9),   // Prerequisite: Upgrade 10
         };
 
         confirmButton.onClick.AddListener(ConfirmPurchase);
@@ -104,18 +116,25 @@ public class UpgradeSystem : MonoBehaviour
     }
     bool ArePrerequisitesFulfilled(int upgradeIndex)
     {
-        int prerequisiteIndex = upgrades[upgradeIndex].prerequisiteIndex;
-
-        // If there is no prerequisite, or the prerequisite is already purchased, return true
-        if (prerequisiteIndex == -1 || upgrades[prerequisiteIndex].isPurchased)
+        // Check if upgradeIndex is within the valid range of the upgrades array
+        if (upgradeIndex >= 0 && upgradeIndex < upgrades.Length)
         {
-            return true;
-        }
+            int prerequisiteIndex = upgrades[upgradeIndex].prerequisiteIndex;
 
-        // If the prerequisite is not purchased, return false
+            // Check if prerequisiteIndex is within the valid range of the upgrades array
+            if (prerequisiteIndex >= 0 && prerequisiteIndex < upgrades.Length)
+            {
+                // If there is no prerequisite, or the prerequisite is already purchased, return true
+                if (prerequisiteIndex == -1 || upgrades[prerequisiteIndex].isPurchased)
+                {
+                    return true;
+                }
+            }
+        }
+    
+        // If the prerequisite is not purchased or indices are out of bounds, return false
         return false;
     }
-
     void ApplyUpgrade(int index)
     {
         Debug.Log("Applying Upgrade: " + upgrades[index].title);
@@ -146,6 +165,13 @@ public class UpgradeSystem : MonoBehaviour
         SetButtonColor(upgradeButton4, upgrades[3].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
         SetButtonColor(upgradeButton5, upgrades[4].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(4) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton6, upgrades[5].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(5) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+
+        SetButtonColor(upgradeButton7, upgrades[6].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
+        SetButtonColor(upgradeButton8, upgrades[7].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(7) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton9, upgrades[8].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(8) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton10, upgrades[9].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
+        SetButtonColor(upgradeButton11, upgrades[10].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(11) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton12, upgrades[11].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(12) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         // Highlights the selected upgrade button
         if (selectedUpgradeIndex != -1)
         {
@@ -171,8 +197,25 @@ public class UpgradeSystem : MonoBehaviour
                 case 5:
                     selectedButton = upgradeButton6;
                     break;
+                case 6:
+                    selectedButton = upgradeButton7;
+                    break;
+                case 7:
+                    selectedButton = upgradeButton8;
+                    break;
+                case 8:
+                    selectedButton = upgradeButton9;
+                    break;
+                case 9:
+                    selectedButton = upgradeButton10;
+                    break;
+                case 10:
+                    selectedButton = upgradeButton11;
+                    break;
+                case 11:
+                    selectedButton = upgradeButton12;
+                    break;
             }
-
             if (selectedButton != null)
             {
                 // highlight in a color

@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public float zoomFactor = 4.0f;
     public float targetZoom;
     public Vector3 startPosition;
-    public float startZoom = 142.0f;
+    public float startZoom = 160.0f;
 
     private Camera cam;
     [SerializeField] PlayerInput PlayerInput;

@@ -18,11 +18,13 @@ public class Menu : MonoBehaviour
 
     public void OpenGlobalRegion()
     {
+        GameManager.instance.Pause();
         GlobalRegionObject.SetActive(true);
         Debug.Log("Button Clicked");
     }
     public void ExitRegion()
     {
+        GameManager.instance.Resume();
         GlobalRegionObject.SetActive(false);
         Debug.Log("Button Clicked");
     }
@@ -46,15 +48,18 @@ public class Menu : MonoBehaviour
     }
     public void UpgradeMenu()
     {
+        GameManager.instance.Pause();
         SwitchMenu(UpgradeMenuObject);
     }
     public void ManagementMenu()
     {
+        GameManager.instance.Pause();
         SwitchMenu(ShopMenuObject);
     }
 
     public void ExitUpgradeMenu()
     {
+        GameManager.instance.Resume();
         CurrentMenu.SetActive(false);
         CurrentMenu = null;
     }

@@ -54,4 +54,10 @@ MonoBehaviour:
   upgradeButton4: {fileID: 0}
   upgradeButton5: {fileID: 0}
   upgradeButton6: {fileID: 0}
+  upgradeButton7: {fileID: 0}
+  upgradeButton8: {fileID: 0}
+  upgradeButton9: {fileID: 0}
+  upgradeButton10: {fileID: 0}
+  upgradeButton11: {fileID: 0}
+  upgradeButton12: {fileID: 0}
   confirmButton: {fileID: 0}
