@@ -48,7 +48,7 @@ public class Maps : MonoBehaviour
     /// </summary>
     /// 
 
-    readonly string map1Text =
+    readonly string map1TerrainsText =
         "....S.SSS.....S.............\n" +
         "FFFFS..SSS........S.S......." +
         "SSFFSS.SS.......SSSSSSS....." +
@@ -85,7 +85,7 @@ public class Maps : MonoBehaviour
     ///  O: Oceania
     ///  A: Africa & Middle East
     /// </summary>
-    readonly string map1Regions =
+    readonly string map1RegionsText =
         "....N.NNN.....E.............\n" +
         "NNNNN..NNN........E.C......." +
         "NNNNNN.NN.......EECCCCC....." +
@@ -134,8 +134,8 @@ public class Maps : MonoBehaviour
         int map0Width = map0Text.IndexOf('\n');
         int map0Height = (map0Text.Length - 1) / map0Width;
 
-        int map1CellCountX = map1Text.IndexOf('\n');
-        int map1CellCountZ = (map1Text.Length - 1) / map1CellCountX;
+        int map1CellCountX = map1TerrainsText.IndexOf('\n');
+        int map1CellCountZ = (map1TerrainsText.Length - 1) / map1CellCountX;
 
         /* Debug.Log("Cell collumns " + map1CellCountX);
         Debug.Log("cell rows " + map1CellCountZ);
@@ -149,7 +149,7 @@ public class Maps : MonoBehaviour
 
         // terrainType[,] map0Terrain = ConvertTo2DArray(map0Text, map0Width, map0Height);
 
-        CellData[,] map1Terrain = ConvertTo2DArray(map1Text, map1Regions, map1CellCountX, map1CellCountZ);
+        CellData[,] map1Terrain = ConvertTo2DArray(map1TerrainsText, map1RegionsText, map1CellCountX, map1CellCountZ);
 
 
         terrainType[,] mapLayout = new terrainType[CellCountX, CellCountZ] {
