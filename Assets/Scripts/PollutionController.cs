@@ -41,6 +41,10 @@ public class PollutionController : MonoBehaviour
     [Header("Stuff")]
     public UnityEngine.UI.Slider slider;
 
+    [SerializeField] private GameObject WinScreen;
+    [SerializeField] private GameObject LoseScreen;
+
+
     [Header("World Stats")]
     public float worldPolution = 0;
     public float polutionPercentage;
@@ -168,6 +172,10 @@ public class PollutionController : MonoBehaviour
         {
             Debug.LogError("WaterContamination instance is null");
         }
+
+
+
+
     }
 
     public void EndDayAdd()
@@ -205,6 +213,16 @@ public class PollutionController : MonoBehaviour
             regions[0].regionTrashDestroyedPercentage = worldTrashDestroyedPercentage;
             regions[0].regionLandfillPercentage = worldLandfilledPercentage;
             regions[0].regionRecyclePercentage = worldRecyclePercentage;
+
+            if (worldPolution >= polutionThreshhold)
+            {
+
+            }
+            if (worldPolution >= 0)
+            {
+
+            }
+
         }
 
 
