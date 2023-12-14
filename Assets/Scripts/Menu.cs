@@ -90,8 +90,7 @@ public class Menu : MonoBehaviour
 
     public void BurgerButton()
     {
-        //FindObjectOfType<AudioManager>().Play("SoundFX");
-        Debug.Log("Sound LOG");
+        FindObjectOfType<AudioManager>().Play("SFX");
         if (BurgerMenu.activeSelf)
         {
             BurgerMenu.SetActive(false);
@@ -124,13 +123,13 @@ public class Menu : MonoBehaviour
     {
         if (SettingMenu.activeSelf)
         {
+            GameManager.instance.Resume();
             SettingMenu.SetActive(false);
-
         }
         else
         {
+            GameManager.instance.Pause();
             SettingMenu.SetActive(true);
-
         }
     }
 }
