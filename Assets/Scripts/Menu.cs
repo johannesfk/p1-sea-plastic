@@ -90,7 +90,7 @@ public class Menu : MonoBehaviour
 
     public void BurgerButton()
     {
-        FindObjectOfType<AudioManager>().Play("SFX");
+        
         if (BurgerMenu.activeSelf)
         {
             BurgerMenu.SetActive(false);
@@ -101,6 +101,7 @@ public class Menu : MonoBehaviour
             BurgerMenu.SetActive(true);
 
         }
+        FindObjectOfType<AudioManager>().Play("SFX");
     }
 
     public void OnBurgerButton(InputValue Button)

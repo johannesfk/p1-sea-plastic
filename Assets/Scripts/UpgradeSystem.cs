@@ -165,7 +165,6 @@ public class UpgradeSystem : MonoBehaviour
         SetButtonColor(upgradeButton4, upgrades[3].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
         SetButtonColor(upgradeButton5, upgrades[4].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(4) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton6, upgrades[5].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(5) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
-
         SetButtonColor(upgradeButton7, upgrades[6].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
         SetButtonColor(upgradeButton8, upgrades[7].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(7) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton9, upgrades[8].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(8) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
