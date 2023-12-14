@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
 
         // Debug.Log(scrollAction.started);
 
-        Debug.Log(scrollData);
+        //Debug.Log(scrollData);
 
         targetZoom -= scrollData * zoomSpeed;
         targetZoom = Mathf.Clamp(targetZoom, 10f, startZoom);

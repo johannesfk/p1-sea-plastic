@@ -4422,15 +4422,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopScreen: {fileID: 1326181988}
-  startMoney: 0
+  startMoney: 100
   money: 0
-  startIncome: 0
+  startIncome: 10
   income: 0
+  incomeMultiplier: 1
   moneyText: {fileID: 933410973}
-  recyclePrice: 0
-  landfillPrice: 0
-  boatPrice: 0
-  incineratorPrice: 0
+  recycleExtraIncome: 20
+  recyclePrice: 100
+  landfillPrice: 10
+  boatPrice: 20
+  incineratorPrice: 50
   recyclePriceText: {fileID: 1212989478}
   landfillPriceText: {fileID: 723642219}
   boatPriceText: {fileID: 1816614969}
@@ -6693,6 +6695,16 @@ PrefabInstance:
       objectReference: {fileID: 1938207784}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
+      propertyPath: wasteAdd
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: boatStrength
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
       propertyPath: currentRegionName
       value: 
       objectReference: {fileID: 7326086858448216178}
@@ -6728,6 +6740,16 @@ PrefabInstance:
       objectReference: {fileID: 1185878661}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
+      propertyPath: recyclePollutionRemove
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: landfillPollutionRemove
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
       propertyPath: regionPolutionPercentage
       value: 
       objectReference: {fileID: 6796539745587375216}
@@ -6741,6 +6763,11 @@ PrefabInstance:
       propertyPath: incineratedPercentageText
       value: 
       objectReference: {fileID: 4883657307765975585}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: inciniratorPollutionRemove
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regionPolutionPercentageText
@@ -6789,32 +6816,42 @@ PrefabInstance:
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[1].regionWaste
-      value: 353
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[2].regionWaste
-      value: 100
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[3].regionWaste
-      value: 1
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[4].regionWaste
-      value: 100
+      value: 138
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[5].regionWaste
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[6].regionWaste
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[1].regionNumber
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
+        type: 3}
+      propertyPath: regions.Array.data[2].regionNumber
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
@@ -6824,32 +6861,32 @@ PrefabInstance:
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[1].regionRecycle
-      value: 32
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[2].regionRecycle
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[3].regionRecycle
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[4].regionRecycle
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[5].regionRecycle
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[6].regionRecycle
-      value: 1
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
@@ -6864,7 +6901,7 @@ PrefabInstance:
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[2].regionPolution
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
@@ -6894,32 +6931,32 @@ PrefabInstance:
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[1].regionLandfilled
-      value: 173
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[2].regionLandfilled
-      value: 1
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[3].regionLandfilled
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[4].regionLandfilled
-      value: 1
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[5].regionLandfilled
-      value: 1
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[6].regionLandfilled
-      value: 1
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
@@ -6929,32 +6966,32 @@ PrefabInstance:
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[1].regionTrashDestroyed
-      value: 67
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[2].regionTrashDestroyed
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[3].regionTrashDestroyed
-      value: 10
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[4].regionTrashDestroyed
-      value: 10
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[5].regionTrashDestroyed
-      value: 10
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2439585120842758440, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
       propertyPath: regions.Array.data[6].regionTrashDestroyed
-      value: 10
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3243903976173182217, guid: 7be8e79c3a6dd5e40907f6a1009cb963,
         type: 3}
@@ -12740,7 +12777,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2088805332089487026}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: UpgradeMenu
+        m_MethodName: ManagementMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
