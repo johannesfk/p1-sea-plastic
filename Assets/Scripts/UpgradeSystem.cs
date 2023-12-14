@@ -86,18 +86,6 @@ public class UpgradeSystem : MonoBehaviour
     private void Update()
     {
         Money.text = "Money: " + ShopController.instance.money;
-
-        Debug.Log(upgradeMoney);
-
-        if (upgradeMoney < ShopController.instance.money)
-        {
-            ShopController.instance.money = upgradeMoney;
-        }
-        else
-        {
-            upgradeMoney = ShopController.instance.money;
-        }
-
     }
 
     public void SelectUpgrade(int index)
@@ -121,9 +109,9 @@ public class UpgradeSystem : MonoBehaviour
         {
             int cost = upgrades[selectedUpgradeIndex].cost;
 
-            if (ArePrerequisitesFulfilled(selectedUpgradeIndex) && upgradeMoney >= cost)
+            if (ArePrerequisitesFulfilled(selectedUpgradeIndex) && ShopController.instance.money >= cost)
             {
-                upgradeMoney -= cost;
+                ShopController.instance.money -= cost;
                 upgrades[selectedUpgradeIndex].isPurchased = true;
 
                 ApplyUpgrade(selectedUpgradeIndex);
