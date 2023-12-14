@@ -36,6 +36,9 @@ public class ShopController : MonoBehaviour
         instance = this;
 
         money = startMoney;
+
+        income = startIncome;
+
     }
 
 
