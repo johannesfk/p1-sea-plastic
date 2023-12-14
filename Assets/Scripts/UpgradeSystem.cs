@@ -106,7 +106,6 @@ public class UpgradeSystem : MonoBehaviour
             Debug.LogError("Invalid upgradeIndex: " + index);
         }
     }
-
     void ConfirmPurchase()
     {
         if (selectedUpgradeIndex != -1 && !upgrades[selectedUpgradeIndex].isPurchased)
@@ -245,7 +244,7 @@ public class UpgradeSystem : MonoBehaviour
             if (selectedButton != null)
             {
                 // highlight in a color
-                selectedButton.GetComponent<Image>().color = Color.magenta;
+                selectedButton.GetComponent<Image>().color = new Color(86f / 255f, 144f / 255f, 219f / 255f);
             }
         }
     }
