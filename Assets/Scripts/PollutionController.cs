@@ -59,10 +59,10 @@ public class PollutionController : MonoBehaviour
 
     [Header("StructureStats")]
     [SerializeField] private float boatAmount;
-    [SerializeField] private float boatStrength;
-    [SerializeField] private float recyclePollutionRemove;
-    [SerializeField] private float landfillPollutionRemove;
-    [SerializeField] private float inciniratorPollutionRemove;
+    public float boatStrength;
+    public float recyclePollutionRemove;
+    public float landfillPollutionRemove;
+    public float inciniratorPollutionRemove;
 
     [Header("UI")]
     [SerializeField] private TMP_Text worldPollutionText;
@@ -109,10 +109,7 @@ public class PollutionController : MonoBehaviour
         regions[0].regionRecycle = worldRecycle;
         regions[0].regionWaste = worldWaste;
         regions[0].regionPolution = worldPolution;
-        regions[0].regionPolutionPercentage = polutionPercentage;
-        regions[0].regionTrashDestroyedPercentage = worldTrashDestroyedPercentage;
-        regions[0].regionLandfillPercentage = worldLandfilledPercentage;
-        regions[0].regionRecyclePercentage = worldRecyclePercentage;
+
 
 
     }
@@ -130,13 +127,18 @@ public class PollutionController : MonoBehaviour
             currentRegion = regions.Count - 1;
         }
         //World Percentages
-        worldPollutionText.text = worldPolution.ToString();
+        worldPollutionText.text = (worldPolution + " Mil. Tons").ToString();
         polutionPercentage = worldPolution / polutionThreshhold * percentageCalculation;
         slider.value = polutionPercentage;
 
         worldLandfilledPercentage = worldLandfilled / worldWaste * percentageCalculation;
         worldRecyclePercentage = worldRecycle / worldWaste * percentageCalculation;
         worldTrashDestroyedPercentage = worldTrashDestroyed / worldWaste * percentageCalculation;
+        regions[0].regionPolutionPercentage = polutionPercentage;
+        regions[0].regionTrashDestroyedPercentage = worldTrashDestroyedPercentage;
+        regions[0].regionLandfillPercentage = worldLandfilledPercentage;
+        regions[0].regionRecyclePercentage = worldRecyclePercentage;
+
 
         //region percentages
         regions[currentRegion].regionPolutionPercentage = regions[currentRegion].regionPolution / regions[currentRegion].regionWaste * percentageCalculation;

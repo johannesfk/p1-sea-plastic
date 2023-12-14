@@ -16,7 +16,7 @@ public class ShopController : MonoBehaviour
     public float money;
     [SerializeField] private int startIncome;
     public int income;
-    [SerializeField] private float incomeMultiplier;
+    public float incomeMultiplier;
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private int recycleExtraIncome;
 
