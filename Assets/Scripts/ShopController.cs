@@ -80,7 +80,7 @@ public class ShopController : MonoBehaviour
         if (money >= recyclePrice)
         {
             money -= recyclePrice;
-            shopScreen.SetActive(false);
+            BoughtItem();
             HexInteraction.instance.PlaceCellType(terrainType.recycler);
 
             Debug.Log("Buy THAT RECYCLE BASTARD");
@@ -96,7 +96,7 @@ public class ShopController : MonoBehaviour
         if (money >= landfillPrice)
         {
             money -= landfillPrice;
-            shopScreen.SetActive(false);
+            BoughtItem();
             HexInteraction.instance.PlaceCellType(terrainType.landfill);
 
             Debug.Log("Buy THAT LANDFILLSHIT");
@@ -113,7 +113,7 @@ public class ShopController : MonoBehaviour
         if (money >= boatPrice)
         {
             money -= boatPrice;
-            shopScreen.SetActive(false);
+            BoughtItem();
             HexInteraction.instance.PlaceCellType(terrainType.boatCleaner);
 
             Debug.Log("Buy THAT MF BOAT");
@@ -130,7 +130,7 @@ public class ShopController : MonoBehaviour
         if (money >= incineratorPrice)
         {
             money -= incineratorPrice;
-            shopScreen.SetActive(false);
+            BoughtItem();
             HexInteraction.instance.PlaceCellType(terrainType.incinerator);
 
             Debug.Log("Buy THAT BURNER THING");
@@ -140,6 +140,12 @@ public class ShopController : MonoBehaviour
             Debug.Log(">YOU CANT BUY THAT SHIT YOU POOR FUCK");
         }
 
+    }
+
+    private void BoughtItem()
+    {
+        shopScreen.SetActive(false);
+        GameManager.instance.Resume();
     }
 
     #endregion

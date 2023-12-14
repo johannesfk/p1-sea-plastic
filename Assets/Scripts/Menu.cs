@@ -59,9 +59,9 @@ public class Menu : MonoBehaviour
 
     public void ExitUpgradeMenu()
     {
-        GameManager.instance.Resume();
         CurrentMenu.SetActive(false);
         CurrentMenu = null;
+        GameManager.instance.Resume();
     }
 
     public void StartGame()
@@ -90,7 +90,7 @@ public class Menu : MonoBehaviour
 
     public void BurgerButton()
     {
-        
+
         if (BurgerMenu.activeSelf)
         {
             BurgerMenu.SetActive(false);
