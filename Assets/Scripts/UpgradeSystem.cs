@@ -45,17 +45,16 @@ public class UpgradeSystem : MonoBehaviour
         // Initialize upgrade data
         upgrades = new UpgradeData[]
         {
-            // Title, Description, cost, ispurcheased, prerequisite upgrade
+            // Title, Description, cost, ispurchased, prerequisite upgrade
             new UpgradeData("Upgrade 1", "Description 1", 10, false), // Prerequisite: None
             new UpgradeData("Upgrade 2", "Description 2 <br>Prerequisite: Upgrade 1", 20, false, 0),  // Prerequisite: Upgrade 1
             new UpgradeData("Upgrade 3", "Description 3 <br>Prerequisite: Upgrade 1", 10, false, 0),   // Prerequisite: Upgrade 1
             new UpgradeData("Upgrade 4", "Description 4", 10, false), // Prerequisite: None
-            new UpgradeData("Upgrade 5", "Description 5 <br>Prerequisite: Upgrade 4", 20, false, 3),  // Prerequisite: Upgrade 1
-            new UpgradeData("Upgrade 6", "Description 6 <br>Prerequisite: Upgrade 4", 10, false, 3),   // Prerequisite: Upgrade 1
+            new UpgradeData("Upgrade 5", "Description 5 <br>Prerequisite: Upgrade 4", 20, false, 3),  // Prerequisite: Upgrade 4
+            new UpgradeData("Upgrade 6", "Description 6 <br>Prerequisite: Upgrade 4", 10, false, 3),   // Prerequisite: Upgrade 4
         };
 
         confirmButton.onClick.AddListener(ConfirmPurchase);
-        UpdateUpgradeUI(0);
         UpdateButtonColors();
     }
 

@@ -63,7 +63,6 @@ public class PollutionController : MonoBehaviour
     [SerializeField] private float recyclePollutionRemove;
     [SerializeField] private float landfillPollutionRemove;
     [SerializeField] private float inciniratorPollutionRemove;
-    [SerializeField] private float boatPollutionRemove;
 
     [Header("UI")]
     [SerializeField] private TMP_Text worldPollutionText;
@@ -74,8 +73,11 @@ public class PollutionController : MonoBehaviour
     [SerializeField] private TMP_Text recyclePercentageText;
     [SerializeField] private TMP_Text currentRegionName;
 
+    [SerializeField] private int wasteAdd;
     private float startPolution = 2000;
     private float polutionThreshhold = 10000;
+
+
 
     void Awake()
     {
@@ -173,7 +175,14 @@ public class PollutionController : MonoBehaviour
             for (int i = 1; i < regions.Count; i++)
             {
 
+                regions[i].regionWaste += wasteAdd;
+
                 regions[i].regionPolution = regions[i].regionWaste - regions[i].regionLandfilled - regions[i].regionRecycle - regions[i].regionTrashDestroyed;
+
+                if (regions[i].regionPolution < 0)
+                {
+                    regions[i].regionPolution = 0;
+                }
 
                 worldPolution += regions[i].regionPolution;
                 worldWaste += regions[i].regionWaste;
@@ -208,12 +217,18 @@ public class PollutionController : MonoBehaviour
                     regions[region].regionRecycle += recyclePollutionRemove;
                     Debug.Log("built: " + type + " in: " + region);
 
+                    ShopController.instance.RecycleBuilded();
+
+                    regions[region].regionPolution = regions[region].regionWaste - regions[region].regionLandfilled - regions[region].regionRecycle - regions[region].regionTrashDestroyed;
+
                     break;
                 }
             case terrainType.incinerator:
                 {
                     regions[region].regionRecycle += recyclePollutionRemove;
                     Debug.Log("built: " + type + " in: " + region);
+
+                    regions[region].regionPolution = regions[region].regionWaste - regions[region].regionLandfilled - regions[region].regionRecycle - regions[region].regionTrashDestroyed;
 
                     break;
                 }
@@ -222,6 +237,8 @@ public class PollutionController : MonoBehaviour
 
                     Debug.Log("built: " + type + " in: " + region);
                     regions[region].regionRecycle += recyclePollutionRemove;
+
+                    regions[region].regionPolution = regions[region].regionWaste - regions[region].regionLandfilled - regions[region].regionRecycle - regions[region].regionTrashDestroyed;
 
                     break;
                 }
