@@ -4,6 +4,15 @@ using TMPro;
 
 public class UpgradeSystem : MonoBehaviour
 {
+
+    [Header("Upgrade Stats")]
+    [SerializeField] private float recycleUpgrade = 2;
+    [SerializeField] private float moneyUpgrade = 1.5f;
+    [SerializeField] private float landfillUpgrade = 2;
+    [SerializeField] private float boatUpgrade = 5;
+    [SerializeField] private float incineratorUpgrade = 2;
+
+    [Header("Upgrade Elements")]
     public TMP_Text titleText;
     public TMP_Text descriptionText;
     public TMP_Text costText;
@@ -23,6 +32,7 @@ public class UpgradeSystem : MonoBehaviour
     public Button upgradeButton12;
     public Button confirmButton;
 
+    private float upgradeMoney;
     private int selectedUpgradeIndex = -1;
 
     // Variables for upgrade data
@@ -48,26 +58,46 @@ public class UpgradeSystem : MonoBehaviour
 
     void Start()
     {
+
+        upgradeMoney = ShopController.instance.money;
+
         // Initialize upgrade data
         upgrades = new UpgradeData[]
         {
             // Title, Description, cost, ispurchased, prerequisite upgrade
-            new UpgradeData("Upgrade 1", "Description 1", 10, false), // Prerequisite: None
-            new UpgradeData("Upgrade 2", "Description 2 <br>Prerequisite: Upgrade 1", 20, false, 0),  // Prerequisite: Upgrade 1
-            new UpgradeData("Upgrade 3", "Description 3 <br>Prerequisite: Upgrade 1", 10, false, 0),   // Prerequisite: Upgrade 1
-            new UpgradeData("Upgrade 4", "Description 4", 10, false), // Prerequisite: None
-            new UpgradeData("Upgrade 5", "Description 5 <br>Prerequisite: Upgrade 4", 20, false, 3),  // Prerequisite: Upgrade 4
-            new UpgradeData("Upgrade 6", "Description 6 <br>Prerequisite: Upgrade 4", 10, false, 3),   // Prerequisite: Upgrade 4
-            new UpgradeData("Upgrade 7", "Description 7", 10, false), // Prerequisite: None
-            new UpgradeData("Upgrade 8", "Description 8 <br>Prerequisite: Upgrade 7", 20, false, 6),  // Prerequisite: Upgrade 7
-            new UpgradeData("Upgrade 9", "Description 9 <br>Prerequisite: Upgrade 7", 10, false, 6),   // Prerequisite: Upgrade 7
-            new UpgradeData("Upgrade 10", "Description 10", 10, false), // Prerequisite: None 
-            new UpgradeData("Upgrade 11", "Description 11 <br>Prerequisite: Upgrade 10", 20, false, 9),  // Prerequisite: Upgrade 10
-            new UpgradeData("Upgrade 12", "Description 12 <br>Prerequisite: Upgrade 10", 10, false, 9),   // Prerequisite: Upgrade 10
+            new UpgradeData("Recycler+", "Makes Recyclers more effective.", 10, false), // Prerequisite: None
+            new UpgradeData("Repurpose", "Make 50% more money from Reyclers. <br>Prerequisite: Recycler+", 20, false, 0),  // Prerequisite: Upgrade 1
+            new UpgradeData("Deluxe Recyclers", "The BEST Recyclers in the buisness. <br>Prerequisite: Recycler+", 10, false, 0),   // Prerequisite: Upgrade 1
+            new UpgradeData("Better Incinerators", "Makes Incinerators more effective at disposing trash.", 10, false), // Prerequisite: None
+            new UpgradeData("Green Incineration", "Incinerators won't pollude the air. <br>Prerequisite: Better Incinerators", 20, false, 3),  // Prerequisite: Upgrade 4
+            new UpgradeData("Super Incinerators", "Makes Incinerators EVEN more effective at disposing trash. <br>Prerequisite: Better Incinerators", 10, false, 3),   // Prerequisite: Upgrade 4
+            new UpgradeData("Better Boats", "Makes Boats better at removing trash", 10, false), // Prerequisite: None
+            new UpgradeData("SUPER CLAW", "Gives Boats a better claw for removing trash from the ocean <br>Prerequisite: Better Boats", 20, false, 6),  // Prerequisite: Upgrade 7
+            new UpgradeData("Better Boats+", "Makes Boats EVEN better at removing trash <br>Prerequisite: Better Boats", 10, false, 6),   // Prerequisite: Upgrade 7
+            new UpgradeData("Bigger landfills", "Makes Landfills bigger so it can store more trash", 10, false), // Prerequisite: None 
+            new UpgradeData("EVEN BIGGER LANDFILLS", "Makes Landfills bigger so it can store more trash <br>Prerequisite: Bigger landfills", 20, false, 9),  // Prerequisite: Upgrade 10
+            new UpgradeData("Really Big Landfills", "Makes Landfills bigger so it can store more trash <br>Prerequisite: Bigger landfills", 10, false, 9),   // Prerequisite: Upgrade 10
         };
 
         confirmButton.onClick.AddListener(ConfirmPurchase);
         UpdateButtonColors();
+    }
+
+    private void Update()
+    {
+        Money.text = "Money: " + ShopController.instance.money;
+
+        Debug.Log(upgradeMoney);
+
+        if (upgradeMoney < ShopController.instance.money)
+        {
+            ShopController.instance.money = upgradeMoney;
+        }
+        else
+        {
+            upgradeMoney = ShopController.instance.money;
+        }
+
     }
 
     public void SelectUpgrade(int index)
@@ -92,9 +122,9 @@ public class UpgradeSystem : MonoBehaviour
         {
             int cost = upgrades[selectedUpgradeIndex].cost;
 
-            if (ShopController.instance.money >= cost && ArePrerequisitesFulfilled(selectedUpgradeIndex))
+            if (ArePrerequisitesFulfilled(selectedUpgradeIndex) && upgradeMoney >= cost)
             {
-                ShopController.instance.money -= cost;
+                upgradeMoney -= cost;
                 upgrades[selectedUpgradeIndex].isPurchased = true;
 
                 ApplyUpgrade(selectedUpgradeIndex);
@@ -121,9 +151,15 @@ public class UpgradeSystem : MonoBehaviour
         {
             int prerequisiteIndex = upgrades[upgradeIndex].prerequisiteIndex;
 
+            if (prerequisiteIndex == -1)
+            {
+                return true;
+            }
+
             // Check if prerequisiteIndex is within the valid range of the upgrades array
             if (prerequisiteIndex >= 0 && prerequisiteIndex < upgrades.Length)
             {
+                Debug.Log($"Upgrade {upgradeIndex}, Prerequisite {prerequisiteIndex}, isPurchased: {upgrades[prerequisiteIndex].isPurchased}");
                 // If there is no prerequisite, or the prerequisite is already purchased, return true
                 if (prerequisiteIndex == -1 || upgrades[prerequisiteIndex].isPurchased)
                 {
@@ -138,7 +174,74 @@ public class UpgradeSystem : MonoBehaviour
     void ApplyUpgrade(int index)
     {
         Debug.Log("Applying Upgrade: " + upgrades[index].title);
-        // Add logic to apply the upgrade based on the selected index
+
+        switch (index)
+        {
+            case 0:
+                {
+                    PollutionController.instance.recyclePollutionRemove += recycleUpgrade;
+                    break;
+                }
+            case 1:
+                {   
+
+                    ShopController.instance.incomeMultiplier += moneyUpgrade;
+
+                    break;
+                }
+            case 2:
+                {
+                    PollutionController.instance.recyclePollutionRemove += recycleUpgrade;
+                    break;
+                }
+            case 3:
+                {
+                    PollutionController.instance.inciniratorPollutionRemove += incineratorUpgrade;
+                    break;
+                }
+            case 4:
+                {
+                    Debug.Log("lol den gør intet");
+                    break;
+                }
+            case 5:
+                {
+                    PollutionController.instance.inciniratorPollutionRemove += incineratorUpgrade;
+                    break;
+                }
+            case 6:
+                {
+                    PollutionController.instance.boatStrength += boatUpgrade;
+                    break;
+                }
+            case 7:
+                {
+                    PollutionController.instance.boatStrength += boatUpgrade;
+                    break;
+                }
+            case 8:
+                {
+                    PollutionController.instance.boatStrength += boatUpgrade;
+                    break;
+                }
+            case 9:
+                {
+
+                    PollutionController.instance.landfillPollutionRemove += landfillUpgrade;
+                    break;
+                }
+            case 10:
+                {
+                    PollutionController.instance.landfillPollutionRemove += landfillUpgrade;
+                    break;
+                }
+            case 11:
+                {
+                    PollutionController.instance.landfillPollutionRemove += landfillUpgrade;
+                    break;
+                }
+        }
+
     }
     void UpdateUpgradeUI(int upgradeIndex)
     {
@@ -148,7 +251,7 @@ public class UpgradeSystem : MonoBehaviour
             titleText.text = "Title: " + upgrades[upgradeIndex].title;
             descriptionText.text = "Description: " + upgrades[upgradeIndex].description;
             costText.text = "Cost: " + upgrades[upgradeIndex].cost;
-            Money.text = "Money: " + ShopController.instance.money;
+            
         }
         else
         {
@@ -169,8 +272,8 @@ public class UpgradeSystem : MonoBehaviour
         SetButtonColor(upgradeButton8, upgrades[7].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(7) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton9, upgrades[8].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(8) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton10, upgrades[9].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
-        SetButtonColor(upgradeButton11, upgrades[10].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(11) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
-        SetButtonColor(upgradeButton12, upgrades[11].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(12) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton11, upgrades[10].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(10) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton12, upgrades[11].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(11) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         // Highlights the selected upgrade button
         if (selectedUpgradeIndex != -1)
         {
