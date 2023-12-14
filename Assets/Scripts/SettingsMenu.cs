@@ -45,27 +45,27 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-   
-    public void SetFullscreen (bool isFullscreen)
+
+    public void SetFullscreen(bool isFullscreen)
     {
         FindObjectOfType<AudioManager>().Play("SFX");
         Screen.fullScreen = isFullscreen;
     }
 
-    public void SetQuality (int qualityIndex)
+    public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     //--------------AUDIO SETTINGS-------------\\
-    public void SetMusicVolume (float volume)
-   {
+    public void SetMusicVolume(float volume)
+    {
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
-   }
+    }
 
     public void SetSFXVolume(float volume)
     {
-        audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume)*20);  
+        audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
     }
 
 
