@@ -35,7 +35,7 @@ public class HexGrid : MonoBehaviour
         riverNW,
         artic
     };
-    
+
 
     public HexCell[] cells { get; private set; }
 

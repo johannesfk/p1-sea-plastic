@@ -216,11 +216,11 @@ public class PollutionController : MonoBehaviour
 
             if (worldPolution >= polutionThreshhold)
             {
-
+                LoseScreen.SetActive(true);
             }
-            if (worldPolution >= 0)
+            if (worldPolution <= 0)
             {
-
+                WinScreen.SetActive(true);
             }
 
         }
