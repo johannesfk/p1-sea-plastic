@@ -90,9 +90,15 @@ public class PollutionController : MonoBehaviour
             {
                 regions[i].regionNumber = i;
             }
-        }
-    }
 
+            for (int i = 1; i < regions.Count; i++)
+            {
+
+                regions[i].regionPolution = regions[i].regionWaste - regions[i].regionLandfilled - regions[i].regionRecycle - regions[i].regionTrashDestroyed;
+            }
+        }
+
+    } 
     async void Start()
     {
         await WaterContamination.Instance.Contaminate(0);
@@ -101,6 +107,11 @@ public class PollutionController : MonoBehaviour
         regions[0].regionRecycle = worldRecycle;
         regions[0].regionWaste = worldWaste;
         regions[0].regionPolution = worldPolution;
+        regions[0].regionPolutionPercentage = polutionPercentage;
+        regions[0].regionTrashDestroyedPercentage = worldTrashDestroyedPercentage;
+        regions[0].regionLandfillPercentage = worldLandfilledPercentage;
+        regions[0].regionRecyclePercentage = worldRecyclePercentage;
+
 
     }
 
@@ -171,13 +182,18 @@ public class PollutionController : MonoBehaviour
                 worldTrashDestroyed += regions[i].regionTrashDestroyed;
             }
 
+            worldPolution -= boatStrength * boatAmount;
+
+
+            //Updating Global Region Stats
             regions[0].regionLandfilled = worldLandfilled;
             regions[0].regionRecycle = worldRecycle;
             regions[0].regionWaste = worldWaste;
             regions[0].regionPolution = worldPolution;
-
-            worldPolution -= boatStrength * boatAmount;
-
+            regions[0].regionPolutionPercentage = polutionPercentage;
+            regions[0].regionTrashDestroyedPercentage = worldTrashDestroyedPercentage;
+            regions[0].regionLandfillPercentage = worldLandfilledPercentage;
+            regions[0].regionRecyclePercentage = worldRecyclePercentage;
         }
 
 

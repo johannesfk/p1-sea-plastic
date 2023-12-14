@@ -13,12 +13,12 @@ public class ShopController : MonoBehaviour
 
     [Header("Money")]
     [SerializeField] private int startMoney;
-    public int money;
+    public float money;
     [SerializeField] private int startIncome;
     public int income;
-
+    [SerializeField] private float incomeMultiplier;
     [SerializeField] private TMP_Text moneyText;
-
+    [SerializeField] private int recycleExtraIncome;
 
     [Header("Prices")]
     [SerializeField] private int recyclePrice;
@@ -67,7 +67,7 @@ public class ShopController : MonoBehaviour
     {
         Debug.Log("New day");
 
-        money += income;
+        money += income * incomeMultiplier;
     }
 
 
@@ -140,6 +140,11 @@ public class ShopController : MonoBehaviour
     }
 
     #endregion
+
+    public void RecycleBuilded()
+    {
+        income += recycleExtraIncome;
+    }
 
     void OnDestroy()
     {
