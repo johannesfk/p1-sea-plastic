@@ -11,6 +11,7 @@ public class ReadInput : MonoBehaviour
     void Start()
     {
         obj_text.text = PlayerPrefs.GetString("Company_Name");
+        display.text = PlayerPrefs.GetString("Company_Name");
     }
     public void DisplayText()
     {
