@@ -23,6 +23,7 @@ public class UpgradeSystem : MonoBehaviour
     public Button upgradeButton12;
     public Button confirmButton;
 
+    private float upgradeMoney;
     private int selectedUpgradeIndex = -1;
 
     // Variables for upgrade data
@@ -48,6 +49,9 @@ public class UpgradeSystem : MonoBehaviour
 
     void Start()
     {
+
+        upgradeMoney = ShopController.instance.money;
+
         // Initialize upgrade data
         upgrades = new UpgradeData[]
         {
@@ -68,6 +72,23 @@ public class UpgradeSystem : MonoBehaviour
 
         confirmButton.onClick.AddListener(ConfirmPurchase);
         UpdateButtonColors();
+    }
+
+    private void Update()
+    {
+        Money.text = "Money: " + ShopController.instance.money;
+
+        Debug.Log(upgradeMoney);
+
+        if (upgradeMoney < ShopController.instance.money)
+        {
+            ShopController.instance.money = upgradeMoney;
+        }
+        else
+        {
+            upgradeMoney = ShopController.instance.money;
+        }
+
     }
 
     public void SelectUpgrade(int index)
@@ -92,9 +113,9 @@ public class UpgradeSystem : MonoBehaviour
         {
             int cost = upgrades[selectedUpgradeIndex].cost;
 
-            if (ShopController.instance.money >= cost && ArePrerequisitesFulfilled(selectedUpgradeIndex))
+            if (ArePrerequisitesFulfilled(selectedUpgradeIndex) && upgradeMoney >= cost) //
             {
-                ShopController.instance.money -= cost;
+                upgradeMoney -= cost;
                 upgrades[selectedUpgradeIndex].isPurchased = true;
 
                 ApplyUpgrade(selectedUpgradeIndex);
@@ -148,7 +169,7 @@ public class UpgradeSystem : MonoBehaviour
             titleText.text = "Title: " + upgrades[upgradeIndex].title;
             descriptionText.text = "Description: " + upgrades[upgradeIndex].description;
             costText.text = "Cost: " + upgrades[upgradeIndex].cost;
-            Money.text = "Money: " + ShopController.instance.money;
+            
         }
         else
         {
