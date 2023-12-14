@@ -113,7 +113,7 @@ public class UpgradeSystem : MonoBehaviour
         {
             int cost = upgrades[selectedUpgradeIndex].cost;
 
-            if (ArePrerequisitesFulfilled(selectedUpgradeIndex) && upgradeMoney >= cost) //
+            if (ArePrerequisitesFulfilled(selectedUpgradeIndex) && upgradeMoney >= cost)
             {
                 upgradeMoney -= cost;
                 upgrades[selectedUpgradeIndex].isPurchased = true;
@@ -142,9 +142,15 @@ public class UpgradeSystem : MonoBehaviour
         {
             int prerequisiteIndex = upgrades[upgradeIndex].prerequisiteIndex;
 
+            if (prerequisiteIndex == -1)
+            {
+                return true;
+            }
+
             // Check if prerequisiteIndex is within the valid range of the upgrades array
             if (prerequisiteIndex >= 0 && prerequisiteIndex < upgrades.Length)
             {
+                Debug.Log($"Upgrade {upgradeIndex}, Prerequisite {prerequisiteIndex}, isPurchased: {upgrades[prerequisiteIndex].isPurchased}");
                 // If there is no prerequisite, or the prerequisite is already purchased, return true
                 if (prerequisiteIndex == -1 || upgrades[prerequisiteIndex].isPurchased)
                 {
@@ -190,8 +196,8 @@ public class UpgradeSystem : MonoBehaviour
         SetButtonColor(upgradeButton8, upgrades[7].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(7) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton9, upgrades[8].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(8) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         SetButtonColor(upgradeButton10, upgrades[9].isPurchased ? Color.blue : new Color(46f / 255f, 115f / 255f, 219f / 255f));
-        SetButtonColor(upgradeButton11, upgrades[10].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(11) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
-        SetButtonColor(upgradeButton12, upgrades[11].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(12) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton11, upgrades[10].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(10) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
+        SetButtonColor(upgradeButton12, upgrades[11].isPurchased ? Color.blue : (ArePrerequisitesFulfilled(11) ? new Color(46f / 255f, 115f / 255f, 219f / 255f) : Color.red));
         // Highlights the selected upgrade button
         if (selectedUpgradeIndex != -1)
         {
