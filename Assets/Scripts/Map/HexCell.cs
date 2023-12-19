@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static HexGrid;
+using static HexCoordinates;
 
 public class HexCell : MonoBehaviour
 {
@@ -76,13 +77,28 @@ public class HexCell : MonoBehaviour
         {
             Debug.LogError("Invalid terrain type");
         }
+
+
     }
 
-    void Start()
+    private void Start()
     {
-
         SetCellType(terrainType);
     }
+
+    /* public void Refresh()
+    {
+        for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
+        {
+            TryGetNeighbor(d, out HexCell neighbor);
+            if (neighbor != null)
+            {
+                Debug.Log("Neighbor " + d.ToString() + neighbor.coordinates.ToString());
+                neighbors[(int)d] = GetNeighbor(d);
+            }
+            Debug.Log("Neighbor " + d.ToString() + " is now " + GetNeighbor(d).coordinates.ToString());
+        }
+    } */
 
     private void AddCellPrefab()
     {
@@ -110,14 +126,21 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    public HexCell GetNeighbor(HexDirection direction)
-    {
-        return neighbors[(int)direction];
-    }
+    public HexCell GetNeighbor(HexDirection direction) =>
+        HexGrid.instance.GetCell(coordinates.Step(direction));
+
     public void SetNeighbor(HexDirection direction, HexCell cell)
     {
-        // Debug.Log("Setting neighbor " + (int)direction + " to " + cell.coordinates.ToString());
+        Debug.Log("Setting neighbor " + (int)direction + " to " + cell.coordinates.ToString());
         neighbors[(int)direction] = cell;
         cell.neighbors[(int)direction.Opposite()] = this;
+        Debug.Log("Neighbor " + (int)direction.Opposite() + " is now ");
+        if (cell.neighbors[(int)direction.Opposite()] != null)
+        {
+            Debug.Log(cell.neighbors[(int)direction.Opposite()].coordinates.ToString());
+        }
     }
+
+    public bool TryGetNeighbor(HexDirection direction, out HexCell cell) =>
+        HexGrid.instance.TryGetCell(coordinates.Step(direction), out cell);
 }
