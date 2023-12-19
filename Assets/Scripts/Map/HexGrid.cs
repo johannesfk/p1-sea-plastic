@@ -39,9 +39,7 @@ public class HexGrid : MonoBehaviour
 
     public HexCell[] cells { get; private set; }
 
-    Canvas gridCanvas;
-
-    // HexSpawnPrefab hexSpawner;
+    public Canvas gridCanvas;
 
     private void Awake()
     {
@@ -51,9 +49,6 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
-        // hexSpawner = GetComponentInChildren<HexSpawnPrefab>();
-
-        // gridCanvas.gameObject.SetActive(false);
 
         List<Map> mapList = Maps.instance.mapList;
 
@@ -61,40 +56,22 @@ public class HexGrid : MonoBehaviour
         {
             Map map1 = mapList[0];
 
-            height = map1.layout.GetLength(0);
-            width = map1.layout.GetLength(1);
+            height = map1.CellCountX;
+            width = map1.CellCountZ;
             cells = new HexCell[map1.layout.Length];
 
             Debug.Log("Map size: " + height + " ✕ " + width);
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    terrainType terrainType = map1.layout[i, j].terrainType;
-                }
-            }
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    // Debug.Log("Cell " + i + " " + j + " " + map1.layout[i, j]);
-                    int index = i * width + j;
-                    HexCell cell = cells[index] = Instantiate<HexCell>(cellPrefab);
-                    cell.terrainType = map1.layout[i, j].terrainType;
-                    // cell.SetCellType(map1.layout[i, j].terrainType);
-                    cell.region = map1.layout[i, j].region;
-                }
-            }
 
             for (int z = 0, i = 0; z < height; z++)
             {
                 for (int x = 0; x < width; x++)
                 {
+                    HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
+                    cell.terrainType = map1.layout[z, x].terrainType;
+                    cell.region = map1.layout[z, x].region;
+                    // Debug.Log("Cell index is " + i + " and " + i);
                     CreateCell(x, z, i++);
                 }
-
             }
         }
         else
@@ -107,9 +84,11 @@ public class HexGrid : MonoBehaviour
     {
         z = z * -1;
         Vector3 position;
-        position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
+        /// bitwise AND to check if the cell is on an even row
+        ///                                                 ⬇️  
+        position.x = x * (HexMetrics.innerRadius * 2f) - (z & 1) * HexMetrics.innerRadius;
         position.y = 0f;
-        position.z = z * (HexMetrics.outerRadius * 1.5f); // * -1 to flip the map top to bottom
+        position.z = z * (HexMetrics.outerRadius * 1.5f); // 1.5f = 3/2
 
         // HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
         HexCell cell = cells[i];
@@ -128,12 +107,12 @@ public class HexGrid : MonoBehaviour
             cell.SetNeighbor(HexDirection.W, cells[i - 1]);
         }
         // If the cell is not on the first row
-        if (-z > 0)
+        if (z < 0)
         {
             /// If the cell is on an even row set the cell to
             /// the north west as the cell at index - width of the map.
             /// Uses bitwise AND to check if the cell is on an even row.
-            if ((-z & 1) == 0)
+            if ((z & 1) == 0)
             {
                 cell.SetNeighbor(HexDirection.NW, cells[i - width]);
                 /// If the cell is not on the rightmost column set the cell to
@@ -163,8 +142,8 @@ public class HexGrid : MonoBehaviour
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition =
             new Vector2(position.x, position.z);
-        label.text = cell.coordinates.ToStringOnSeparateLines(); */
-
+        label.text = cell.coordinates.ToStringOnSeparateLines();
+ */
         /* if (cell.region != 0)
         {
             TMP_Text regionlabel = Instantiate<TMP_Text>(cellLabelPrefab);
@@ -189,5 +168,28 @@ public class HexGrid : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    public bool TryGetCell(HexCoordinates coordinates, out HexCell cell)
+    {
+        int z = coordinates.Z;
+        int x = coordinates.X + z / 2;
+        if (z < 0 || z >= height || x < 0 || x >= width)
+        {
+            cell = null;
+            return false;
+        }
+        cell = cells[x + z * width];
+        return true;
+    }
+    public HexCell GetCell(HexCoordinates coordinates)
+    {
+        int z = coordinates.Z;
+        int x = coordinates.X + z / 2;
+        if (z < 0 || z >= height || x < 0 || x >= width)
+        {
+            return null;
+        }
+        return cells[x + z * width];
     }
 }

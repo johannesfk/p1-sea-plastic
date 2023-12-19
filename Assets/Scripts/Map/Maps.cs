@@ -130,47 +130,27 @@ public class Maps : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-
-        int map0Width = map0Text.IndexOf('\n');
-        int map0Height = (map0Text.Length - 1) / map0Width;
-
-        int map1CellCountX = map1TerrainsText.IndexOf('\n');
-        int map1CellCountZ = (map1TerrainsText.Length - 1) / map1CellCountX;
-
-        /* Debug.Log("Cell collumns " + map1CellCountX);
-        Debug.Log("cell rows " + map1CellCountZ);
-        Debug.Log("cell count " + map1CellCountX * map1CellCountZ); */
-
         if (instance == null)
         {
             instance = this;
         }
+
+
+        int map1CellCountX = map1TerrainsText.IndexOf('\n');
+        int map1CellCountZ = (map1TerrainsText.Length - 1) / map1CellCountX;
+
         mapList = new List<Map>();
 
-        // terrainType[,] map0Terrain = ConvertTo2DArray(map0Text, map0Width, map0Height);
-
-        CellData[,] map1Terrain = ConvertTo2DArray(map1TerrainsText, map1RegionsText, map1CellCountX, map1CellCountZ);
-
-
-        terrainType[,] mapLayout = new terrainType[CellCountX, CellCountZ] {
-            { water, water, water, water, water, water },
-            { water, forest, forest, forest, forest, water },
-            { water, forest, mountain, mountain, forest, water },
-            { water, forest, forest, mountain, forest, water },
-            { water, forest, forest, forest, forest, water },
-            { water, boatCleaner, water, water, water, water },
-            { water, water, water, water, water, water },
-            { water, water, water, water, water, water }
-        };
-
-
+        CellData[,] map1Data = ConvertTo2DArray(map1TerrainsText, map1RegionsText, map1CellCountX, map1CellCountZ);
 
         // Map 1 end
         //Map map0 = new Map(map0Width, map0Height);
-        Map map1 = new Map(map1Terrain.GetLength(1), map1Terrain.GetLength(0));
-        Map map2 = new Map(CellCountX, CellCountZ);
+        Map map1 = new Map(map1Data.GetLength(1), map1Data.GetLength(0));
+        // Map map2 = new Map(CellCountX, CellCountZ);
         //map0.layout = map0Terrain;
-        map1.layout = AddWorldBorder(map1Terrain, 5);
+        map1.layout = AddWorldBorder(map1Data, 5);
+        map1.CellCountX = map1.layout.GetLength(0);
+        map1.CellCountZ = map1.layout.GetLength(1);
         // map1.layout = map1Terrain;
         // map2.layout = mapLayout;
         //mapList.Add(map0);

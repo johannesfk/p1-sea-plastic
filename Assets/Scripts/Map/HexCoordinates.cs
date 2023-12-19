@@ -74,7 +74,7 @@ public struct HexCoordinates
         HexDirection.SE => new HexCoordinates(x + 1, z - 1),
         HexDirection.SW => new HexCoordinates(x, z - 1),
         HexDirection.W => new HexCoordinates(x - 1, z),
-        _ => new HexCoordinates(x - 1, z + 1)
+        HexDirection.NW => new HexCoordinates(x - 1, z + 1)
     };
 
     public static HexCoordinates FromOffsetCoordinates(int x, int z)

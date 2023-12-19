@@ -136,7 +136,7 @@ public class WaterContamination : MonoBehaviour
     {
         while (cleanCells == null || cleanCells.Count == 0)
         {
-            Debug.Log("Waiting for clean cells");
+            // Debug.Log("Waiting for clean cells");
             await Task.Delay(100);
         }
 

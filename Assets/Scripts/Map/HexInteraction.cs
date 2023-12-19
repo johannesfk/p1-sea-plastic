@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -91,6 +92,29 @@ public class HexInteraction : MonoBehaviour
         if (index >= 0 && index < HexGrid.instance.cells.Length)
         {
             HexCell cell = HexGrid.instance.cells[index];
+
+            /* TMP_Text cellLabel = Instantiate<TMP_Text>(HexGrid.instance.cellLabelPrefab);
+            cellLabel.rectTransform.SetParent(HexGrid.instance.gridCanvas.transform, false);
+            cellLabel.rectTransform.anchoredPosition =
+                new Vector2(cell.position.x, cell.position.z);
+            cellLabel.text = cell.coordinates.ToString();
+            cellLabel.color = Color.red; */
+
+            /* for (int n = 0; n < cell.neighbors.Length; n++)
+            {
+                HexCell neighbor = cell.neighbors[n];
+                if (neighbor == null)
+                {
+                    Debug.Log("Neighbor is null");
+                }
+                // Debug.Log("Neighbor " + ((HexDirection)n).ToString() + neighbor.coordinates.ToString());
+                TMP_Text neighborLabel = Instantiate<TMP_Text>(HexGrid.instance.cellLabelPrefab);
+                neighborLabel.rectTransform.SetParent(HexGrid.instance.gridCanvas.transform, false);
+                neighborLabel.rectTransform.anchoredPosition =
+                    new Vector2(neighbor.position.x, neighbor.position.z);
+                neighborLabel.text = n.ToString() + "\n" + neighbor.coordinates.ToString();
+                neighborLabel.color = Color.blue;
+            } */
             touchedRegion = cell.region;
             Debug.Log("Touched region " + touchedRegion);
 
