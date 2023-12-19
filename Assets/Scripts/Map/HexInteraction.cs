@@ -41,12 +41,15 @@ public class HexInteraction : MonoBehaviour
     }
     [HideInInspector]
     public bool uiActive = false;
+    [SerializeField]
+    bool neighborsVisible = false;
 
     [SerializeField]
     private bool canPlace = false;
 
     [SerializeField]
     private terrainType nextStructure;
+
 
     // Update is called once per frame
     void Update()
@@ -56,7 +59,15 @@ public class HexInteraction : MonoBehaviour
             Debug.Log("Left click");
             HandleInput();
         }
+        // ToggleNeighborLabels(neighborsVisible);
     }
+    /* void ToggleNeighborLabels(bool isVisible)
+    {
+        foreach (TMP_Text neighborLabel in HexGrid.instance.gridCanvas.GetComponentsInChildren<TMP_Text>())
+        {
+            neighborLabel.gameObject.SetActive(isVisible);
+        }
+    } */
 
     void HandleInput()
     {
@@ -100,7 +111,15 @@ public class HexInteraction : MonoBehaviour
             cellLabel.text = cell.coordinates.ToString();
             cellLabel.color = Color.red; */
 
-            /* for (int n = 0; n < cell.neighbors.Length; n++)
+            TMP_Text neighborLabel = Instantiate<TMP_Text>(HexGrid.instance.cellLabelPrefab);
+            neighborLabel.rectTransform.SetParent(HexGrid.instance.gridCanvas.transform, false);
+            neighborLabel.rectTransform.anchoredPosition =
+                new Vector2(cell.position.x, cell.position.z);
+            neighborLabel.text = cell.coordinates.ToString();
+            neighborLabel.color = Color.red;
+            neighborLabel.tag = "NeighborLabel";
+
+            for (int n = 0; n < cell.neighbors.Length; n++)
             {
                 HexCell neighbor = cell.neighbors[n];
                 if (neighbor == null)
@@ -108,13 +127,15 @@ public class HexInteraction : MonoBehaviour
                     Debug.Log("Neighbor is null");
                 }
                 // Debug.Log("Neighbor " + ((HexDirection)n).ToString() + neighbor.coordinates.ToString());
-                TMP_Text neighborLabel = Instantiate<TMP_Text>(HexGrid.instance.cellLabelPrefab);
+                // TMP_Text neighborLabel = Instantiate<TMP_Text>(HexGrid.instance.cellLabelPrefab);
                 neighborLabel.rectTransform.SetParent(HexGrid.instance.gridCanvas.transform, false);
                 neighborLabel.rectTransform.anchoredPosition =
                     new Vector2(neighbor.position.x, neighbor.position.z);
                 neighborLabel.text = n.ToString() + "\n" + neighbor.coordinates.ToString();
                 neighborLabel.color = Color.blue;
-            } */
+                neighborLabel.gameObject.SetActive(neighborsVisible);
+                neighborLabel.tag = "NeighborLabel";
+            }
             touchedRegion = cell.region;
             Debug.Log("Touched region " + touchedRegion);
 
@@ -159,7 +180,7 @@ public class HexInteraction : MonoBehaviour
                 }
             }
 
-            Debug.Log("Touched cell position " + cell.transform.position);
+            // Debug.Log("Touched cell position " + cell.transform.position);
 
             for (int i = 0; i < cell.neighbors.Length; i++)
             {

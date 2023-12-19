@@ -41,6 +41,13 @@ public class HexGrid : MonoBehaviour
 
     public Canvas gridCanvas;
 
+    [SerializeField]
+    bool coordinatesVisible = false;
+    [SerializeField]
+    bool regionsVisible = false;
+    [SerializeField]
+    bool neighborsVisible = false;
+
     private void Awake()
     {
         instance = this;
@@ -77,6 +84,45 @@ public class HexGrid : MonoBehaviour
         else
         {
             Debug.LogError("No maps found");
+        }
+    }
+
+    void Update()
+    {
+        ToggleCoordinateLabels(coordinatesVisible);
+        ToggleRegionLabels(regionsVisible);
+        ToggleNeighborLabels(neighborsVisible);
+    }
+    void ToggleCoordinateLabels(bool isVisible)
+    {
+        // Debug.Log("Toggle coordinate labels");
+        foreach (TMP_Text label in gridCanvas.transform.GetComponentsInChildren<TMP_Text>())
+        {
+            Debug.Log("Label tag is " + label.tag);
+            if (label.tag == "CoordinateLabel")
+            {
+                label.gameObject.SetActive(isVisible);
+            }
+        }
+    }
+    void ToggleRegionLabels(bool isVisible)
+    {
+        foreach (TMP_Text regionlabel in gridCanvas.GetComponentsInChildren<TMP_Text>())
+        {
+            if (regionlabel.tag == "RegionLabel")
+            {
+                regionlabel.gameObject.SetActive(isVisible);
+            }
+        }
+    }
+    void ToggleNeighborLabels(bool isVisible)
+    {
+        foreach (TMP_Text neighborLabel in HexGrid.instance.gridCanvas.GetComponentsInChildren<TMP_Text>())
+        {
+            if (neighborLabel.tag == "NeighborLabel")
+            {
+                neighborLabel.gameObject.SetActive(isVisible);
+            }
         }
     }
 
@@ -138,13 +184,15 @@ public class HexGrid : MonoBehaviour
 
 
         // Cell Coordinates as label for debugging
-        /* TMP_Text label = Instantiate<TMP_Text>(cellLabelPrefab);
+        TMP_Text label = Instantiate<TMP_Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition =
             new Vector2(position.x, position.z);
         label.text = cell.coordinates.ToStringOnSeparateLines();
- */
-        /* if (cell.region != 0)
+        label.gameObject.SetActive(coordinatesVisible);
+        label.tag = "CoordinateLabel";
+
+        if (cell.region != 0)
         {
             TMP_Text regionlabel = Instantiate<TMP_Text>(cellLabelPrefab);
             regionlabel.rectTransform.SetParent(gridCanvas.transform, false);
@@ -153,9 +201,9 @@ public class HexGrid : MonoBehaviour
             regionlabel.fontSize = 10;
             regionlabel.text = cell.region.ToString();
             regionlabel.color = Color.red;
-        } */
-
-
+            regionlabel.gameObject.SetActive(regionsVisible);
+            regionlabel.tag = "RegionLabel";
+        }
     }
 
     public void OnDestroy()
