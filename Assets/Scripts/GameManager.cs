@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] float dayTimer;
     [SerializeField] int dayNumber = 1;
     private float dayMaxTime = 60;
-    private bool dailyEventHappened;
 
     public delegate void NewDayHandler();
     public event NewDayHandler OnNewDay;
@@ -90,10 +89,6 @@ public class GameManager : MonoBehaviour
             dayTimer += Time.fixedDeltaTime;
         }
 
-        if (dayTimer >= dayMaxTime * 0.5f && dailyEventHappened == false)
-        {
-            dailyEventHappened = true;
-        }
 
 
         int minutes = Mathf.FloorToInt(dayTimer / 60);
