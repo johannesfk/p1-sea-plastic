@@ -165,18 +165,19 @@ public class Maps : MonoBehaviour
         CellData[,] map = new CellData[height, width];
         int charIndex = 0;
 
+
         for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++)
             {
+                char terrainChar = mapText[charIndex];
+                char regionChar = regionText[charIndex];
                 /// Skip newlines and carriage returns
-                while (mapText[charIndex] == '\n' || mapText[charIndex] == '\r')
+                while (terrainChar == '\n' || terrainChar == '\r')
                 {
                     charIndex++;
                 }
-                char terrainChar = mapText[charIndex];
                 // Debug.Log("terrainChar " + terrainChar + " @ " + charIndex);
-                char regionChar = regionText[charIndex];
                 map[i, j] = new CellData
                 {
                     terrainType = GetTerrainType(terrainChar),
@@ -223,13 +224,13 @@ public class Maps : MonoBehaviour
     {
         /// Checks if bordersize is even, if not, make it even.
         /// This is to prevent the map layout to shift by 1 cell every other row.
-        if ((int)Math.Ceiling((double)borderSize) % 2 != 0)
+        if (borderSize % 2 != 0)
         {
             borderSize++;
         }
         // Create a new array that is 10x10 larger than the original
         CellData[,] borderedMap = new CellData[originalMap.GetLength(0) + borderSize * 2, originalMap.GetLength(1) + borderSize * 2];
-        // Fill the new array with water
+        // Fill the new array with water and snow in the bottom
         for (int i = 0; i < borderedMap.GetLength(0); i++)
         {
             for (int j = 0; j < borderedMap.GetLength(1); j++)

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// https://www.redblobgames.com/grids/hexagons/
 public static class HexMetrics
 {
-    public const float outerToInner = 0.866025404f; // sqrt(3)/2 https://en.wikipedia.org/wiki/Pythagorean_theorem
+    public const float outerToInner = 0.866025404f; // sqrt(3)/2, 2 being the size https://en.wikipedia.org/wiki/Pythagorean_theorem
     public const float innerToOuter = 1f / outerToInner;
     public const float outerRadius = 10f;
     public const float innerRadius = outerRadius * outerToInner;
