@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5360628355515183067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7809156996054815905}
+  - component: {fileID: 2678136423145415978}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7809156996054815905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360628355515183067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2678136423145415978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360628355515183067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c49467cb22e9644a144224facf1a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeMenuObject: {fileID: 0}
+  ManagementMenuObject: {fileID: 0}
+  AdvertismentMenuObject: {fileID: 0}
+  CurrentMenu: {fileID: 0}
+  BurgerMenu: {fileID: 0}
+  CurrentRegion: {fileID: 0}
+  GlobalRegionObject: {fileID: 1763105717004919501, guid: 1397615093bde18419552e59fd9535f1,
+    type: 3}
+  Region1Object: {fileID: 3724381905165963301, guid: 447fde895b32e4942bb713a2aa1f86bb,
+    type: 3}
+  Region2Object: {fileID: 5015636426046601742, guid: 4003e2c129590fc43bc961a438a085eb,
+    type: 3}
+  Region3Object: {fileID: 4031781949266458038, guid: af4b7afc17eb5a34b8f8c657f281f18b,
+    type: 3}
+  Region4Object: {fileID: 1403205402310131350, guid: 536acb7b9f803c340818b7c27b92e557,
+    type: 3}
+  Region5Object: {fileID: 3791626995228862881, guid: ec2b2f54bc40fc746b8cd5325266e88d,
+    type: 3}
+  Region6Object: {fileID: 7062036192519547437, guid: eb2b17cff132c6a409ebf621075b2421,
+    type: 3}
